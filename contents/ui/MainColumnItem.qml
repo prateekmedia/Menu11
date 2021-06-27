@@ -389,37 +389,6 @@ Item {
         }
     }
 
-
-    Item{
-
-        id: btmGrid
-        width: parent.width
-
-        //anchors.top:    searching ? undefined : mainColumn.bottom
-        anchors.top:   recentItem.bottom
-        anchors.topMargin: units.largeSpacing
-        anchors.bottom: parent.bottom
-        anchors.left: parent.left
-        anchors.leftMargin: units.largeSpacing
-
-        visible: !searching
-
-        property int iconSize: 22
-
-        PlasmaExtras.Heading {
-            id: btmLabel
-            x: units.smallSpacing
-            width: parent.width - x
-            elide: Text.ElideRight
-            wrapMode: Text.NoWrap
-            color: theme.textColor
-            level: 5
-            font.bold: true
-            font.weight: Font.Bold
-            text: i18n("Prateek SU")
-        }
-    }
-
     Component.onCompleted: {
         searchField.focus = true
     }

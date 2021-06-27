@@ -95,20 +95,14 @@ Item {
         onSourceChanged: updateSizeHints()
     }
 
-    MouseArea
-    {
+    MouseArea {
         id: mouseArea
-        property bool wasExpanded: false;
-
         anchors.fill: parent
-
         hoverEnabled: !dashWindow || !dashWindow.visible
-
         onClicked: {
-               plasmoid.expanded = !wasExpanded;
+               plasmoid.expanded = !plasmoid.expanded;
         }
     }
 
-    Component.onCompleted: {
-    }
+    Component.onCompleted: {}
 }
