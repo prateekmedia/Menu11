@@ -2,6 +2,10 @@
     "KPlugin": {
         "Authors": [
             {
+                "Email": "pankajsunal123@gmail.com",
+                "Name": "Prateek SU"
+            },
+            {
                 "Email": "hein@kde.org",
                 "Name": "Eike Hein"
             }
@@ -9,18 +13,18 @@
         "Category": "Application Launchers",
         "Dependencies": [
         ],
-        "Description": "A launcher based on cascading popup menus",
+        "Description": "A launcher based on Win11 Design",
       
         "EnabledByDefault": true,
         "Icon": "start-here-kde",
-        "Id": "menuZ",
+        "Id": "menu11",
         "License": "GPL-2.0+",
-        "Name": "Menu Z",
+        "Name": "Menu 11",
       
         "ServiceTypes": [
             "Plasma/Applet"
         ],
-        "Version": "2.0"
+        "Version": "2.11.0"
     },
     "X-Plasma-API": "declarativeappletscript",
     "X-Plasma-MainScript": "ui/main.qml",
