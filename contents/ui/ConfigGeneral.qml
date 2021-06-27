@@ -42,7 +42,6 @@ Kirigami.FormLayout {
     property alias cfg_appNameFormat: appNameFormat.currentIndex
     property alias cfg_limitDepth: limitDepth.checked
     property alias cfg_alphaSort: alphaSort.checked
-    property alias cfg_invertColors: invertColors.checked
     property alias cfg_showIconsRootLevel: showIconsRootLevel.checked
 
     property alias cfg_recentOrdering: recentOrdering.currentIndex
@@ -52,10 +51,6 @@ Kirigami.FormLayout {
 
     property alias cfg_useExtraRunners: useExtraRunners.checked
     property alias cfg_alignResultsToBottom: alignResultsToBottom.checked
-
-    property alias cfg_showBorder: showBorder.checked
-    property alias cfg_widthPanel: widthPanel.value
-    property alias cfg_opacityBar: opacityBar.value
 
 
     Button {
@@ -252,41 +247,5 @@ Kirigami.FormLayout {
         visible: !isDash
 
         text: i18n("Align search results to bottom")
-    }
-
-
-    Item {
-        Kirigami.FormData.isSection: true
-    }
-
-    CheckBox {
-        id: invertColors
-        Kirigami.FormData.label: i18n("Options")
-        text: i18n("Invert colors")
-    }
-
-    CheckBox {
-        id: showBorder
-        text: i18n("Show border")
-    }
-
-    SpinBox {
-        Kirigami.FormData.label: i18n("Width on panel:")
-        editable: true
-        stepSize: 10
-        id: widthPanel
-        from: 200
-        to: 600
-        value: cfg_widthPanel
-    }
-
-    SpinBox {
-        Kirigami.FormData.label: i18n("Transparency:")
-        id: opacityBar
-        editable: true
-        stepSize: 10
-        from: 0
-        to: 100
-        value: cfg_opacityBar
     }
 }

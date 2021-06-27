@@ -32,11 +32,6 @@
       <default>false</default>
     </entry>
 
-<entry name="invertColors" type="Bool">
-  <label>Invert colors</label>
-  <default>false</default>
-</entry>
-
     <entry name="recentOrdering" type="Int">
       <label>How should the previously used apps/docs/contacts be ordered: 0 = RecentFirst, 1 = PopularFirst</label>
       <default>0</default>
@@ -86,18 +81,6 @@
     <entry name="showIconsRootLevel" type="Bool">
       <label>Whether to show icons on the root level of the menu.</label>
       <default>false</default>
-    </entry>
-    <entry name="widthPanel" type="Int">
-      <label>Width of plamoid.</label>
-      <default>300</default>
-    </entry>
-    <entry name="showBorder" type="Bool">
-      <label>Show border of input bar.</label>
-      <default>false</default>
-    </entry>
-    <entry name="opacityBar" type="Int">
-      <label>Transparency of bar.</label>
-      <default>70</default>
     </entry>
   </group>
 </kcfg>

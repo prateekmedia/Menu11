@@ -202,7 +202,7 @@ Item {
         level: 5
         font.bold: true
         font.weight: Font.Bold
-        text: i18n("Top Apps")
+        text: i18n("Pinned")
         visible: !searching
     }
 
@@ -315,7 +315,7 @@ Item {
     Item{
 
         id: recentItem
-        width: parent.width * 0.65
+        width: parent.width
 
         //anchors.top:    searching ? undefined : mainColumn.bottom
         anchors.top:   mainColumn.bottom
@@ -389,20 +389,35 @@ Item {
         }
     }
 
+
     Item{
 
+        id: btmGrid
+        width: parent.width
 
-        anchors.top:    searching ? undefined : mainColumn.bottom
-        anchors.left: recentItem.right
-        anchors.right: parent.right
-        width: parent.width * 0.25
+        //anchors.top:    searching ? undefined : mainColumn.bottom
+        anchors.top:   recentItem.bottom
+        anchors.topMargin: units.largeSpacing
         anchors.bottom: parent.bottom
-        anchors.margins: units.largeSpacing
-        visible: !searching
-        Clock{
-            anchors.fill: parent
-        }
+        anchors.left: parent.left
+        anchors.leftMargin: units.largeSpacing
 
+        visible: !searching
+
+        property int iconSize: 22
+
+        PlasmaExtras.Heading {
+            id: btmLabel
+            x: units.smallSpacing
+            width: parent.width - x
+            elide: Text.ElideRight
+            wrapMode: Text.NoWrap
+            color: theme.textColor
+            level: 5
+            font.bold: true
+            font.weight: Font.Bold
+            text: i18n("Prateek SU")
+        }
     }
 
     Component.onCompleted: {
