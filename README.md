@@ -7,7 +7,7 @@
 <a href="#installing-manually"><img alt="Install Manually" src="https://img.shields.io/badge/Install Manually-git-blue"/></a>
 
 #### *Special Thanks to*
-- [Eike Hein](hein@kde.org) for Creating [MenuZ](https://store.kde.org/p/1367167/)  
+- [Eike Hein](mailto:hein@kde.org) for Creating [MenuZ](https://store.kde.org/p/1367167/)  
 [Know More](https://github.com/prateekmedia/Menu11/graphs/contributors)
 
 <h2 align="center">Installing Manually</h2>
