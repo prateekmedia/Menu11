@@ -51,6 +51,7 @@ Item {
         + (2 * Math.max(highlightItemSvg.margins.top + highlightItemSvg.margins.bottom,
             highlightItemSvg.margins.left + highlightItemSvg.margins.right))
     property bool searching: (searchField.text != "")
+    property bool showAllApps: false
     property int tileSide: 64 + 30
     onSearchingChanged: {
         if (!searching) {
@@ -69,21 +70,21 @@ Item {
     SequentialAnimation {
         id: playAllGrid
         running: false
-        NumberAnimation { target: allAppsGrid; property: "x"; from: 100; to: 0; duration: 500; easing.type: Easing.InOutQuad }
+        NumberAnimation { target: globalFavoritesGrid; property: "x"; from: 100; to: 0; duration: 500; easing.type: Easing.InOutQuad }
     }
 
     function reset() {
-        mainColumn.visibleGrid = allAppsGrid
+        mainColumn.visibleGrid = globalFavoritesGrid
         searchField.clear();
         searchField.focus = true
-        allAppsGrid.tryActivate(0, 0);
+        globalFavoritesGrid.tryActivate(0, 0);
     }
 
     function reload() {
         mainColumn.visible = false
         recentItem.visible = false
         bottomItem.visible = false
-        allAppsGrid.model = null
+        globalFavoritesGrid.model = null
         documentsFavoritesGrid.model = null
         preloadAllAppsTime.done = false
         preloadAllAppsTime.defer()
@@ -116,7 +117,7 @@ Item {
             if (done) {
                 return;
             }
-            allAppsGrid.model = rootModel.modelForRow(0)
+            globalFavoritesGrid.model = globalFavorites
             documentsFavoritesGrid.model = rootModel.modelForRow(1);
             done = true;
             mainColumn.visible = true
@@ -145,11 +146,11 @@ Item {
 
     PlasmaComponents.TextField {
         id: searchField
-        anchors.top: parent.top
         focus: true
+        opacity: searching
         height: units.iconSizes.medium
-        width: parent.width
-        visible: false
+        width: parent.width - x
+        x: units.smallSpacing
         onTextChanged: {
             runnerModel.query = text;
             newTextQuery(text)
@@ -209,11 +210,11 @@ Item {
         font.bold: true
         font.weight: Font.Bold
         text: i18n("Pinned")
-        visible: !searching
+        visible: !searching && !showAllApps
     }
 
     PlasmaComponents.ToolButton  {
-        text: "All Apps"
+        text: showAllApps ? "Pinned" : "All Apps"
         id: mainsecLabelGrid
         anchors.top: parent.top//headRect.bottom
         anchors.rightMargin: units.largeSpacing
@@ -222,16 +223,17 @@ Item {
         font.bold: true
         font.weight: Font.Bold
         visible: !searching
+        onClicked: showAllApps = !showAllApps
     }
 
     Item {
         id: mainColumn
-        anchors.top: searching ? parent.top : mainLabelGrid.bottom
+        anchors.top: searching ? searchField.bottom : mainLabelGrid.bottom
         anchors.margins: units.largeSpacing
         anchors.left: parent.left
         anchors.right: parent.right
         height: searching ? parent.height : tileSide * 2
-        property Item visibleGrid: allAppsGrid
+        property Item visibleGrid: globalFavoritesGrid
         function tryActivate(row, col) {
             if (visibleGrid) {
                 visibleGrid.tryActivate(row, col);
@@ -239,28 +241,50 @@ Item {
         }
 
         ItemGridView {
-            id: allAppsGrid
+            id: globalFavoritesGrid
             width: parent.width
             height: searching ? parent.height : tileSide * 2
             cellWidth: tileSide
             cellHeight: tileSide
             iconSize: iconSize
             square: true
-            model: rootModel.modelForRow(0);
+            model: globalFavorites
             dropEnabled: true
             usesPlasmaTheme: false
             verticalScrollBarPolicy: Qt.ScrollBarAlwaysOff
             z: (opacity == 1.0) ? 1 : 0
             enabled: (opacity == 1.0) ? 1 : 0
-            opacity: searching ? 0 : 1
+            opacity: searching || showAllApps ? 0 : 1
             onOpacityChanged: {
                 if (opacity == 1.0) {
-                    //allAppsGrid.flickableItem.contentY = 0;
-                    mainColumn.visibleGrid = allAppsGrid;
+                    //globalFavoritesGrid.flickableItem.contentY = 0;
+                    mainColumn.visibleGrid = globalFavoritesGrid;
                 }
             }
             onKeyNavDown: documentsFavoritesGrid.tryActivate(0, 0)
 
+        }
+
+        ItemGridView {
+            id: allAppsGrid
+            anchors.fill: parent
+            z: (opacity == 1.0) ? 1 : 0
+            width:  parent.width
+            height: parent.height
+            enabled: (opacity == 1.0) ? 1 : 0
+            cellWidth: tileSide
+            cellHeight: tileSide
+            iconSize: iconSize
+            square: true
+            usesPlasmaTheme: false
+            verticalScrollBarPolicy: Qt.ScrollBarAlwaysOff
+            opacity: !searching && showAllApps ? 1 : 0
+            model: rootModel.modelForRow(2);
+            onOpacityChanged: {
+                if (opacity == 1.0) {
+                    mainColumn.visibleGrid = allAppsGrid;
+                }
+            }
         }
 
         ItemMultiGridView {
@@ -278,12 +302,6 @@ Item {
                 if (opacity == 1.0) {
                     mainColumn.visibleGrid = runnerGrid;
                 }
-            }
-            onKeyNavDown: {
-
-                if (!searching)
-                    documentsFavoritesGrid.tryActivate(0, 0)
-
             }
         }
 
@@ -447,6 +465,7 @@ Item {
             name: "info"
             PropertyChanges {
                 target: nameLabel
+                opacity: 0
             }
             PropertyChanges {
                 target: infoLabel
@@ -498,16 +517,16 @@ Item {
                     KQuickAddons.KCMShell.openSystemSettings("kcm_users")
                 }
 
-                Keys.onPressed: {
-                    // In search on backtab focus on search pane
-                    if (event.key == Qt.Key_Backtab && (root.state == "Search" || mainTabGroup.state == "top")) {
-                        navigationMethod.state = "keyboard"
-                        keyboardNavigation.state = "RightColumn"
-                        root.currentContentView.forceActiveFocus()
-                        event.accepted = true;
-                        return;
-                    }
-                }
+                // Keys.onPressed: {
+                //     // In search on backtab focus on search pane
+                //     if (event.key == Qt.Key_Backtab && (root.state == "Search" || mainTabGroup.state == "top")) {
+                //         navigationMethod.state = "keyboard"
+                //         keyboardNavigation.state = "RightColumn"
+                //         root.currentContentView.forceActiveFocus()
+                //         event.accepted = true;
+                //         return;
+                //     }
+                // }
             }
 
             Item {
