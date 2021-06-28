@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2013-2015 by Eike Hein <hein@kde.org>                   *
+ *   Copyright (C) 2021 by Prateek SU <pankajsunal123@gmail.com>           *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -19,13 +20,10 @@
 
 
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.kquickcontrolsaddons 2.0
+import org.kde.kquickcontrolsaddons 2.0 as KQuickAddons
 
-//
-//import QtQuick 2.0
 import QtQuick 2.12
 import QtQuick.Layouts 1.12
-import QtGraphicalEffects 1.0
 //import org.kde.plasma.core 2.1 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.kirigami 2.13 as Kirigami
@@ -33,7 +31,6 @@ import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.kwindowsystem 1.0
 import org.kde.plasma.private.shell 2.0
 import org.kde.plasma.private.kicker 0.1 as Kicker
-import QtQuick.Layouts 1.0
 import org.kde.kcoreaddons 1.0 as KCoreAddons
 import org.kde.kquickcontrolsaddons 2.0 as KQuickAddons
 
@@ -475,11 +472,14 @@ Item {
             ] // states
         RowLayout {
             id: nameAndIcon
-            anchors.left: parent.left
-            anchors.leftMargin: PlasmaCore.Units.gridUnit + header.leftInset + PlasmaCore.Units.devicePixelRatio //border width
-            anchors.right: parent.right
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.rightMargin: Math.round(parent.width / 1.5) + PlasmaCore.Units.gridUnit
+            width:parent.width
+            anchors {
+                left: parent.left
+                leftMargin: PlasmaCore.Units.gridUnit + header.leftInset + PlasmaCore.Units.devicePixelRatio //border width
+                right: parent.right
+                verticalCenter: parent.verticalCenter
+                rightMargin: Math.round(parent.width / 1.5) + PlasmaCore.Units.gridUnit
+            }
             PlasmaComponents.RoundButton {
                 id: avatarButton
                 visible: KQuickAddons.KCMShell.authorize("kcm_users.desktop").length > 0
@@ -578,6 +578,8 @@ Item {
                         }
                     }
                 }
+
+
             }
         }
     }
