@@ -68,6 +68,7 @@ Item {
         id: playAllGrid
         running: false
         NumberAnimation { target: globalFavoritesGrid; property: "x"; from: 100; to: 0; duration: 500; easing.type: Easing.InOutQuad }
+        NumberAnimation { target: allAppsGrid; property: "x"; from: 100; to: 0; duration: 500; easing.type: Easing.InOutQuad }
     }
 
     function reset() {
@@ -116,6 +117,7 @@ Item {
             }
             globalFavoritesGrid.model = globalFavorites
             documentsFavoritesGrid.model = rootModel.modelForRow(1);
+            allAppsGrid.model = rootModel.modelForRow(2);
             done = true;
             mainColumn.visible = true
             recentItem.visible = true
@@ -144,10 +146,13 @@ Item {
     PlasmaComponents.TextField {
         id: searchField
         focus: true
+        placeholderText: i18n("Search...")
         opacity: searching
         height: units.iconSizes.medium
         width: parent.width - x
         x: units.smallSpacing
+        Accessible.editable: true
+        Accessible.searchEdit: true
         onTextChanged: {
             runnerModel.query = text;
             newTextQuery(text)
@@ -206,13 +211,14 @@ Item {
         level: 5
         font.bold: true
         font.weight: Font.Bold
-        text: i18n("Pinned")
-        visible: !searching && !showAllApps
+        text: i18n(showAllApps ? "All Apps" : "Pinned")
+        visible: !searching
     }
 
     PlasmaComponents.ToolButton  {
-        text: showAllApps ? "Pinned" : "All Apps"
+        text: i18n(showAllApps ? "Back" : "All Apps")
         id: mainsecLabelGrid
+        icon.name: showAllApps ? "go-previous" : "go-next"
         anchors.top: parent.top//headRect.bottom
         anchors.rightMargin: units.largeSpacing
         anchors.right: parent.right
@@ -229,7 +235,8 @@ Item {
         anchors.margins: units.largeSpacing
         anchors.left: parent.left
         anchors.right: parent.right
-        height: searching ? parent.height : tileSide * 2
+        anchors.bottom: searching ? parent.bottom : showAllApps ? footer.top : undefined
+        height: searching || showAllApps ? parent.height : tileSide * 2
         property Item visibleGrid: globalFavoritesGrid
         function tryActivate(row, col) {
             if (visibleGrid) {
@@ -247,7 +254,7 @@ Item {
             square: true
             model: globalFavorites
             dropEnabled: true
-            usesPlasmaTheme: false
+            usesPlasmaTheme: true
             verticalScrollBarPolicy: Qt.ScrollBarAlwaysOff
             z: (opacity == 1.0) ? 1 : 0
             enabled: (opacity == 1.0) ? 1 : 0
@@ -273,7 +280,7 @@ Item {
             cellHeight: tileSide
             iconSize: iconSize
             square: true
-            usesPlasmaTheme: false
+            usesPlasmaTheme: true
             verticalScrollBarPolicy: Qt.ScrollBarAlwaysOff
             opacity: !searching && showAllApps ? 1 : 0
             model: rootModel.modelForRow(2);
@@ -353,11 +360,10 @@ Item {
         //anchors.top:    searching ? undefined : mainColumn.bottom
         anchors.top: mainColumn.bottom
         anchors.topMargin: units.largeSpacing
-        anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.leftMargin: units.largeSpacing
 
-        visible: !searching
+        visible: !searching && !showAllApps
 
         property int iconSize: 22
 
@@ -387,7 +393,7 @@ Item {
             iconSize: units.iconSizes.smallMedium
             model: rootModel.modelForRow(1);
             dropEnabled: true
-            usesPlasmaTheme: false
+            usesPlasmaTheme: true
             onKeyNavLeft: {
                 //mainColumn.visibleGrid.tryActivate(0,0);
             }
@@ -422,168 +428,16 @@ Item {
         }
     }
 
-    Item {
-        id: bottomItem
-        width: parent.width
-
-        //anchors.top:    searching ? undefined : recentItem.bottom
-        anchors.top: documentsFavoritesGrid.bottom
-        anchors.bottom: parent.bottom
-        anchors.left: parent.left
-        anchors.leftMargin: units.largeSpacing
+    Footer {
+        id: footer
         visible: !searching
-        property int iconSize: 22
-
-        PlasmaExtras.PlasmoidHeading {
-            id: header
-            x: units.smallSpacing
-            y: -50
-            implicitHeight: Math.round(PlasmaCore.Units.gridUnit * 2.5)
-            rightPadding: rightInset
-
-            property Item configureButton: configureButton
-            property Item avatar: avatarButton
-
-            state: "name"
-
-            states: [
-                State {
-                    name: "name"
-                    PropertyChanges {
-                    target: nameLabel
-                        opacity: 1
-                }
-                    PropertyChanges {
-                    target: infoLabel
-                        opacity: 0
-                }
-                },
-        State {
-            name: "info"
-            PropertyChanges {
-                target: nameLabel
-                opacity: 0
-            }
-            PropertyChanges {
-                target: infoLabel
-                opacity: 1
-            }
-        }
-            ] // states
-        RowLayout {
-            id: nameAndIcon
-            width:parent.width
-            anchors {
-                left: parent.left
-                leftMargin: PlasmaCore.Units.gridUnit + header.leftInset + PlasmaCore.Units.devicePixelRatio //border width
-                right: parent.right
-                verticalCenter: parent.verticalCenter
-                rightMargin: Math.round(parent.width / 1.5) + PlasmaCore.Units.gridUnit
-            }
-            PlasmaComponents.RoundButton {
-                id: avatarButton
-                visible: KQuickAddons.KCMShell.authorize("kcm_users.desktop").length > 0
-                y: -50
-
-                flat: true
-
-                Layout.preferredWidth: PlasmaCore.Units.gridUnit * 2
-                Layout.preferredHeight: PlasmaCore.Units.gridUnit * 2
-
-                Accessible.name: nameLabel.text
-                Accessible.description: i18n("Go to user settings")
-
-                Kirigami.Avatar {
-                    source: kuser.faceIconUrl
-                    name: nameLabel.text
-                    anchors {
-                        fill: parent
-                        margins: PlasmaCore.Units.smallSpacing
-                    }
-                    // NOTE: for some reason Avatar eats touch events even though it shouldn't
-                    // Ideally we'd be using Avatar but it doesn't have proper key nav yet
-                    // see https://invent.kde.org/frameworks/kirigami/-/merge_requests/218
-                    actions.main: Kirigami.Action {
-                        text: avatarButton.Accessible.description
-                        onTriggered: avatarButton.clicked()
-                    }
-                    // no keyboard nav
-                    activeFocusOnTab: false
-                    // ignore accessibility (done by the button)
-                    Accessible.ignored: true
-                }
-
-                onClicked: {
-                    KQuickAddons.KCMShell.openSystemSettings("kcm_users")
-                }
-
-                // Keys.onPressed: {
-                //     // In search on backtab focus on search pane
-                //     if (event.key == Qt.Key_Backtab && (root.state == "Search" || mainTabGroup.state == "top")) {
-                //         navigationMethod.state = "keyboard"
-                //         keyboardNavigation.state = "RightColumn"
-                //         root.currentContentView.forceActiveFocus()
-                //         event.accepted = true;
-                //         return;
-                //     }
-                // }
-            }
-
-            Item {
-                Layout.preferredHeight: PlasmaCore.Units.gridUnit
-                Layout.alignment: Layout.AlignVCenter | Qt.AlignLeft
-
-                PlasmaExtras.Heading {
-                    id: nameLabel
-
-                    level: 2
-                    text: kuser.fullName
-                    elide: Text.ElideRight
-                    horizontalAlignment: Text.AlignLeft
-                    verticalAlignment: Text.AlignVCenter
-
-                    Behavior on opacity {
-                        NumberAnimation {
-                            duration: PlasmaCore.Units.longDuration
-                            easing.type: Easing.InOutQuad
-                        }
-                    }
-
-                    // Show the info instead of the user's name when hovering over it
-                    MouseArea {
-                        anchors.fill: nameLabel
-                        hoverEnabled: true
-                        onEntered: {
-                            header.state = "info"
-                        }
-                        onExited: {
-                            header.state = "name"
-                        }
-                    }
-                }
-
-                PlasmaExtras.Heading {
-                    id: infoLabel
-                    level: 5
-                    opacity: 0
-                    text: kuser.os !== "" ? i18n("%2@%3 (%1)", kuser.os, kuser.loginName, kuser.host) : i18n("%1@%2", kuser.loginName, kuser.host)
-                    elide: Text.ElideRight
-                    horizontalAlignment: Text.AlignLeft
-                    verticalAlignment: Text.AlignVCenter
-
-                    Behavior on opacity {
-                        NumberAnimation {
-                            duration: PlasmaCore.Units.longDuration
-                            easing.type: Easing.InOutQuad
-                        }
-                    }
-                }
-
-
-            }
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        Component.onCompleted: {
+            header.input.forceActiveFocus();
         }
     }
-}
 
 Component.onCompleted: {
     searchField.focus = true
