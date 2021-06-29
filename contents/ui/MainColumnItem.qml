@@ -273,14 +273,14 @@ Item {
 
         }
 
-        ItemListView {
+        ItemMultiGridView {
             id: allAppsGrid
             model: rootModel.modelForRow(2)
             anchors.fill: parent
             width: parent.width
             height: parent.height
-            itemHeight: units.iconSizes.medium + 10
-            iconsEnabled: true
+            // itemHeight: units.iconSizes.medium + 10
+            // iconsEnabled: true
             z: (opacity == 1.0) ? 1 : 0
             enabled: (opacity == 1.0) ? 1 : 0
             opacity: !searching && showAllApps ? 1 : 0
@@ -291,15 +291,13 @@ Item {
             }
         }
 
-        ItemMultiListView {
+        ItemMultiGridView {
             id: runnerGrid
             anchors.fill: parent
             z: (opacity == 1.0) ? 1 : 0
             enabled: (opacity == 1.0) ? 1 : 0
             width: parent.width
             model: runnerModel
-            itemHeight: units.iconSizes.medium + 10
-            iconsEnabled: true
             opacity: searching ? 1.0 : 0.0
             onOpacityChanged: {
                 if (opacity == 1.0) {
@@ -352,11 +350,8 @@ Item {
     }
 
     Item{
-
         id: recentItem
         width: parent.width
-
-        //anchors.top:    searching ? undefined : mainColumn.bottom
         anchors.top: mainColumn.bottom
         anchors.topMargin: units.largeSpacing
         anchors.left: parent.left

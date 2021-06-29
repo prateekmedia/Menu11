@@ -27,7 +27,7 @@ import "code/tools.js" as Tools
 Item {
     id: item
 
-    width:  GridView.view.cellWidth
+    width: GridView.view.cellWidth
     height: GridView.view.cellHeight
     property bool showLabel: true
     property int itemIndex: model.index
@@ -36,7 +36,7 @@ Item {
     property variant icon: model.decoration !== undefined ? model.decoration : ""
     property var m: model
     property bool hasActionList: ((model.favoriteId !== null)
-                                  || (("hasActionList" in model) && (model.hasActionList === true)))
+        || (("hasActionList" in model) && (model.hasActionList === true)))
 
     Accessible.role: Accessible.MenuItem
     Accessible.name: model.display
@@ -56,11 +56,11 @@ Item {
         }
     }
 
-    function backColor(idx){
+    function backColor(idx) {
 
         var i = idx % 4;
-        if(i === 0 || i === 3)        
-            return  Qt.lighter(theme.backgroundColor)            
+        if (i === 0 || i === 3)
+            return Qt.lighter(theme.backgroundColor)
         return Qt.darker(theme.backgroundColor)
     }
 
@@ -81,17 +81,7 @@ Item {
         colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
         animated: false
         usesPlasmaTheme: item.GridView.view.usesPlasmaTheme
-        source:  {
-           if (model.display.indexOf(".") === -1 ) {
-               var s = "-" + model.url
-               if( s[s.length - 8 ] == "."){
-                   return  model.decoration
-               }
-               return "folder"
-           }else{
-               return  model.decoration
-           }        
-        }
+        source: model.decoration
     }
 
     PlasmaComponents.Label {
@@ -99,9 +89,11 @@ Item {
         visible: showLabel
         anchors {
             left: icon.right
-            leftMargin: units.smallSpacing
-            top: icon.top
+            leftMargin: PlasmaCore.Units.smallSpacing * 4
+            rightMargin: PlasmaCore.Units.smallSpacing * 2
+            verticalCenter: parent.verticalCenter
         }
+        
         maximumLineCount: 1
         elide: Text.ElideRight
         wrapMode: Text.Wrap
