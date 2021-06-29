@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2014-2015 by Eike Hein <hein@kde.org>                   *
+ *    Copyright (C) 2021 by Prateek SU <pankajsunal123@gmail.com>          *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -33,16 +34,16 @@ Item {
 
     signal reset
 
-    property bool isDash: false//true//<>(plasmoid.pluginName === "org.kde.plasma.kickerdash")
+    property bool isDash: true
 
-    property string stringQuery: ""
-    Plasmoid.switchWidth: isDash || !Plasmoid.fullRepresentationItem ? 0 : Plasmoid.fullRepresentationItem.Layout.minimumWidth
-    Plasmoid.switchHeight: isDash || !Plasmoid.fullRepresentationItem ? 0 : Plasmoid.fullRepresentationItem.Layout.minimumHeight
+    Plasmoid.switchWidth: Plasmoid.fullRepresentationItem.Layout.minimumWidth
+    Plasmoid.switchHeight: Plasmoid.fullRepresentationItem.Layout.minimumHeight
 
     // this is a bit of a hack to prevent Plasma from spawning a dialog on its own when we're Dash
-    Plasmoid.preferredRepresentation: isDash ? Plasmoid.fullRepresentation : null
-    Plasmoid.compactRepresentation: isDash ? null : compactRepresentation
-    Plasmoid.fullRepresentation: isDash ? compactRepresentation : menuRepresentation
+    Plasmoid.preferredRepresentation: null
+
+    Plasmoid.compactRepresentation: compactRepresentation
+    Plasmoid.fullRepresentation: menuRepresentation
 
     property QtObject itemListDialogComponent: Qt.createComponent("ItemListDialog.qml");
     property Item dragSource: null
@@ -50,7 +51,7 @@ Item {
     property QtObject globalFavorites: rootModel.favoritesModel
     property QtObject systemFavorites: rootModel.systemFavoritesModel
 
-    //Plasmoid.icon: plasmoid.configuration.useCustomButtonImage ? plasmoid.configuration.customButtonImage : plasmoid.configuration.icon
+    Plasmoid.icon: plasmoid.configuration.useCustomButtonImage ? plasmoid.configuration.customButtonImage : plasmoid.configuration.icon
 
     onSystemFavoritesChanged: {
         systemFavorites.favorites = plasmoid.configuration.favoriteSystemActions;
@@ -67,21 +68,13 @@ Item {
 
     Component {
         id: compactRepresentation
-        CompactRepresentation {
-            property string textQuery: kicker.stringQuery
-
-        }
+        CompactRepresentation { }
     }
 
     Component {
         id: menuRepresentation
-        MenuRepresentation {
-            onAppendSearchText:{
-                kicker.stringQuery = text
-            }
-        }
+        MenuRepresentation { }
     }
-
 
     Kicker.RootModel {
         id: rootModel
@@ -89,14 +82,14 @@ Item {
         autoPopulate: false
 
         appNameFormat: plasmoid.configuration.appNameFormat
-        flat: isDash ? true : plasmoid.configuration.limitDepth
+        flat: true//isDash ? true : plasmoid.configuration.limitDepth
         sorted: plasmoid.configuration.alphaSort
         showSeparators: !isDash
         appletInterface: plasmoid
 
-        showAllApps: true//isDash
-        //showAllAppsCategorized: true //  invalid for kubuntu 18.04
-        //showTopLevelItems: !isDash    // invalid for kubuntu 18.04
+        showAllApps: true
+        showAllAppsCategorized: true
+        showTopLevelItems: !isDash
         showRecentApps: plasmoid.configuration.showRecentApps
         showRecentDocs: plasmoid.configuration.showRecentDocs
         showRecentContacts: plasmoid.configuration.showRecentContacts
@@ -168,10 +161,9 @@ Item {
         runners: {
             var runners = new Array("services");
 
-            if (isDash) {
-                runners = runners.concat(new Array("desktopsessions", "PowerDevil",
-                                                   "calculator", "unitconverter"));
-            }
+            runners = runners.concat(new Array("desktopsessions", "PowerDevil",
+                "calculator", "unitconverter"));
+
 
             if (plasmoid.configuration.useExtraRunners) {
                 runners = runners.concat(plasmoid.configuration.extraRunners);
@@ -198,7 +190,7 @@ Item {
     }
 
     PlasmaCore.FrameSvgItem {
-        id : highlightItemSvg
+        id: highlightItemSvg
 
         visible: false
 
@@ -207,7 +199,7 @@ Item {
     }
 
     PlasmaCore.FrameSvgItem {
-        id : listItemSvg
+        id: listItemSvg
 
         visible: false
 
@@ -271,7 +263,7 @@ Item {
 
     Component.onCompleted: {
         if (plasmoid.hasOwnProperty("activationTogglesExpanded")) {
-            plasmoid.activationTogglesExpanded = !isDash
+            plasmoid.activationTogglesExpanded = false
         }
 
         windowSystem.focusIn.connect(enableHideOnWindowDeactivate);

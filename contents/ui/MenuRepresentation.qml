@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2013-2015 by Eike Hein <hein@kde.org>                   *
+ *    Copyright (C) 2021 by Prateek SU <pankajsunal123@gmail.com>          *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -28,17 +29,18 @@ FocusScope {
     property int iconSize: mainColumnItem.iconSize
     property bool done: false
 
-    function toggle(){
-        plasmoid.expanded = false;
+    function toggle() {
+        plasmoid.expanded = !plasmoid.expanded
+
     }
-    function mainReset(){
+    function mainReset() {
         mainColumnItem.reset()
     }
-    Layout.minimumWidth:  mainColumnItem.width //+ tilesColumnItem.width
-    Layout.maximumWidth:  mainColumnItem.width //+ tilesColumnItem.width
+    Layout.minimumWidth: mainColumnItem.width //+ tilesColumnItem.width
+    Layout.maximumWidth: mainColumnItem.width //+ tilesColumnItem.width
     Layout.minimumHeight: mainColumnItem.tileSide * 5 + 50
     Layout.maximumHeight: mainColumnItem.tileSide * 5 + 50
-    
+
     signal appendSearchText(string text)
 
     Row{
@@ -47,7 +49,7 @@ FocusScope {
 
         MainColumnItem{
             id: mainColumnItem
-            onNewTextQuery:  {
+            onNewTextQuery: {
                 appendSearchText(text)
             }
         }
@@ -56,13 +58,13 @@ FocusScope {
 
     Keys.onPressed: {
         if (event.key === Qt.Key_Escape) {
-            plasmoid.expanded = false;
+            plasmoid.expanded = false
         }
     }
 
     function refreshModel() {
         mainColumnItem.reload()
-        console.log("refresh model - menu Z")
+        console.log("refresh model - menu 11")
     }
 
     Component.onCompleted: {

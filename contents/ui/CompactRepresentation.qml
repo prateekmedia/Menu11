@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2013-2014 by Eike Hein <hein@kde.org>                   *
+ *    Copyright (C) 2021 by Prateek SU <pankajsunal123@gmail.com>          *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -100,9 +101,9 @@ Item {
         anchors.fill: parent
         hoverEnabled: !dashWindow || !dashWindow.visible
         onClicked: {
-               plasmoid.expanded = !plasmoid.expanded;
+            plasmoid.expanded = !plasmoid.expanded;
         }
     }
 
-    Component.onCompleted: {}
+    Component.onCompleted: { }
 }

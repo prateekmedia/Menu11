@@ -23,7 +23,6 @@ import QtQuick 2.12
 import QtQuick.Layouts 1.12
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
-import org.kde.plasma.components 2.0 as PlasmaComponents2 // for Menu + MenuItem
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.kcoreaddons 1.0 as KCoreAddons
 // While using Kirigami in applets is normally a no, we
@@ -37,7 +36,7 @@ PlasmaExtras.PlasmoidHeading {
 
     implicitHeight: Math.round(PlasmaCore.Units.gridUnit * 2.5)
     rightPadding: rightInset
-    anchors.bottomMargin:15
+    anchors.bottomMargin: 15
 
     property Item configureButton: configureButton
     property Item avatar: avatarButton
@@ -63,179 +62,180 @@ PlasmaExtras.PlasmoidHeading {
         State {
             name: "name"
             PropertyChanges {
-                target: nameLabel
+            target: nameLabel
                 opacity: 1
-            }
-            PropertyChanges {
-                target: infoLabel
-                opacity: 0
-            }
-        },
-        State {
-            name: "info"
-            PropertyChanges {
-                target: nameLabel
-                opacity: 0
-            }
-            PropertyChanges {
-                target: infoLabel
-                opacity: 1
-            }
         }
+            PropertyChanges {
+            target: infoLabel
+                opacity: 0
+        }
+        },
+State {
+    name: "info"
+    PropertyChanges {
+        target: nameLabel
+        opacity: 0
+    }
+    PropertyChanges {
+        target: infoLabel
+        opacity: 1
+    }
+}
     ] // states
 
 
-    Rectangle{
-        id: divider
-        visible: !searching
-        anchors{
-            left: parent.left
-            right: parent.right
-            top: lockScreenButton.top
-            margins: units.largeSpacing
-            bottomMargin: 0
-        }
-        y: -15
-        color: theme.textColor
-        height: 1
-        opacity: 0.2
+Rectangle{
+    id: divider
+    visible: !searching
+    anchors{
+        left: parent.left
+        right: parent.right
+        top: lockScreenButton.top
+        margins: units.largeSpacing
+        bottomMargin: 0
     }
+    y: -15
+    color: theme.textColor
+    height: 1
+    opacity: 0.2
+}
 
-    RowLayout {
-        id: nameAndIcon
-        anchors.leftMargin: units.largeSpacing
-        anchors.left: parent.left
-        x: units.smallSpacing
-        anchors.right: parent.right
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.rightMargin: Math.round(parent.width/1.5) + PlasmaCore.Units.gridUnit
-        PlasmaComponents.RoundButton {
-            id: avatarButton
-            visible: KQuickAddons.KCMShell.authorize("kcm_users.desktop").length > 0
+RowLayout {
+    id: nameAndIcon
+    anchors.leftMargin: units.largeSpacing
+    anchors.left: parent.left
+    x: units.smallSpacing
+    anchors.right: parent.right
+    anchors.verticalCenter: parent.verticalCenter
+    anchors.rightMargin: Math.round(parent.width / 1.5) + PlasmaCore.Units.gridUnit
+    PlasmaComponents.RoundButton {
+        id: avatarButton
+        visible: KQuickAddons.KCMShell.authorize("kcm_users.desktop").length > 0
 
-            flat: true
+        flat: true
 
-            Layout.preferredWidth: PlasmaCore.Units.gridUnit * 2
-            Layout.preferredHeight: PlasmaCore.Units.gridUnit * 2
+        Layout.preferredWidth: units.iconSizes.large
+        Layout.preferredHeight: Layout.preferredWidth
 
-            Accessible.name: nameLabel.text
-            Accessible.description: i18n("Go to user settings")
+        Accessible.name: nameLabel.text
+        Accessible.description: i18n("Go to user settings")
 
-            Kirigami.Avatar {
-                source: kuser.faceIconUrl
-                name: nameLabel.text
-                anchors {
-                    fill: parent
-                    margins: PlasmaCore.Units.smallSpacing
-                }
-                // NOTE: for some reason Avatar eats touch events even though it shouldn't
-                // Ideally we'd be using Avatar but it doesn't have proper key nav yet
-                // see https://invent.kde.org/frameworks/kirigami/-/merge_requests/218
-                actions.main: Kirigami.Action {
-                    text: avatarButton.Accessible.description
-                    onTriggered: avatarButton.clicked()
-                }
-                // no keyboard nav
-                activeFocusOnTab: false
-                // ignore accessibility (done by the button)
-                Accessible.ignored: true
+        Kirigami.Avatar {
+            source: kuser.faceIconUrl
+            name: nameLabel.text
+            anchors {
+                fill: parent
+                margins: PlasmaCore.Units.smallSpacing
             }
-
-            onClicked: {
-                KQuickAddons.KCMShell.openSystemSettings("kcm_users")
+            // NOTE: for some reason Avatar eats touch events even though it shouldn't
+            // Ideally we'd be using Avatar but it doesn't have proper key nav yet
+            // see https://invent.kde.org/frameworks/kirigami/-/merge_requests/218
+            actions.main: Kirigami.Action {
+                text: avatarButton.Accessible.description
+                onTriggered: avatarButton.clicked()
             }
-
-            Keys.onPressed: {
-                // In search on backtab focus on search pane
-                if (event.key == Qt.Key_Backtab && (root.state == "Search" || mainTabGroup.state == "top")) {
-                    navigationMethod.state = "keyboard"
-                    keyboardNavigation.state = "RightColumn"
-                    root.currentContentView.forceActiveFocus()
-                    event.accepted = true;
-                    return;
-                }
-            }
+            // no keyboard nav
+            activeFocusOnTab: false
+            // ignore accessibility (done by the button)
+            Accessible.ignored: true
         }
 
-        Item {
-            Layout.fillWidth: true
-            Layout.preferredHeight: PlasmaCore.Units.gridUnit
-            Layout.alignment: Layout.AlignVCenter | Qt.AlignLeft
+        onClicked: {
+            KQuickAddons.KCMShell.openSystemSettings("kcm_users")
+        }
 
-            PlasmaExtras.Heading {
-                id: nameLabel
-                anchors.fill: parent
-
-                level: 2
-                text: kuser.fullName
-                elide: Text.ElideRight
-                horizontalAlignment: Text.AlignLeft
-                verticalAlignment: Text.AlignVCenter
-
-                Behavior on opacity {
-                    NumberAnimation {
-                        duration: PlasmaCore.Units.longDuration
-                        easing.type: Easing.InOutQuad
-                    }
-                }
-
-                // Show the info instead of the user's name when hovering over it
-                MouseArea {
-                    anchors.fill: nameLabel
-                    hoverEnabled: true
-                    onEntered: {
-                        footer.state = "info"
-                    }
-                    onExited: {
-                        footer.state = "name"
-                    }
-                }
-            }
-
-            PlasmaExtras.Heading {
-                id: infoLabel
-                level: 5
-                opacity: 0
-                text: kuser.os !== "" ? i18n("%2@%3 (%1)", kuser.os, kuser.loginName, kuser.host) : i18n("%1@%2", kuser.loginName, kuser.host)
-                elide: Text.ElideRight
-                horizontalAlignment: Text.AlignLeft
-                verticalAlignment: Text.AlignVCenter
-
-                Behavior on opacity {
-                    NumberAnimation {
-                        duration: PlasmaCore.Units.longDuration
-                        easing.type: Easing.InOutQuad
-                    }
-                }
+        Keys.onPressed: {
+            // In search on backtab focus on search pane
+            if (event.key == Qt.Key_Backtab && (root.state == "Search" || mainTabGroup.state == "top")) {
+                navigationMethod.state = "keyboard"
+                keyboardNavigation.state = "RightColumn"
+                root.currentContentView.forceActiveFocus()
+                event.accepted = true;
+                return;
             }
         }
     }
 
-    RowLayout {
-        anchors.rightMargin: units.largeSpacing
-        anchors.right: parent.right
-        x: -units.smallSpacing
-        anchors.verticalCenter: parent.verticalCenter
+    Item {
+        Layout.fillWidth: true
+        Layout.preferredHeight: PlasmaCore.Units.gridUnit
+        Layout.alignment: Layout.AlignVCenter | Qt.AlignLeft
 
-        // looks visually balanced that way
-        spacing: Math.round(PlasmaCore.Units.smallSpacing * 2.5)
+        PlasmaExtras.Heading {
+            id: nameLabel
+            anchors.fill: parent
 
-        PlasmaComponents.RoundButton {
-            id: lockScreenButton
-            icon.name: "system-lock-screen"
-            onPressed: pmEngine.performOperation("lockScreen")
-            PlasmaComponents.ToolTip {
-                text: "Lock Screen"
+            level: 2
+            text: kuser.fullName
+            elide: Text.ElideRight
+            horizontalAlignment: Text.AlignLeft
+            verticalAlignment: Text.AlignVCenter
+
+            Behavior on opacity {
+                NumberAnimation {
+                    duration: PlasmaCore.Units.longDuration
+                    easing.type: Easing.InOutQuad
+                }
+            }
+
+            // Show the info instead of the user's name when hovering over it
+            MouseArea {
+                anchors.fill: nameLabel
+                hoverEnabled: true
+                onEntered: {
+                    footer.state = "info"
+                }
+                onExited: {
+                    footer.state = "name"
+                }
             }
         }
 
-        PlasmaComponents.RoundButton {
-            id: leaveButton
-            icon.name: "system-shutdown"
-            onPressed: pmEngine.performOperation("requestShutDown")
-            PlasmaComponents.ToolTip {
-                text: "Shutdown"
+        PlasmaExtras.Heading {
+            id: infoLabel
+            level: 5
+            opacity: 0
+            text: kuser.os !== "" ? i18n("%2@%3 (%1)", kuser.os, kuser.loginName, kuser.host) : i18n("%1@%2", kuser.loginName, kuser.host)
+            elide: Text.ElideRight
+            horizontalAlignment: Text.AlignLeft
+            verticalAlignment: Text.AlignVCenter
+
+            Behavior on opacity {
+                NumberAnimation {
+                    duration: PlasmaCore.Units.longDuration
+                    easing.type: Easing.InOutQuad
+                }
             }
         }
     }
+}
+
+RowLayout {
+    anchors.rightMargin: units.largeSpacing
+    anchors.right: parent.right
+    x: -units.smallSpacing
+    anchors.verticalCenter: parent.verticalCenter
+
+    // looks visually balanced that way
+    spacing: Math.round(PlasmaCore.Units.smallSpacing * 2.5)
+
+    PlasmaComponents.RoundButton {
+        id: lockScreenButton
+        icon.name: "system-lock-screen"
+        enabled: pmEngine.data["Sleep States"]["LockScreen"]
+        onClicked: pmEngine.performOperation("lockScreen")
+        PlasmaComponents.ToolTip {
+            text: i18nc("@action", "Lock Screen")
+        }
+    }
+
+    PlasmaComponents.RoundButton {
+        id: leaveButton
+        icon.name: "system-shutdown"
+        onClicked: pmEngine.performOperation("requestShutDown")
+        PlasmaComponents.ToolTip {
+            text: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Leave ... ")
+        }
+    }
+}
 }

@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2015 by Eike Hein <hein@kde.org>                        *
+ *    Copyright (C) 2021 by Prateek SU <pankajsunal123@gmail.com>          *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -32,7 +33,7 @@ PlasmaExtras.ScrollArea {
         top: parent.top
     }
     width: parent.width
-    implicitHeight: itemColumn.implicitHeight //+ units.largeSpacing
+    implicitHeight: itemColumn.implicitHeight + units.largeSpacing
 
     signal keyNavLeft(int subGridIndex)
     signal keyNavRight(int subGridIndex)
@@ -40,16 +41,13 @@ PlasmaExtras.ScrollArea {
     signal keyNavDown()
 
     property bool grabFocus: false
+    property int iconSize: units.iconSizes.medium
 
     property alias model: repeater.model
-
     property alias count: repeater.count
-    property bool square: false
-    property int tileSide
 
     //clip: true
-//    verticalScrollBarPolicy: Qt.ScrollBarAsNeeded
-//    horizontalScrollBarPolicy: Qt.ScrollBarAlwaysOn
+    verticalScrollBarPolicy: Qt.ScrollBarAsNeeded
 
     flickableItem.flickableDirection: Flickable.VerticalFlick
 
@@ -104,7 +102,7 @@ PlasmaExtras.ScrollArea {
 
                 property int headerHeight: gridViewLabel.height
                 property int footerHeight: units.smallSpacing * 3
-                visible:  gridView.count > 0
+                visible: gridView.count > 0
                 property Item itemGrid: gridView
 
                 PlasmaExtras.Heading {
@@ -142,12 +140,11 @@ PlasmaExtras.ScrollArea {
                     dropEnabled: false
                     // <
 
-                    width:  parent.width
-                    square: itemMultiGrid.square
-                    height: Math.ceil(count  * cellHeight)
-                    cellHeight: itemMultiGrid.tileSide//root.iconSize + (2 * highlightItemSvg.margins.top)//<>cellSize
-                    cellWidth:  itemMultiGrid.tileSide// cellHeight
-                    iconSize:   root.iconSize
+                    width: parent.width
+                    height: Math.ceil(count * cellHeight)
+                    cellWidth: parent.width
+                    cellHeight: itemMultiGrid.iconSize + (2 * highlightItemSvg.margins.top)//<>cellSize
+                    iconSize: itemMultiGrid.iconSize
                     model: repeater.model.modelForRow(index)
 
                     onFocusChanged: {
