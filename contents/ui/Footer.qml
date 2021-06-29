@@ -37,6 +37,7 @@ PlasmaExtras.PlasmoidHeading {
 
     implicitHeight: Math.round(PlasmaCore.Units.gridUnit * 2.5)
     rightPadding: rightInset
+    anchors.bottomMargin:15
 
     property Item configureButton: configureButton
     property Item avatar: avatarButton
@@ -82,6 +83,23 @@ PlasmaExtras.PlasmoidHeading {
             }
         }
     ] // states
+
+
+    Rectangle{
+        id: divider
+        visible: !searching
+        anchors{
+            left: parent.left
+            right: parent.right
+            top: lockScreenButton.top
+            margins: units.largeSpacing
+            bottomMargin: 0
+        }
+        y: -15
+        color: theme.textColor
+        height: 1
+        opacity: 0.2
+    }
 
     RowLayout {
         id: nameAndIcon
