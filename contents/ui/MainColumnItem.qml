@@ -300,10 +300,6 @@ Item {
             model: runnerModel
             itemHeight: units.iconSizes.medium + 10
             iconsEnabled: true
-            // tileSide: tileSide
-            // verticalScrollBarPolicy: Qt.ScrollBarAlwaysOff
-            // grabFocus: true
-            // square: true
             opacity: searching ? 1.0 : 0.0
             onOpacityChanged: {
                 if (opacity == 1.0) {
