@@ -38,6 +38,8 @@ FocusScope {
     property bool dragEnabled: true
     property bool dropEnabled: false
     property bool showLabels: true
+    property bool showBacks: false
+    property bool useSmallSpacings: false
     property alias usesPlasmaTheme: gridView.usesPlasmaTheme
 
     property alias currentIndex: gridView.currentIndex
@@ -192,6 +194,8 @@ FocusScope {
         Component{
             id: aItemGridDelegate
             ItemGridDelegate {
+                showBack: showBacks
+                useSmallSpacing: useSmallSpacings
                 showLabel: showLabels
             }
         }

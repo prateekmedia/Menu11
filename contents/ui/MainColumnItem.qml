@@ -228,8 +228,6 @@ Item {
             rightMargin: units.largeSpacing
         }
         x: -units.smallSpacing
-        font.bold: true
-        font.weight: Font.Bold
         visible: !searching
         onClicked: showAllApps = !showAllApps
     }
@@ -375,26 +373,26 @@ Item {
 
         ItemGridView {
             id: documentsFavoritesGrid
+            visible: !searching && !showAllApps
             property int rows: 3
+            useSmallSpacings: true
+            showBacks: true
+
             anchors{
                 top: headLabelDocuments.bottom
-                topMargin: units.largeSpacing
-                leftMargin: units.largeSpacing
+                left: parent.left
+                right: parent.right
+                bottom: footer.top
                 margins: units.largeSpacing
                 bottomMargin: 0
             }
-            width: parent.width //parent.width * 0.7
-            height: tileSide * 2 + units.largeSpacing
-            cellWidth: tileSide * 2
-            cellHeight: 24
-            iconSize: units.iconSizes.smallMedium
+
+            height: (units.iconSizes.medium + units.smallSpacing * 2) * 3
+            cellWidth:    parent.width * 0.45
+            cellHeight:   units.iconSizes.medium + units.smallSpacing * 2
+            iconSize:    units.iconSizes.medium
             model: rootModel.modelForRow(1);
-            visible: !searching && !showAllApps
-            dropEnabled: true
-            usesPlasmaTheme: true
-            onKeyNavLeft: {
-                //mainColumn.visibleGrid.tryActivate(0,0);
-            }
+            usesPlasmaTheme: false
 
             onKeyNavUp: {
                 mainColumn.visibleGrid.tryActivate(0, 0);

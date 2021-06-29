@@ -30,6 +30,8 @@ Item {
     width: GridView.view.cellWidth
     height: GridView.view.cellHeight
     property bool showLabel: true
+    property bool showBack: false
+    property bool useSmallSpacing: true
     property int itemIndex: model.index
     property string favoriteId: model.favoriteId !== undefined ? model.favoriteId : ""
     property url url: model.url !== undefined ? model.url : ""
@@ -67,7 +69,7 @@ Item {
     Rectangle{
         id: back
         anchors.fill: parent
-        opacity: 0.15
+        opacity: showBack ? 0.15 : 0
         color: backColor(index)
     }
 
@@ -89,8 +91,8 @@ Item {
         visible: showLabel
         anchors {
             left: icon.right
-            leftMargin: PlasmaCore.Units.smallSpacing * 4
-            rightMargin: PlasmaCore.Units.smallSpacing * 2
+            leftMargin: PlasmaCore.Units.smallSpacing * (useSmallSpacing ? 1 : 4)
+            rightMargin: PlasmaCore.Units.smallSpacing * (useSmallSpacing ? 0 : 2)
             verticalCenter: parent.verticalCenter
         }
         
