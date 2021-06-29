@@ -45,6 +45,17 @@ PlasmaExtras.PlasmoidHeading {
         id: kuser
     }
 
+    PlasmaCore.DataSource {
+        id: pmEngine
+        engine: "powermanagement"
+        connectedSources: ["PowerDevil", "Sleep States"]
+        function performOperation(what) {
+            var service = serviceForSource("PowerDevil")
+            var operation = service.operationDescription(what)
+            service.startOperationCall(operation)
+        }
+    }
+
     state: "name"
 
     states: [
@@ -165,7 +176,6 @@ PlasmaExtras.PlasmoidHeading {
 
             PlasmaExtras.Heading {
                 id: infoLabel
-                anchors.fill: parent
                 level: 5
                 opacity: 0
                 text: kuser.os !== "" ? i18n("%2@%3 (%1)", kuser.os, kuser.loginName, kuser.host) : i18n("%1@%2", kuser.loginName, kuser.host)
@@ -192,32 +202,21 @@ PlasmaExtras.PlasmoidHeading {
         // looks visually balanced that way
         spacing: Math.round(PlasmaCore.Units.smallSpacing * 2.5)
 
-        PlasmaComponents.ToolButton {
-            id: leaveButton
-            icon.name: "system-shutdown"
-
-            // Make it look pressed while the menu is open
-            checked: contextMenu.status === PlasmaComponents2.DialogStatus.Open
-            onPressed: contextMenu.openRelative()
+        PlasmaComponents.RoundButton {
+            id: lockScreenButton
+            icon.name: "system-lock-screen"
+            onPressed: pmEngine.performOperation("lockScreen")
             PlasmaComponents.ToolTip {
-                text: "Shutdown Options"
+                text: "Lock Screen"
             }
         }
-    }
 
-
-    PlasmaComponents2.Menu {
-        id: contextMenu
-        visualParent: leaveButton
-        placement: {
-            switch (plasmoid.location) {
-            case PlasmaCore.Types.LeftEdge:
-            case PlasmaCore.Types.RightEdge:
-            case PlasmaCore.Types.TopEdge:
-                return PlasmaCore.Types.BottomPosedRightAlignedPopup;
-            case PlasmaCore.Types.BottomEdge:
-            default:
-                return PlasmaCore.Types.TopPosedRightAlignedPopup;
+        PlasmaComponents.RoundButton {
+            id: leaveButton
+            icon.name: "system-shutdown"
+            onPressed: pmEngine.performOperation("requestShutDown")
+            PlasmaComponents.ToolTip {
+                text: "Shutdown"
             }
         }
     }

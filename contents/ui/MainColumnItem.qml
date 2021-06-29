@@ -24,6 +24,7 @@ import org.kde.kquickcontrolsaddons 2.0 as KQuickAddons
 
 import QtQuick 2.12
 import QtQuick.Layouts 1.12
+import QtGraphicalEffects 1.0
 //import org.kde.plasma.core 2.1 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.kirigami 2.13 as Kirigami
@@ -68,7 +69,7 @@ Item {
         id: playAllGrid
         running: false
         NumberAnimation { target: globalFavoritesGrid; property: "x"; from: 100; to: 0; duration: 500; easing.type: Easing.InOutQuad }
-        NumberAnimation { target: allAppsGrid; property: "x"; from: 100; to: 0; duration: 500; easing.type: Easing.InOutQuad }
+        NumberAnimation { target: allAppsGrid; property: "y"; from: 100; to: 0; duration: 500; easing.type: Easing.InOutQuad }
     }
 
     function reset() {
@@ -81,7 +82,6 @@ Item {
     function reload() {
         mainColumn.visible = false
         recentItem.visible = false
-        bottomItem.visible = false
         globalFavoritesGrid.model = null
         documentsFavoritesGrid.model = null
         preloadAllAppsTime.done = false
@@ -121,7 +121,6 @@ Item {
             done = true;
             mainColumn.visible = true
             recentItem.visible = true
-            bottomItem.visible = true
             playAllGrid.start()
         }
         function defer() {
@@ -246,22 +245,21 @@ Item {
 
         ItemGridView {
             id: globalFavoritesGrid
+            model: globalFavorites
             width: parent.width
             height: searching ? parent.height : tileSide * 2
             cellWidth: tileSide
             cellHeight: tileSide
             iconSize: iconSize
             square: true
-            model: globalFavorites
             dropEnabled: true
             usesPlasmaTheme: true
-            verticalScrollBarPolicy: Qt.ScrollBarAlwaysOff
             z: (opacity == 1.0) ? 1 : 0
             enabled: (opacity == 1.0) ? 1 : 0
+            verticalScrollBarPolicy: Qt.ScrollBarAlwaysOff
             opacity: searching || showAllApps ? 0 : 1
             onOpacityChanged: {
                 if (opacity == 1.0) {
-                    //globalFavoritesGrid.flickableItem.contentY = 0;
                     mainColumn.visibleGrid = globalFavoritesGrid;
                 }
             }
@@ -271,19 +269,20 @@ Item {
 
         ItemGridView {
             id: allAppsGrid
+            model: rootModel.modelForRow(2)
             anchors.fill: parent
-            z: (opacity == 1.0) ? 1 : 0
             width:  parent.width
             height: parent.height
-            enabled: (opacity == 1.0) ? 1 : 0
             cellWidth: tileSide
             cellHeight: tileSide
             iconSize: iconSize
             square: true
+            dropEnabled: true
             usesPlasmaTheme: true
+            z: (opacity == 1.0) ? 1 : 0
+            enabled: (opacity == 1.0) ? 1 : 0
             verticalScrollBarPolicy: Qt.ScrollBarAlwaysOff
             opacity: !searching && showAllApps ? 1 : 0
-            model: rootModel.modelForRow(2);
             onOpacityChanged: {
                 if (opacity == 1.0) {
                     mainColumn.visibleGrid = allAppsGrid;
