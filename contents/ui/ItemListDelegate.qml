@@ -197,7 +197,7 @@ Item {
 
             anchors.verticalCenter: parent.verticalCenter
 
-            width: visible ? units.iconSizes.small : 0
+            width: visible ? units.iconSizes.medium : 0
             height: width
 
             visible: iconsEnabled

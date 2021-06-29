@@ -34,7 +34,8 @@ FocusScope {
     height: listView.contentHeight
 
     signal exited
-    signal keyNavigationAtListEnd
+    signal keyNavUp
+    signal keyNavDown
     signal appendSearchText(string text)
 
     property Item focusParent: null
@@ -54,6 +55,18 @@ FocusScope {
     property alias count: listView.count
     property alias containsMouse: listener.containsMouse
     property alias resetOnExitDelay: resetIndexTimer.interval
+
+
+    function tryActivate(row) {
+        if (count) {
+            row = Math.min(row, count - 1);
+            currentIndex = Math.min(row ? ((Math.max(1, row) * 1) + 0)
+                                        : 0,
+                                    count - 1);
+
+            focus = true;
+        }
+    }
 
     onFocusParentChanged: {
         appendSearchText.connect(focusParent.appendSearchText);
@@ -204,8 +217,7 @@ FocusScope {
                         event.accepted = true;
 
                         if (!keyNavigationWraps && currentIndex == 0) {
-                            itemList.keyNavigationAtListEnd();
-
+                            itemList.keyNavUp();
                             return;
                         }
 
@@ -221,7 +233,7 @@ FocusScope {
                         event.accepted = true;
 
                         if (!keyNavigationWraps && currentIndex == count - 1) {
-                            itemList.keyNavigationAtListEnd();
+                            itemList.keyNavDown();
 
                             return;
                         }

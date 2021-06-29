@@ -69,13 +69,13 @@ Item {
         id: playAllGrid
         running: false
         NumberAnimation { target: globalFavoritesGrid; property: "x"; from: 100; to: 0; duration: 500; easing.type: Easing.InOutQuad }
-        NumberAnimation { target: allAppsGrid; property: "y"; from: 100; to: 0; duration: 500; easing.type: Easing.InOutQuad }
     }
 
     function reset() {
         mainColumn.visibleGrid = globalFavoritesGrid
-        searchField.clear();
+        searchField.clear()
         searchField.focus = true
+        showAllApps = false
         globalFavoritesGrid.tryActivate(0, 0);
     }
 
@@ -84,6 +84,7 @@ Item {
         recentItem.visible = false
         globalFavoritesGrid.model = null
         documentsFavoritesGrid.model = null
+        allAppsGrid.model = null
         preloadAllAppsTime.done = false
         preloadAllAppsTime.defer()
     }
@@ -217,10 +218,15 @@ Item {
     PlasmaComponents.ToolButton  {
         text: i18n(showAllApps ? "Back" : "All Apps")
         id: mainsecLabelGrid
+        flat: false
+        icon.width: icon.height
+        icon.height: visible ? units.iconSizes.small : 0
         icon.name: showAllApps ? "go-previous" : "go-next"
-        anchors.top: parent.top//headRect.bottom
-        anchors.rightMargin: units.largeSpacing
-        anchors.right: parent.right
+        anchors {
+            top: parent.top
+            right: parent.right
+            rightMargin: units.largeSpacing
+        }
         x: -units.smallSpacing
         font.bold: true
         font.weight: Font.Bold
@@ -267,21 +273,16 @@ Item {
 
         }
 
-        ItemGridView {
+        ItemListView {
             id: allAppsGrid
             model: rootModel.modelForRow(2)
             anchors.fill: parent
-            width:  parent.width
+            width: parent.width
             height: parent.height
-            cellWidth: tileSide
-            cellHeight: tileSide
-            iconSize: iconSize
-            square: true
-            dropEnabled: true
-            usesPlasmaTheme: true
+            itemHeight: units.iconSizes.medium + 10
+            iconsEnabled: true
             z: (opacity == 1.0) ? 1 : 0
             enabled: (opacity == 1.0) ? 1 : 0
-            verticalScrollBarPolicy: Qt.ScrollBarAlwaysOff
             opacity: !searching && showAllApps ? 1 : 0
             onOpacityChanged: {
                 if (opacity == 1.0) {
@@ -290,16 +291,19 @@ Item {
             }
         }
 
-        ItemMultiGridView {
+        ItemMultiListView {
             id: runnerGrid
             anchors.fill: parent
             z: (opacity == 1.0) ? 1 : 0
             enabled: (opacity == 1.0) ? 1 : 0
+            width: parent.width
             model: runnerModel
-            tileSide: tileSide
-            verticalScrollBarPolicy: Qt.ScrollBarAlwaysOff
-            grabFocus: true
-            square: true
+            itemHeight: units.iconSizes.medium + 10
+            iconsEnabled: true
+            // tileSide: tileSide
+            // verticalScrollBarPolicy: Qt.ScrollBarAlwaysOff
+            // grabFocus: true
+            // square: true
             opacity: searching ? 1.0 : 0.0
             onOpacityChanged: {
                 if (opacity == 1.0) {
@@ -362,8 +366,6 @@ Item {
         anchors.left: parent.left
         anchors.leftMargin: units.largeSpacing
 
-        visible: !searching && !showAllApps
-
         property int iconSize: 22
 
         PlasmaExtras.Heading {
@@ -376,21 +378,27 @@ Item {
             level: 5
             font.bold: true
             font.weight: Font.Bold
+            visible: !searching && !showAllApps
             text: i18n("Recent")
         }
 
         ItemGridView {
             id: documentsFavoritesGrid
             property int rows: 3
-            anchors.top: headLabelDocuments.bottom
-            anchors.topMargin: units.largeSpacing
-            anchors.leftMargin: units.largeSpacing
+            anchors{
+                top: headLabelDocuments.bottom
+                topMargin: units.largeSpacing
+                leftMargin: units.largeSpacing
+                margins: units.largeSpacing
+                bottomMargin: 0
+            }
             width: parent.width //parent.width * 0.7
             height: tileSide * 2 + units.largeSpacing
             cellWidth: tileSide * 2
             cellHeight: 24
             iconSize: units.iconSizes.smallMedium
             model: rootModel.modelForRow(1);
+            visible: !searching && !showAllApps
             dropEnabled: true
             usesPlasmaTheme: true
             onKeyNavLeft: {
@@ -438,8 +446,8 @@ Item {
         }
     }
 
-Component.onCompleted: {
-    searchField.focus = true
-}
+    Component.onCompleted: {
+        searchField.focus = true
+    }
 }
 
