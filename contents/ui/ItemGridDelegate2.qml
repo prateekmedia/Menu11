@@ -31,7 +31,7 @@ Item {
     width:  GridView.view.cellWidth - 10
     height: GridView.view.cellHeight - 10
 
-    property int iconSize: units.iconSizes.large
+    property int iconSize: units.iconSizes.large * 0.95 
 
     property bool showLabel: true
     property int itemIndex: model.index
@@ -59,23 +59,24 @@ Item {
         }
     }
 
-    Rectangle{
-        id: back
-        anchors.fill: parent
-        //color: Qt.lighter(Qt.lighter(theme.backgroundColor))
-        color: Qt.darker(theme.backgroundColor)
-        opacity: 0.15
-    }
+    // Rectangle{
+    //     id: back
+    //     anchors.fill: parent
+    //     //color: Qt.lighter(Qt.lighter(theme.backgroundColor))
+    //     color: Qt.darker(theme.backgroundColor)
+    //     opacity: 0.15
+    // }
 
     PlasmaCore.IconItem {
         id: icon
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: back.top
         anchors.topMargin: units.smallSpacing * 2
+
         width:  iconSize
         height: width
         colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
-        animated: false
+        animated: true
         usesPlasmaTheme: item.GridView.view.usesPlasmaTheme
         source: model.decoration
     }
@@ -95,6 +96,7 @@ Item {
         elide: Text.ElideRight
         wrapMode: Text.Wrap
         color: theme.textColor
+        horizontalAlignment: Text.AlignHCenter
         text: ("name" in model ? model.name : model.display)
     }
 
