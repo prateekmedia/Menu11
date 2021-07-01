@@ -37,21 +37,22 @@ PlasmaExtras.PlasmoidHeading {
     implicitHeight: Math.round(PlasmaCore.Units.gridUnit * 2.5)
     rightPadding: rightInset
     leftPadding: rightPadding
-
+    // topMargin: 0
     property Item configureButton: configureButton
     property Item avatar: avatarButton
 
     KCoreAddons.KUser {
         id: kuser
     }
-    anchors.bottomMargin: 10
+    anchors.bottomMargin: 30
+    // anchors.leftMargin: 40
     height: units.iconSizes.medium * 2
 
     Rectangle{
         id: back
         anchors.fill: parent
-        opacity: 0.2
-        color: Qt.darker(theme.backgroundColor)
+        opacity: 0
+        color: "#FF0000"
     }
 
     PlasmaCore.DataSource {
@@ -99,9 +100,12 @@ Rectangle{
     anchors{
         left: parent.left
         right: parent.right
-        top: lockScreenButton.top
-        margins: units.largeSpacing
+        // top: lockScreenButton.top
+        // margins: units.largeSpacing
+        leftMargin: 0
+        rightMargin: 0 
         bottomMargin: 0
+        // topMargin: 0
     }
     color: theme.textColor
     height: 1
@@ -110,7 +114,7 @@ Rectangle{
 
 RowLayout {
     id: nameAndIcon
-    anchors.leftMargin: units.largeSpacing * 1.2
+    anchors.leftMargin: units.largeSpacing * 3
     anchors.left: parent.left
     x: units.smallSpacing
     anchors.right: parent.right
@@ -173,7 +177,7 @@ RowLayout {
             anchors.fill: parent
 
             level: 5
-            font.weight: Font.Bold
+            // font.weight: Font.Bold
             text: kuser.fullName
             elide: Text.ElideRight
             horizontalAlignment: Text.AlignLeft
@@ -219,7 +223,7 @@ RowLayout {
 }
 
 RowLayout {
-    anchors.rightMargin: units.largeSpacing * 1.2
+    anchors.rightMargin: units.largeSpacing * 3
     anchors.right: parent.right
     x: -units.smallSpacing
     anchors.verticalCenter: parent.verticalCenter
@@ -227,7 +231,7 @@ RowLayout {
     // looks visually balanced that way
     spacing: Math.round(PlasmaCore.Units.smallSpacing * 2.5)
 
-    PlasmaComponents.RoundButton {
+    PlasmaComponents.TabButton {
         id: lockScreenButton
         icon.name: "system-lock-screen"
         enabled: pmEngine.data["Sleep States"]["LockScreen"]
@@ -237,7 +241,7 @@ RowLayout {
         }
     }
 
-    PlasmaComponents.RoundButton {
+    PlasmaComponents.TabButton {
         id: leaveButton
         icon.name: "system-shutdown"
         onClicked: pmEngine.performOperation("requestShutDown")

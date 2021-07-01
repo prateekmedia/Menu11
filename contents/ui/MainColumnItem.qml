@@ -27,6 +27,7 @@ import QtQuick.Layouts 1.12
 import QtGraphicalEffects 1.0
 //import org.kde.plasma.core 2.1 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
+
 import org.kde.kirigami 2.13 as Kirigami
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.kwindowsystem 1.0
@@ -42,7 +43,7 @@ Item {
 
     width: tileSide * 6 + 3 * units.largeSpacing
     height: root.height
-    y: 10
+    y: 30
     property int iconSize: units.iconSizes.large
     property int cellSize: iconSize + theme.mSize(theme.defaultFont).height
         + (2 * units.smallSpacing)
@@ -201,8 +202,8 @@ Item {
 
     PlasmaExtras.Heading {
         id: mainLabelGrid
-        anchors.top: parent.top//headRect.bottom
-        anchors.leftMargin: units.largeSpacing
+        anchors.top: parent.top + 10//headRect.bottom
+        anchors.leftMargin: units.largeSpacing * 3
         anchors.left: parent.left
         x: units.smallSpacing
         elide: Text.ElideRight
@@ -215,19 +216,30 @@ Item {
         visible: !searching
     }
 
-    PlasmaComponents.ToolButton  {
+    PlasmaComponents.Button  {
         text: i18n(showAllApps ? "Back" : "All Apps")
         id: mainsecLabelGrid
         flat: false
-        icon{
-            width: height
-            height: visible ? units.iconSizes.small : 0
-            name: showAllApps ? "go-previous" : "go-next"
+        background: Rectangle {
+            color: Qt.lighter(theme.backgroundColor)
+            border.width: 1
+            border.color: "#cacbd0"
+            radius: 5
         }
+        topPadding: 5
+        bottomPadding: 5
+        leftPadding: 10
+        rightPadding: 10
+        // icon{
+        //     width: height
+        //     height: visible ? units.iconSizes.small : 0
+        //     name: showAllApps ? "go-previous" : "go-next"
+        // }
+
         anchors {
             top: parent.top
             right: parent.right
-            rightMargin: units.largeSpacing
+            rightMargin: units.largeSpacing * 2.5
         }
         x: -units.smallSpacing
         visible: !searching
@@ -238,7 +250,7 @@ Item {
         id: mainColumn
         anchors.top: searching ? searchField.bottom : mainLabelGrid.bottom
         anchors.margins: units.largeSpacing
-        anchors.left: parent.left
+        anchors.left: parent.left 
         anchors.right: parent.right
         anchors.bottom: searching ? parent.bottom : showAllApps ? footer.top : undefined
         height: searching || showAllApps ? parent.height : tileSide * 3
@@ -277,8 +289,11 @@ Item {
             id: allAppsGrid
             model: rootModel.modelForRow(2)
             anchors.fill: parent
-            width: parent.width
+            width: parent.width 
             height: parent.height
+            anchors {
+                leftMargin: units.largeSpacing * 2;
+            }
             // itemHeight: units.iconSizes.medium + 10
             // iconsEnabled: true
             z: (opacity == 1.0) ? 1 : 0
@@ -353,9 +368,10 @@ Item {
         id: recentItem
         width: parent.width
         anchors.top: mainColumn.bottom
-        anchors.topMargin: units.largeSpacing
+        anchors.topMargin: units.largeSpacing * 0.5
         anchors.left: parent.left
-        anchors.leftMargin: units.largeSpacing
+        anchors.bottom: parent.bottom
+        anchors.leftMargin: units.largeSpacing * 3
 
         property int iconSize: 22
 
@@ -370,7 +386,8 @@ Item {
             font.bold: true
             font.weight: Font.Bold
             visible: !searching && !showAllApps
-            text: i18n("Recent")
+            text: i18n("Recommended")
+            
         }
 
         ItemGridView {
@@ -383,12 +400,14 @@ Item {
                 left: parent.left
                 right: parent.right
                 bottom: footer.top
+                // topMargin: parent.margins.top
                 bottomMargin: 0
+                topMargin:  units.largeSpacing
             }
 
             height: (units.iconSizes.medium + units.smallSpacing * 2) * 4
             cellWidth:    parent.width * 0.45
-            cellHeight:   units.iconSizes.medium + units.smallSpacing * 2
+            cellHeight:   units.iconSizes.medium + units.smallSpacing * 5
             iconSize:    units.iconSizes.medium
             model: rootModel.modelForRow(1);
             usesPlasmaTheme: false

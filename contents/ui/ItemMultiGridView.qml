@@ -108,7 +108,7 @@ PlasmaExtras.ScrollArea {
                 PlasmaExtras.Heading {
                     id: gridViewLabel
                     anchors.top: parent.top
-                    //anchors.topMargin: 8
+                    anchors.topMargin: 10
                     x: units.smallSpacing
                     width: parent.width - x
                     height: dummyHeading.height

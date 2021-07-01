@@ -44,11 +44,11 @@ PlasmaCore.Dialog {
     objectName: "popupWindow"
     flags: Qt.WindowStaysOnTopHint
     location: PlasmaCore.Types.Floating
-    hideOnWindowDeactivate: true
+    hideOnWindowDeactivate: false
 
     property int iconSize: units.iconSizes.medium
     property int iconSizeSide: units.iconSizes.smallMedium
-    property int cellWidth: units.gridUnit * 15
+    property int cellWidth: units.gridUnit * 13
     property int cellWidthSide: units.gridUnit * 13
     property int cellHeight: iconSize +  ( Math.max(highlightItemSvg.margins.top + highlightItemSvg.margins.bottom,
                                                     highlightItemSvg.margins.left + highlightItemSvg.margins.right))
@@ -135,10 +135,10 @@ PlasmaCore.Dialog {
 
 
     FocusScope {
-        Layout.minimumWidth: mainColumnItem.width //+ tilesColumnItem.width
-        Layout.maximumWidth: mainColumnItem.width //+ tilesColumnItem.width
-        Layout.minimumHeight: mainColumnItem.tileSide * 6 + 50
-        Layout.maximumHeight: mainColumnItem.tileSide * 6 + 50
+        Layout.minimumWidth: mainColumnItem.width + 10  //+ tilesColumnItem.width
+        Layout.maximumWidth: mainColumnItem.width + 10 //+ tilesColumnItem.width
+        Layout.minimumHeight: mainColumnItem.tileSide * 6 + 85
+        Layout.maximumHeight: mainColumnItem.tileSide * 6 + 85
 
         focus: true
 
