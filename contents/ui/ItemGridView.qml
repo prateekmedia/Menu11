@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2015 by Eike Hein <hein@kde.org>                        *
+ *   Copyright (C) 2021 by Prateek SU <pankajsunal123@gmail.com>           *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -208,6 +209,7 @@ FocusScope {
             focus: true
 
             horizontalScrollBarPolicy: Qt.ScrollBarAlwaysOff
+            verticalScrollBarPolicy: Qt.ScrollBarAsNeeded
 
 
             GridView {
@@ -428,9 +430,6 @@ FocusScope {
                             var mapped = mapToItem(gridView.currentItem, mouse.x, mouse.y);
                             gridView.currentItem.openActionMenu(mapped.x, mapped.y);
                         }
-                    } else {
-                        var mapped = mapToItem(rootItem, mouse.x, mouse.y);
-                        contextMenu.open(mapped.x, mapped.y);
                     }
                 } else {
                     pressedItem = gridView.currentItem;

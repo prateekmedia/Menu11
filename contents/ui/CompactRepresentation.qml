@@ -1,6 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2013-2014 by Eike Hein <hein@kde.org>                   *
- *    Copyright (C) 2021 by Prateek SU <pankajsunal123@gmail.com>          *
+ *   Copyright (C) 2021 by Prateek SU <pankajsunal123@gmail.com>           *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -21,30 +21,26 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 
+import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 
 Item {
     id: root
 
-    readonly property bool inPanel: (plasmoid.location === PlasmaCore.Types.TopEdge
-        || plasmoid.location === PlasmaCore.Types.RightEdge
-        || plasmoid.location === PlasmaCore.Types.BottomEdge
-        || plasmoid.location === PlasmaCore.Types.LeftEdge)
-    readonly property bool vertical: (plasmoid.formFactor === PlasmaCore.Types.Vertical)
+    readonly property var screenGeometry: plasmoid.screenGeometry
+    readonly property bool inPanel: (plasmoid.location == PlasmaCore.Types.TopEdge
+        || plasmoid.location == PlasmaCore.Types.RightEdge
+        || plasmoid.location == PlasmaCore.Types.BottomEdge
+        || plasmoid.location == PlasmaCore.Types.LeftEdge)
+    readonly property bool vertical: (plasmoid.formFactor == PlasmaCore.Types.Vertical)
     readonly property bool useCustomButtonImage: (plasmoid.configuration.useCustomButtonImage
-        && plasmoid.configuration.customButtonImage.length !== 0)
+        && plasmoid.configuration.customButtonImage.length != 0)
     property QtObject dashWindow: null
 
-
+    Plasmoid.status: dashWindow && dashWindow.visible ? PlasmaCore.Types.RequiresAttentionStatus : PlasmaCore.Types.PassiveStatus
 
     onWidthChanged: updateSizeHints()
     onHeightChanged: updateSizeHints()
-
-    onDashWindowChanged: {
-        if (dashWindow) {
-            dashWindow.visualParent = root;
-        }
-    }
 
     function updateSizeHints() {
         if (useCustomButtonImage) {
@@ -64,7 +60,7 @@ Item {
         } else {
             root.Layout.minimumWidth = units.iconSizes.small;
             root.Layout.maximumWidth = inPanel ? units.iconSizeHints.panel : -1;
-            root.Layout.minimumHeight = units.iconSizes.small;
+            root.Layout.minimumHeight = units.iconSizes.small
             root.Layout.maximumHeight = inPanel ? units.iconSizeHints.panel : -1;
         }
     }
@@ -85,25 +81,34 @@ Item {
 
         source: useCustomButtonImage ? plasmoid.configuration.customButtonImage : plasmoid.configuration.icon
 
-        active: mouseArea.containsMouse && !justOpenedTimer.running
+        active: mouseArea.containsMouse
 
         smooth: true
 
         // A custom icon could also be rectangular. However, if a square, custom, icon is given, assume it
-        // to be an icon and round it to the nearest icon size again to avoid scaling artifacts.
+        // to be an icon and round it to the nearest icon size again to avoid scaling artefacts.
         roundToIconSize: !useCustomButtonImage || aspectRatio === 1
 
         onSourceChanged: updateSizeHints()
     }
 
-    MouseArea {
+    MouseArea
+    {
         id: mouseArea
+
         anchors.fill: parent
-        hoverEnabled: !dashWindow || !dashWindow.visible
+
+        hoverEnabled: true
+
         onClicked: {
-            plasmoid.expanded = !plasmoid.expanded;
+            dashWindow.visible = !dashWindow.visible;
         }
     }
 
-    Component.onCompleted: { }
+    Component.onCompleted: {
+        dashWindow = Qt.createQmlObject("MenuRepresentation {}", root);
+        plasmoid.activated.connect(function() {
+            dashWindow.visible = !dashWindow.visible;
+        });
+    }
 }

@@ -1,6 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2014-2015 by Eike Hein <hein@kde.org>                   *
- *    Copyright (C) 2021 by Prateek SU <pankajsunal123@gmail.com>          *
+ *   Copyright (C) 2021 by Prateek SU <pankajsunal123@gmail.com>           *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -34,46 +34,30 @@ Item {
 
     signal reset
 
-    property bool isDash: true
+    property bool isDash: false
 
-    Plasmoid.switchWidth: Plasmoid.fullRepresentationItem.Layout.minimumWidth
-    Plasmoid.switchHeight: Plasmoid.fullRepresentationItem.Layout.minimumHeight
+    Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
 
-    // this is a bit of a hack to prevent Plasma from spawning a dialog on its own when we're Dash
-    Plasmoid.preferredRepresentation: null
+    Plasmoid.compactRepresentation: null
+    Plasmoid.fullRepresentation: compactRepresentation
 
-    Plasmoid.compactRepresentation: compactRepresentation
-    Plasmoid.fullRepresentation: menuRepresentation
-
-    property QtObject itemListDialogComponent: Qt.createComponent("ItemListDialog.qml");
     property Item dragSource: null
 
     property QtObject globalFavorites: rootModel.favoritesModel
     property QtObject systemFavorites: rootModel.systemFavoritesModel
 
-    Plasmoid.icon: plasmoid.configuration.useCustomButtonImage ? plasmoid.configuration.customButtonImage : plasmoid.configuration.icon
-
-    onSystemFavoritesChanged: {
-        systemFavorites.favorites = plasmoid.configuration.favoriteSystemActions;
-    }
-
     function action_menuedit() {
         processRunner.runMenuEditor();
     }
 
-    function updateSvgMetrics() {
-        lineSvg.horLineHeight = lineSvg.elementSize("horizontal-line").height;
-        lineSvg.vertLineWidth = lineSvg.elementSize("vertical-line").width;
-    }
-
     Component {
         id: compactRepresentation
-        CompactRepresentation { }
+        CompactRepresentation {}
     }
 
     Component {
         id: menuRepresentation
-        MenuRepresentation { }
+        MenuRepresentation {}
     }
 
     Kicker.RootModel {
@@ -82,9 +66,9 @@ Item {
         autoPopulate: false
 
         appNameFormat: plasmoid.configuration.appNameFormat
-        flat: true//isDash ? true : plasmoid.configuration.limitDepth
+        flat: true
         sorted: plasmoid.configuration.alphaSort
-        showSeparators: !isDash
+        showSeparators: false
         appletInterface: plasmoid
 
         showAllApps: true
@@ -111,14 +95,40 @@ Item {
             plasmoid.configuration.recentOrdering = recentOrdering;
         }
 
-        Component.onCompleted: {
-            favoritesModel.initForClient("org.kde.plasma.kicker.favorites.instance-" + plasmoid.id)
+        onFavoritesModelChanged: {
+            if ("initForClient" in favoritesModel) {
+                favoritesModel.initForClient("org.kde.plasma.kicker.favorites.instance-" + plasmoid.id)
 
-            if (!plasmoid.configuration.favoritesPortedToKAstats) {
-                favoritesModel.portOldFavorites(plasmoid.configuration.favoriteApps);
-                plasmoid.configuration.favoritesPortedToKAstats = true;
+                if (!plasmoid.configuration.favoritesPortedToKAstats) {
+                    favoritesModel.portOldFavorites(plasmoid.configuration.favoriteApps);
+                    plasmoid.configuration.favoritesPortedToKAstats = true;
+                }
+            } else {
+                favoritesModel.favorites = plasmoid.configuration.favoriteApps;
             }
 
+            favoritesModel.maxFavorites = pageSize;
+        }
+
+        onSystemFavoritesModelChanged: {
+            systemFavoritesModel.enabled = false;
+            systemFavoritesModel.favorites = plasmoid.configuration.favoriteSystemActions;
+            systemFavoritesModel.maxFavorites = 8;
+        }
+
+        Component.onCompleted: {
+            if ("initForClient" in favoritesModel) {
+                favoritesModel.initForClient("org.kde.plasma.kicker.favorites.instance-" + plasmoid.id)
+
+                if (!plasmoid.configuration.favoritesPortedToKAstats) {
+                    favoritesModel.portOldFavorites(plasmoid.configuration.favoriteApps);
+                    plasmoid.configuration.favoritesPortedToKAstats = true;
+                }
+            } else {
+                favoritesModel.favorites = plasmoid.configuration.favoriteApps;
+            }
+
+            favoritesModel.maxFavorites = pageSize;
             rootModel.refresh();
         }
     }
@@ -154,43 +164,23 @@ Item {
     Kicker.RunnerModel {
         id: runnerModel
 
+        favoritesModel: globalFavorites
+        runners: plasmoid.configuration.useExtraRunners ? new Array("services").concat(plasmoid.configuration.extraRunners) : "services"
         appletInterface: plasmoid
 
-        favoritesModel: globalFavorites
-
-        runners: {
-            var runners = new Array("services");
-
-            runners = runners.concat(new Array("desktopsessions", "PowerDevil",
-                "calculator", "unitconverter"));
-
-
-            if (plasmoid.configuration.useExtraRunners) {
-                runners = runners.concat(plasmoid.configuration.extraRunners);
-            }
-
-            return runners;
-        }
-
-        deleteWhenEmpty: isDash
+        deleteWhenEmpty: false
     }
 
     Kicker.DragHelper {
         id: dragHelper
-
-        dragIconSize: units.iconSizes.medium
     }
 
     Kicker.ProcessRunner {
         id: processRunner;
     }
 
-    Kicker.WindowSystem {
-        id: windowSystem;
-    }
-
     PlasmaCore.FrameSvgItem {
-        id: highlightItemSvg
+        id : highlightItemSvg
 
         visible: false
 
@@ -199,84 +189,33 @@ Item {
     }
 
     PlasmaCore.FrameSvgItem {
-        id: listItemSvg
+        id : panelSvg
 
         visible: false
 
-        imagePath: "widgets/listitem"
-        prefix: "normal"
-    }
-
-    PlasmaCore.Svg {
-        id: arrows
-
-        imagePath: "widgets/arrows"
-        size: "16x16"
-    }
-
-    PlasmaCore.Svg {
-        id: lineSvg
-        imagePath: "widgets/line"
-
-        property int horLineHeight
-        property int vertLineWidth
+        imagePath: "widgets/panel-background"
     }
 
     PlasmaComponents.Label {
         id: toolTipDelegate
 
         width: contentWidth
-        height: undefined
+        height: contentHeight
 
         property Item toolTip
 
         text: (toolTip != null) ? toolTip.text : ""
     }
 
-    Timer {
-        id: justOpenedTimer
-
-        repeat: false
-        interval: 600
-    }
-
-    Connections {
-        target: plasmoid
-
-        onExpandedChanged: {
-            if (expanded) {
-                windowSystem.monitorWindowVisibility(plasmoid.fullRepresentationItem);
-                justOpenedTimer.start();
-            } else {
-                kicker.reset();
-            }
-        }
-    }
-
     function resetDragSource() {
         dragSource = null;
     }
 
-    function enableHideOnWindowDeactivate() {
-        plasmoid.hideOnWindowDeactivate = true;
-    }
-
     Component.onCompleted: {
-        if (plasmoid.hasOwnProperty("activationTogglesExpanded")) {
-            plasmoid.activationTogglesExpanded = false
-        }
-
-        windowSystem.focusIn.connect(enableHideOnWindowDeactivate);
-        plasmoid.hideOnWindowDeactivate = true;
-
-        if (plasmoid.immutability !== PlasmaCore.Types.SystemImmutable) {
-            plasmoid.setAction("menuedit", i18n("Edit Applications..."), "kmenuedit");
-        }
-
-        updateSvgMetrics();
-        theme.themeChanged.connect(updateSvgMetrics);
+        plasmoid.setAction("menuedit", i18n("Edit Applications..."));
 
         rootModel.refreshed.connect(reset);
+
         dragHelper.dropped.connect(resetDragSource);
     }
 }

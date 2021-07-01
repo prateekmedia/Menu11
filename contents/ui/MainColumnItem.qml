@@ -35,7 +35,7 @@ import org.kde.plasma.private.kicker 0.1 as Kicker
 import org.kde.kcoreaddons 1.0 as KCoreAddons
 import org.kde.kquickcontrolsaddons 2.0 as KQuickAddons
 
-import "code/tools.js" as Tools
+import "../code/tools.js" as Tools
 
 Item {
     id: item
@@ -219,9 +219,11 @@ Item {
         text: i18n(showAllApps ? "Back" : "All Apps")
         id: mainsecLabelGrid
         flat: false
-        icon.width: icon.height
-        icon.height: visible ? units.iconSizes.small : 0
-        icon.name: showAllApps ? "go-previous" : "go-next"
+        icon{
+            width: height
+            height: visible ? units.iconSizes.small : 0
+            name: showAllApps ? "go-previous" : "go-next"
+        }
         anchors {
             top: parent.top
             right: parent.right
@@ -239,7 +241,7 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: searching ? parent.bottom : showAllApps ? footer.top : undefined
-        height: searching || showAllApps ? parent.height : tileSide * 2
+        height: searching || showAllApps ? parent.height : tileSide * 3
         property Item visibleGrid: globalFavoritesGrid
         function tryActivate(row, col) {
             if (visibleGrid) {
@@ -251,7 +253,7 @@ Item {
             id: globalFavoritesGrid
             model: globalFavorites
             width: parent.width
-            height: searching ? parent.height : tileSide * 2
+            height: tileSide * 3
             cellWidth: tileSide
             cellHeight: tileSide
             iconSize: iconSize
@@ -374,20 +376,17 @@ Item {
         ItemGridView {
             id: documentsFavoritesGrid
             visible: !searching && !showAllApps
-            property int rows: 3
-            useSmallSpacings: true
-            showBacks: true
+            showBacks: false
 
             anchors{
                 top: headLabelDocuments.bottom
                 left: parent.left
                 right: parent.right
                 bottom: footer.top
-                margins: units.largeSpacing
                 bottomMargin: 0
             }
 
-            height: (units.iconSizes.medium + units.smallSpacing * 2) * 3
+            height: (units.iconSizes.medium + units.smallSpacing * 2) * 4
             cellWidth:    parent.width * 0.45
             cellHeight:   units.iconSizes.medium + units.smallSpacing * 2
             iconSize:    units.iconSizes.medium
@@ -430,9 +429,6 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        Component.onCompleted: {
-            header.input.forceActiveFocus();
-        }
     }
 
     Component.onCompleted: {

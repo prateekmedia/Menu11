@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2015 by Eike Hein <hein@kde.org>                        *
+ *   Copyright (C) 2021 by Prateek SU <pankajsunal123@gmail.com>           *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -22,7 +23,7 @@ import QtQuick 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 
-import "code/tools.js" as Tools
+import "../code/tools.js" as Tools
 
 Item {
     id: item

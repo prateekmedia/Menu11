@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2014 by Eike Hein <hein@kde.org>                        *
+ *   Copyright (C) 2021 by Prateek SU <pankajsunal123@gmail.com>           *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -50,7 +51,7 @@ Kirigami.FormLayout {
     property alias cfg_showRecentContacts: showRecentContacts.checked
 
     property alias cfg_useExtraRunners: useExtraRunners.checked
-    property alias cfg_alignResultsToBottom: alignResultsToBottom.checked
+    property alias cfg_centerMenu: centerMenu.checked
 
 
     Button {
@@ -156,6 +157,14 @@ Kirigami.FormLayout {
         Kirigami.FormData.isSection: true
     }
 
+    CheckBox {
+        id: centerMenu
+
+        visible: !isDash
+
+        Kirigami.FormData.label: i18n("Center Menu:")
+    }
+
     ComboBox {
         id: appNameFormat
 
@@ -239,13 +248,5 @@ Kirigami.FormLayout {
         Kirigami.FormData.label: i18n("Search:")
 
         text: i18n("Expand search to bookmarks, files and emails")
-    }
-
-    CheckBox {
-        id: alignResultsToBottom
-
-        visible: !isDash
-
-        text: i18n("Align search results to bottom")
     }
 }

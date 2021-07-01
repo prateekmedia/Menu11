@@ -1,6 +1,7 @@
 /***************************************************************************
- *   Copyright (C) 2013-2015 by Eike Hein <hein@kde.org>                   *
- *    Copyright (C) 2021 by Prateek SU <pankajsunal123@gmail.com>          *
+ *   Copyright (C) 2014 by Weng Xuetian <wengxt@gmail.com>
+ *   Copyright (C) 2013-2017 by Eike Hein <hein@kde.org>                   *
+ *   Copyright (C) 2021 by Prateek SU <pankajsunal123@gmail.com>           *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -18,59 +19,153 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-import QtQuick 2.2
+import QtQuick 2.4
 import QtQuick.Layouts 1.1
+import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 
-FocusScope {
+import org.kde.plasma.extras 2.0 as PlasmaExtras
+
+import org.kde.plasma.private.kicker 0.1 as Kicker
+import org.kde.kcoreaddons 1.0 as KCoreAddons // kuser
+import org.kde.plasma.private.shell 2.0
+
+import org.kde.kwindowsystem 1.0
+import QtGraphicalEffects 1.0
+import org.kde.kquickcontrolsaddons 2.0
+import org.kde.plasma.private.quicklaunch 1.0
+
+
+import QtQuick.Dialogs 1.2
+PlasmaCore.Dialog {
     id: root
-    focus: true
-    property int iconSize: mainColumnItem.iconSize
-    property bool done: false
 
-    function toggle() {
-        plasmoid.expanded = !plasmoid.expanded
+    objectName: "popupWindow"
+    flags: Qt.WindowStaysOnTopHint
+    location: PlasmaCore.Types.Floating
+    hideOnWindowDeactivate: true
 
-    }
-    function mainReset() {
-        mainColumnItem.reset()
-    }
-    Layout.minimumWidth: mainColumnItem.width //+ tilesColumnItem.width
-    Layout.maximumWidth: mainColumnItem.width //+ tilesColumnItem.width
-    Layout.minimumHeight: mainColumnItem.tileSide * 5 + 50
-    Layout.maximumHeight: mainColumnItem.tileSide * 5 + 50
-
+    property int iconSize: units.iconSizes.medium
+    property int iconSizeSide: units.iconSizes.smallMedium
+    property int cellWidth: units.gridUnit * 15
+    property int cellWidthSide: units.gridUnit * 13
+    property int cellHeight: iconSize +  ( Math.max(highlightItemSvg.margins.top + highlightItemSvg.margins.bottom,
+                                                    highlightItemSvg.margins.left + highlightItemSvg.margins.right))
     signal appendSearchText(string text)
 
-    Row{
-        anchors.fill: parent
-        spacing: units.largeSpacing
+    onVisibleChanged: {
+        if (!visible) {
+            reset();
+        } else {
+            var pos = popupPosition(width, height);
+            x = pos.x;
+            y = pos.y;
+            requestActivate();
+        }
+    }
 
-        MainColumnItem{
-            id: mainColumnItem
-            onNewTextQuery: {
-                appendSearchText(text)
+    onHeightChanged: {
+        var pos = popupPosition(width, height);
+        x = pos.x;
+        y = pos.y;
+    }
+
+    onWidthChanged: {
+        var pos = popupPosition(width, height);
+        x = pos.x;
+        y = pos.y;
+    }
+
+    function toggle() {
+        root.visible = false;
+    }
+
+    function reset() {
+        mainColumnItem.reset()
+    }
+
+    function popupPosition(width, height) {
+        var screenAvail = plasmoid.availableScreenRect;
+        var screenGeom = plasmoid.screenGeometry;
+        //QtBug - QTBUG-64115
+        var screen = Qt.rect(screenAvail.x + screenGeom.x,
+                             screenAvail.y + screenGeom.y,
+                             screenAvail.width,
+                             screenAvail.height);
+
+        var offset = units.smallSpacing;
+
+        // Fall back to bottom-left of screen area when the applet is on the desktop or floating.
+        var x = offset;
+        var y = screen.height - height - offset;
+        var horizMidPoint;z
+        var vertMidPoint;
+        var appletTopLeft;
+        if (plasmoid.configuration.centerMenu) {
+            horizMidPoint = screen.x + (screen.width / 2);
+            vertMidPoint = screen.y + (screen.height / 2);
+            x = horizMidPoint - width / 2;
+            //y = vertMidPoint - height / 2;
+            y = screen.height - height - offset - panelSvg.margins.top - 6;
+        } else if (plasmoid.location === PlasmaCore.Types.BottomEdge) {
+            horizMidPoint = screen.x + (screen.width / 2);
+            appletTopLeft = parent.mapToGlobal(0, 0);
+            x = (appletTopLeft.x < horizMidPoint) ? screen.x + offset : (screen.x + screen.width) - width - offset;
+            y = screen.height - height - offset - panelSvg.margins.top - 6;
+        } else if (plasmoid.location === PlasmaCore.Types.TopEdge) {
+            horizMidPoint = screen.x + (screen.width / 2);
+            var appletBottomLeft = parent.mapToGlobal(0, parent.height);
+            x = (appletBottomLeft.x < horizMidPoint) ? screen.x + offset : (screen.x + screen.width) - width - offset;
+            y = parent.height + panelSvg.margins.bottom + offset;
+        } else if (plasmoid.location === PlasmaCore.Types.LeftEdge) {
+            vertMidPoint = screen.y + (screen.height / 2);
+            appletTopLeft = parent.mapToGlobal(0, 0);
+            x = parent.width + panelSvg.margins.right + offset;
+            y = (appletTopLeft.y < vertMidPoint) ? screen.y + offset : (screen.y + screen.height) - height - offset;
+        } else if (plasmoid.location === PlasmaCore.Types.RightEdge) {
+            vertMidPoint = screen.y + (screen.height / 2);
+            appletTopLeft = parent.mapToGlobal(0, 0);
+            x = appletTopLeft.x - panelSvg.margins.left - offset - width;
+            y = (appletTopLeft.y < vertMidPoint) ? screen.y + offset : (screen.y + screen.height) - height - offset;
+        }
+
+        return Qt.point(x, y);
+    }
+
+
+    FocusScope {
+        Layout.minimumWidth: mainColumnItem.width //+ tilesColumnItem.width
+        Layout.maximumWidth: mainColumnItem.width //+ tilesColumnItem.width
+        Layout.minimumHeight: mainColumnItem.tileSide * 6 + 50
+        Layout.maximumHeight: mainColumnItem.tileSide * 6 + 50
+
+        focus: true
+
+
+        Row{
+            anchors.fill: parent
+            spacing: units.largeSpacing
+
+            MainColumnItem{
+                id: mainColumnItem
+                onNewTextQuery: {
+                    appendSearchText(text)
+                }
+            }
+        }
+
+
+        Keys.onPressed: {
+            if (event.key == Qt.Key_Escape) {
+                    root.visible = false;
             }
         }
     }
 
-
-    Keys.onPressed: {
-        if (event.key === Qt.Key_Escape) {
-            plasmoid.expanded = false
-        }
-    }
-
-    function refreshModel() {
-        mainColumnItem.reload()
-        console.log("refresh model - menu 11")
-    }
-
     Component.onCompleted: {
-        rootModel.refreshed.connect(refreshModel)
-        plasmoid.hideOnWindowDeactivate = true;
-        kicker.reset.connect(mainReset);
-        windowSystem.hidden.connect(mainReset);
+        kicker.reset.connect(reset);
+        dragHelper.dropped.connect(pageList.cycle);
+        reset();
     }
 }
