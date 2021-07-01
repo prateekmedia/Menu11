@@ -36,13 +36,22 @@ PlasmaExtras.PlasmoidHeading {
 
     implicitHeight: Math.round(PlasmaCore.Units.gridUnit * 2.5)
     rightPadding: rightInset
-    anchors.bottomMargin: 15
+    leftPadding: rightPadding
 
     property Item configureButton: configureButton
     property Item avatar: avatarButton
 
     KCoreAddons.KUser {
         id: kuser
+    }
+    anchors.bottomMargin: 10
+    height: units.iconSizes.medium * 2
+
+    Rectangle{
+        id: back
+        anchors.fill: parent
+        opacity: 0.2
+        color: Qt.darker(theme.backgroundColor)
     }
 
     PlasmaCore.DataSource {
@@ -94,27 +103,25 @@ Rectangle{
         margins: units.largeSpacing
         bottomMargin: 0
     }
-    y: -15
     color: theme.textColor
     height: 1
-    opacity: 0.2
+    opacity: 0.1
 }
 
 RowLayout {
     id: nameAndIcon
-    anchors.leftMargin: units.largeSpacing
+    anchors.leftMargin: units.largeSpacing * 1.2
     anchors.left: parent.left
     x: units.smallSpacing
     anchors.right: parent.right
     anchors.verticalCenter: parent.verticalCenter
-    anchors.rightMargin: Math.round(parent.width / 1.5) + PlasmaCore.Units.gridUnit
     PlasmaComponents.RoundButton {
         id: avatarButton
         visible: KQuickAddons.KCMShell.authorize("kcm_users.desktop").length > 0
 
         flat: true
 
-        Layout.preferredWidth: units.iconSizes.large
+        Layout.preferredWidth: units.iconSizes.large * 0.8
         Layout.preferredHeight: Layout.preferredWidth
 
         Accessible.name: nameLabel.text
@@ -165,7 +172,8 @@ RowLayout {
             id: nameLabel
             anchors.fill: parent
 
-            level: 2
+            level: 5
+            font.weight: Font.Bold
             text: kuser.fullName
             elide: Text.ElideRight
             horizontalAlignment: Text.AlignLeft
@@ -193,7 +201,7 @@ RowLayout {
 
         PlasmaExtras.Heading {
             id: infoLabel
-            level: 5
+            level: 6
             opacity: 0
             text: kuser.os !== "" ? i18n("%2@%3 (%1)", kuser.os, kuser.loginName, kuser.host) : i18n("%1@%2", kuser.loginName, kuser.host)
             elide: Text.ElideRight
@@ -211,7 +219,7 @@ RowLayout {
 }
 
 RowLayout {
-    anchors.rightMargin: units.largeSpacing
+    anchors.rightMargin: units.largeSpacing * 1.2
     anchors.right: parent.right
     x: -units.smallSpacing
     anchors.verticalCenter: parent.verticalCenter
