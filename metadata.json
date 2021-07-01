@@ -11,20 +11,17 @@
             }
         ],
         "Category": "Application Launchers",
-        "Dependencies": [
-        ],
-        "Description": "A launcher based on Win11 Design",
-      
+        "Dependencies": [],
+        "Description": "A launcher based on Windowns 11 Menu, Fork of MenuZ.",
         "EnabledByDefault": true,
         "Icon": "start-here-kde",
         "Id": "menu11",
         "License": "GPL-2.0+",
         "Name": "Menu 11",
-      
         "ServiceTypes": [
             "Plasma/Applet"
         ],
-        "Version": "2.11.0"
+        "Version": "1.1"
     },
     "X-Plasma-API": "declarativeappletscript",
     "X-Plasma-MainScript": "ui/main.qml",
