@@ -4,7 +4,7 @@
 <a href="https://github.com/prateekmedia/Menu11/releases"><img alt="GitHub release" src="https://img.shields.io/github/v/release/prateekmedia/Menu11"/></a> <a href="LICENSE"><img alt="License" src="https://img.shields.io/github/license/prateekmedia/Menu11?color=blue"/></a>
 </p>
 
-<img src="https://user-images.githubusercontent.com/41370460/124288609-0237db80-db6f-11eb-9a98-db1a08beda36.jpg" width=400>
+<img src="https://user-images.githubusercontent.com/41370460/124293062-e125b980-db73-11eb-86a4-8b3a8bd40c86.jpg" width=400>
 
 <a href="#installing-manually"><img alt="Install Manually" src="https://img.shields.io/badge/Install Manually-git-blue"/></a>
 
@@ -17,6 +17,6 @@
 
 ### Using git
 ```bash
-git clone "https://github.com/prateekmedia/Menu11.git ~/.local/share/plasma/plasmoids/menu11";
+git clone https://github.com/prateekmedia/Menu11.git ~/.local/share/plasma/plasmoids/menu11;
 kquitapp5 plasmashell || killall plasmashell && kstart5 plasmashell;
 ```
