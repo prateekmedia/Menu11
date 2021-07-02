@@ -212,7 +212,7 @@ Item {
         level: 5
         font.bold: true
         font.weight: Font.Bold
-        text: i18n(showAllApps ? "All Apps" : "Pinned")
+        text: i18n(showAllApps ? "All apps" : "Pinned")
         visible: !searching
     }
 
@@ -223,7 +223,7 @@ Item {
             cursorShape: containsMouse ? Qt.PointingHandCursor : Qt.ArrowCursor
             onClicked: showAllApps = !showAllApps
         }
-        text: i18n(showAllApps ? "Back" : "All Apps")
+        text: i18n(showAllApps ? "Back" : "All apps")
         id: mainsecLabelGrid
         icon.name: showAllApps ? "go-previous" : "go-next"
         font.pointSize: 8
@@ -258,7 +258,7 @@ Item {
         anchors {
             top: searching ? searchField.bottom : mainLabelGrid.bottom
             margins: units.largeSpacing
-            left: parent.left 
+            left: parent.left
             right: parent.right
             bottom: searching ? parent.bottom : showAllApps ? footer.top : undefined
             leftMargin: units.largeSpacing * (searching ? 1.6 : 3)
@@ -315,9 +315,6 @@ Item {
             anchors.fill: parent
             z: (opacity == 1.0) ? 1 : 0
             enabled: (opacity == 1.0) ? 1 : 0
-            anchors {
-                rightMargin: units.largeSpacing * 2;
-            }
             width: parent.width
             model: runnerModel
             opacity: searching ? 1.0 : 0.0
@@ -395,7 +392,7 @@ Item {
             font.weight: Font.Bold
             visible: !searching && !showAllApps
             text: i18n("Recommended")
-            
+
         }
 
         ItemGridView {
@@ -409,15 +406,15 @@ Item {
                 bottom: footer.top
                 // topMargin: parent.margins.top
                 bottomMargin: 0
-                topMargin:  units.largeSpacing
+                topMargin: units.largeSpacing
             }
 
             increaseLeftSpacings: true
 
             height: (units.iconSizes.medium + units.smallSpacing * 2) * 4
-            cellWidth:    parent.width * 0.45 - units.largeSpacing * 1.5
-            cellHeight:   units.iconSizes.medium + units.smallSpacing * 5
-            iconSize:    units.iconSizes.medium
+            cellWidth: parent.width * 0.45 - units.largeSpacing * 1.5
+            cellHeight: units.iconSizes.medium + units.smallSpacing * 5
+            iconSize: units.iconSizes.medium
             model: rootModel.modelForRow(1);
             usesPlasmaTheme: false
 
