@@ -175,9 +175,7 @@ Item {
             text = text + newText;
         }
         Keys.onPressed: {
-            if (event.key == Qt.Key_Space) {
-                event.accepted = true;
-            } else if (event.key == Qt.Key_Down) {
+            if (event.key == Qt.Key_Down) {
                 event.accepted = true;
                 mainColumn.tryActivate(0, 0)
             } else if (event.key == Qt.Key_Tab || event.key == Qt.Key_Up) {
@@ -227,7 +225,7 @@ Item {
         id: mainsecLabelGrid
         icon.name: showAllApps ? "go-previous" : "go-next"
         font.pointSize: 8
-        icon.height: 16
+        icon.height: units.iconSizes.small * 0.97
         icon.width: icon.height
         LayoutMirroring.enabled: !showAllApps
         LayoutMirroring.childrenInherit: true
