@@ -9,7 +9,7 @@
 <a href="#installing-manually"><img alt="Install Manually" src="https://img.shields.io/badge/Install Manually-git-blue"/></a>
 
 #### *Special Thanks to*
-- [Eike Hein](mailto:hein@kde.org) for Creating [MenuZ](https://store.kde.org/p/1367167/)
+- [adhe](https://www.opencode.net/adhe) for Creating [MenuZ](https://store.kde.org/p/1367167/)
 - [Nayam](https://github.com/NayamAmarshe) for improving the design to look more like windows 11 menu.  
 <a href="https://github.com/prateekmedia/Menu11/graphs/contributors"><img alt="Know More" src="https://shields.io/badge/-Know More-blueviolet"/></a>
 
