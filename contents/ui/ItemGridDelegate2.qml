@@ -1,6 +1,5 @@
 /***************************************************************************
  *   Copyright (C) 2015 by Eike Hein <hein@kde.org>                        *
- *   Copyright (C) 2021 by Prateek SU <pankajsunal123@gmail.com>           *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -28,12 +27,12 @@ import "../code/tools.js" as Tools
 Item {
     id: item
 
-    width:  GridView.view.cellWidth - 10
-    height: GridView.view.cellHeight - 10
-
-    property int iconSize: units.iconSizes.large
+    width:  GridView.view.cellWidth
+    height: width
+    property int iconSize: units.iconSizes.large * 0.95
 
     property bool showLabel: true
+
     property int itemIndex: model.index
     property string favoriteId: model.favoriteId !== undefined ? model.favoriteId : ""
     property url url: model.url !== undefined ? model.url : ""
@@ -54,62 +53,47 @@ Item {
 
     function actionTriggered(actionId, actionArgument) {
         var close = (Tools.triggerAction(GridView.view.model, model.index, actionId, actionArgument) === true);
-        if (close) {
-            root.toggle();
-        }
+        if (close) root.toggle();
     }
-
-    // Rectangle{
-    //     id: back
-    //     anchors.fill: parent
-    //     //color: Qt.lighter(Qt.lighter(theme.backgroundColor))
-    //     color: Qt.darker(theme.backgroundColor)
-    //     opacity: 0.15
-    // }
 
     PlasmaCore.IconItem {
         id: icon
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: back.top
-        anchors.topMargin: units.smallSpacing * 2
-
-        width:  iconSize
+        anchors{
+            top: parent.top
+            topMargin: units.smallSpacing
+            horizontalCenter: parent.horizontalCenter
+        }
+        width: iconSize
         height: width
         colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
-        animated: true
+        animated: false
         usesPlasmaTheme: item.GridView.view.usesPlasmaTheme
         source: model.decoration
     }
 
     PlasmaComponents.Label {
-        
         id: label
         visible: showLabel
         anchors {
             top: icon.bottom
             topMargin: units.smallSpacing
-            left: parent.left
-            leftMargin: highlightItemSvg.margins.left
-            right: parent.right
-            rightMargin: highlightItemSvg.margins.right
+            horizontalCenter: parent.horizontalCenter
         }
         maximumLineCount: 1
+        horizontalAlignment: Text.AlignHCenter
+        width: parent.width - units.largeSpacing
         elide: Text.ElideRight
         wrapMode: Text.Wrap
         color: theme.textColor
-        horizontalAlignment: Text.AlignHCenter
         text: ("name" in model ? model.name : model.display)
     }
 
     PlasmaCore.ToolTipArea {
         id: toolTip
-
         property string text: model.display
-
         anchors.fill: parent
         active: root.visible && label.truncated
         mainItem: toolTipDelegate
-
         onContainsMouseChanged: item.GridView.view.itemContainsMouseChanged(containsMouse)
     }
 
@@ -119,7 +103,6 @@ Item {
             openActionMenu(item);
         } else if ((event.key === Qt.Key_Enter || event.key === Qt.Key_Return)) {
             event.accepted = true;
-
             if ("trigger" in GridView.view.model) {
                 GridView.view.model.trigger(index, "", null);
                 root.toggle();
