@@ -42,7 +42,6 @@ Item {
 
     Accessible.role: Accessible.MenuItem
     Accessible.name: model.display
-
     function openActionMenu(x, y) {
         var actionList = hasActionList ? model.actionList : [];
         Tools.fillActionMenu(i18n, actionMenu, actionList, GridView.view.model.favoritesModel, model.favoriteId);

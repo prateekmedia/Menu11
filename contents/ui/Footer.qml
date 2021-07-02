@@ -51,9 +51,10 @@ PlasmaExtras.PlasmoidHeading {
     KCoreAddons.KUser {
         id: kuser
     }
-    anchors.bottomMargin: 30
-    anchors.leftMargin: 0
-    anchors.rightMargin: 0
+    anchors.bottomMargin: units.largeSpacing * 2
+    anchors.topMargin: anchors.bottomMargin
+    anchors.leftMargin: -12
+    anchors.rightMargin: anchors.leftMargin
     height: units.iconSizes.medium * 2
 
     PlasmaCore.DataSource {
@@ -69,7 +70,7 @@ PlasmaExtras.PlasmoidHeading {
 
     RowLayout {
         id: nameAndIcon
-        anchors.leftMargin: units.largeSpacing * 3 - footer.rightPadding
+        anchors.leftMargin: units.largeSpacing * 3 - footer.rightPadding - footer.anchors.leftMargin
         anchors.left: parent.left
         x: units.smallSpacing
         anchors.right: parent.right
@@ -145,9 +146,9 @@ PlasmaExtras.PlasmoidHeading {
     }
 
     RowLayout {
-        anchors.rightMargin: units.largeSpacing * 3 - footer.rightPadding
+        anchors.rightMargin: units.largeSpacing * 3 - footer.rightPadding - footer.anchors.leftMargin
         anchors.right: parent.right
-        x: -units.smallSpacing
+        x: -units.smallSpacing 
         anchors.verticalCenter: parent.verticalCenter
 
         // looks visually balanced that way

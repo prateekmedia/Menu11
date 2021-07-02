@@ -76,7 +76,7 @@ Item {
         visible: showLabel
         anchors {
             top: icon.bottom
-            topMargin: units.smallSpacing
+            topMargin: units.smallSpacing * 3
             horizontalCenter: parent.horizontalCenter
         }
         maximumLineCount: 1

@@ -41,9 +41,9 @@ import "../code/tools.js" as Tools
 Item {
     id: item
 
-    width: tileSide * 6 + 6 * units.largeSpacing
+    width: tileSide * 6 + 16 * units.smallSpacing
     height: root.height
-    y: 30
+    y: units.largeSpacing * 2
     property int iconSize: units.iconSizes.large
     property int cellSize: iconSize + theme.mSize(theme.defaultFont).height
         + (2 * units.smallSpacing)
@@ -181,12 +181,6 @@ Item {
             } else if (event.key == Qt.Key_Tab || event.key == Qt.Key_Up) {
                 event.accepted = true;
                 mainColumn.tryActivate(0, 0)
-            } else if (event.key == Qt.Key_Backspace) {
-                event.accepted = true;
-                if (searching)
-                    searchField.backspace();
-                else
-                    searchField.focus = true
             } else if (event.key == Qt.Key_Escape) {
                 event.accepted = true;
                 if (searching) {
@@ -224,16 +218,22 @@ Item {
         text: i18n(showAllApps ? "Back" : "All apps")
         id: mainsecLabelGrid
         icon.name: showAllApps ? "go-previous" : "go-next"
-        font.pointSize: 8
-        icon.height: units.iconSizes.small * 0.97
+        font.pointSize: 9
+        icon.height: 15
         icon.width: icon.height
         LayoutMirroring.enabled: true
         LayoutMirroring.childrenInherit: !showAllApps
-        flat: false
+        flat: false        
+        background: Rectangle {
+            color: Qt.lighter(theme.backgroundColor)
+            border.width: 1
+            border.color: "#cacbd0"
+            radius: 5
+        }
         topPadding: 5
-        bottomPadding: 5
-        leftPadding: 10
-        rightPadding: 10
+        bottomPadding: topPadding
+        leftPadding: showAllApps ? 4 : 8
+        rightPadding: showAllApps ? 8 : 4
         icon{
             width: height
             height: visible ? units.iconSizes.small : 0
@@ -245,7 +245,6 @@ Item {
             rightMargin: units.largeSpacing * 3
             leftMargin: units.largeSpacing * 3
             left: parent.left
-            // right: showAllApps ? parent.right : undefined
         }
         x: -units.smallSpacing
         visible: !searching
@@ -255,12 +254,12 @@ Item {
         id: mainColumn
         anchors {
             top: searching ? searchField.bottom : mainLabelGrid.bottom
-            margins: units.largeSpacing
+            leftMargin:  units.largeSpacing * (searching ? 1.6 : 3)
+            rightMargin: anchors.leftMargin
+            topMargin: units.largeSpacing * 0.8
             left: parent.left
             right: parent.right
             bottom: searching ? parent.bottom : showAllApps ? footer.top : undefined
-            leftMargin: units.largeSpacing * (searching ? 1.6 : 3)
-            rightMargin: units.largeSpacing * (searching ? 1.6 : 3)
         }
         height: searching || showAllApps ? parent.height : tileSide * 3
         property Item visibleGrid: globalFavoritesGrid
@@ -275,7 +274,7 @@ Item {
             model: globalFavorites
             width: parent.width
             height: tileSide * 3
-            cellWidth: tileSide
+            cellWidth: tileSide * 0.92
             cellHeight: tileSide
             square: true
             dropEnabled: true
@@ -298,6 +297,7 @@ Item {
             anchors.fill: parent
             z: (opacity == 1.0) ? 1 : 0
             enabled: (opacity == 1.0) ? 1 : 0
+            height: parent.height
             width: parent.width
             model: rootModel.modelForRow(2)
             opacity: showAllApps && !searching ? 1.0 : 0.0
@@ -370,7 +370,7 @@ Item {
         id: recentItem
         width: parent.width
         anchors.top: mainColumn.bottom
-        anchors.topMargin: units.largeSpacing * 0.5
+        anchors.topMargin: units.largeSpacing * 0.8
         anchors.left: parent.left
         anchors.bottom: parent.bottom
         anchors.leftMargin: units.largeSpacing * 3
@@ -390,7 +390,6 @@ Item {
             font.weight: Font.Bold
             visible: !searching && !showAllApps
             text: i18n("Recommended")
-
         }
 
         ItemGridView {
@@ -404,13 +403,13 @@ Item {
                 bottom: footer.top
                 // topMargin: parent.margins.top
                 bottomMargin: 0
-                topMargin: units.largeSpacing
+                topMargin: units.largeSpacing * 0.8
             }
 
             increaseLeftSpacings: true
 
             height: (units.iconSizes.medium + units.smallSpacing * 2) * 4
-            cellWidth: parent.width * 0.45 - units.largeSpacing * 1.5
+            cellWidth: parent.width * 0.4
             cellHeight: units.iconSizes.medium + units.smallSpacing * 5
             iconSize: units.iconSizes.medium
             model: rootModel.modelForRow(1);
@@ -449,13 +448,9 @@ Item {
     Footer {
         id: footer
         visible: !searching
-        anchors {
-            left: parent.left
-            right: parent.right
-            bottom: parent.bottom
-            leftMargin: -12
-            rightMargin: anchors.leftMargin
-        }
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
     }
 
     Component.onCompleted: {
