@@ -44,7 +44,7 @@ PlasmaCore.Dialog {
     objectName: "popupWindow"
     flags: Qt.WindowStaysOnTopHint
     location: PlasmaCore.Types.Floating
-    hideOnWindowDeactivate: false
+    hideOnWindowDeactivate: true
 
     property int iconSize: units.iconSizes.medium
     property int iconSizeSide: units.iconSizes.smallMedium
@@ -111,23 +111,23 @@ PlasmaCore.Dialog {
         } else if (plasmoid.location === PlasmaCore.Types.BottomEdge) {
             horizMidPoint = screen.x + (screen.width / 2);
             appletTopLeft = parent.mapToGlobal(0, 0);
-            x = (appletTopLeft.x < horizMidPoint) ? screen.x + offset : (screen.x + screen.width) - width - offset;
+            x = (appletTopLeft.x < horizMidPoint) ? screen.x + offset + 6 : (screen.x + screen.width) - width - offset - 6;
             y = screen.height - height - offset - panelSvg.margins.top - 6;
         } else if (plasmoid.location === PlasmaCore.Types.TopEdge) {
             horizMidPoint = screen.x + (screen.width / 2);
             var appletBottomLeft = parent.mapToGlobal(0, parent.height);
-            x = (appletBottomLeft.x < horizMidPoint) ? screen.x + offset : (screen.x + screen.width) - width - offset;
-            y = parent.height + panelSvg.margins.bottom + offset;
+            x = (appletBottomLeft.x < horizMidPoint) ? screen.x + offset + 6 : (screen.x + screen.width) - width - offset - 6;
+            y = parent.height + panelSvg.margins.bottom + offset + 6;
         } else if (plasmoid.location === PlasmaCore.Types.LeftEdge) {
             vertMidPoint = screen.y + (screen.height / 2);
             appletTopLeft = parent.mapToGlobal(0, 0);
-            x = parent.width + panelSvg.margins.right + offset;
-            y = (appletTopLeft.y < vertMidPoint) ? screen.y + offset : (screen.y + screen.height) - height - offset;
+            x = parent.width + panelSvg.margins.right + offset + 6;
+            y = (appletTopLeft.y < vertMidPoint) ? screen.y + offset + 6 : (screen.y + screen.height) - height - offset - 6;
         } else if (plasmoid.location === PlasmaCore.Types.RightEdge) {
             vertMidPoint = screen.y + (screen.height / 2);
             appletTopLeft = parent.mapToGlobal(0, 0);
-            x = appletTopLeft.x - panelSvg.margins.left - offset - width;
-            y = (appletTopLeft.y < vertMidPoint) ? screen.y + offset : (screen.y + screen.height) - height - offset;
+            x = appletTopLeft.x - panelSvg.margins.left - offset - width - 6;
+            y = (appletTopLeft.y < vertMidPoint) ? screen.y + offset + 6 : (screen.y + screen.height) - height - offset - 6;
         }
 
         return Qt.point(x, y);
@@ -135,8 +135,8 @@ PlasmaCore.Dialog {
 
 
     FocusScope {
-        Layout.minimumWidth: mainColumnItem.width + 10  //+ tilesColumnItem.width
-        Layout.maximumWidth: mainColumnItem.width + 10 //+ tilesColumnItem.width
+        Layout.minimumWidth: mainColumnItem.width  //+ tilesColumnItem.width
+        Layout.maximumWidth: mainColumnItem.width //+ tilesColumnItem.width
         Layout.minimumHeight: mainColumnItem.tileSide * 6 + 85
         Layout.maximumHeight: mainColumnItem.tileSide * 6 + 85
 
@@ -165,7 +165,6 @@ PlasmaCore.Dialog {
 
     Component.onCompleted: {
         kicker.reset.connect(reset);
-        dragHelper.dropped.connect(pageList.cycle);
         reset();
     }
 }

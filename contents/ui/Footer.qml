@@ -35,11 +35,18 @@ PlasmaExtras.PlasmoidHeading {
     id: footer
 
     implicitHeight: Math.round(PlasmaCore.Units.gridUnit * 2.5)
-    rightPadding: rightInset
+    rightPadding: rightInset * 4
     leftPadding: rightPadding
-    // topMargin: 0
     property Item configureButton: configureButton
     property Item avatar: avatarButton
+    background: Rectangle {
+        color: Qt.lighter(theme.backgroundColor)
+        opacity: .1
+        border.width: 1
+        border.color: "#cacbd0"
+        radius: 5
+    }
+
 
     KCoreAddons.KUser {
         id: kuser
@@ -47,13 +54,6 @@ PlasmaExtras.PlasmoidHeading {
     anchors.bottomMargin: 30
     // anchors.leftMargin: 40
     height: units.iconSizes.medium * 2
-
-    Rectangle{
-        id: back
-        anchors.fill: parent
-        opacity: 0
-        color: "#FF0000"
-    }
 
     PlasmaCore.DataSource {
         id: pmEngine
@@ -93,28 +93,9 @@ State {
 }
     ] // states
 
-
-Rectangle{
-    id: divider
-    visible: !searching
-    anchors{
-        left: parent.left
-        right: parent.right
-        // top: lockScreenButton.top
-        // margins: units.largeSpacing
-        leftMargin: 0
-        rightMargin: 0 
-        bottomMargin: 0
-        // topMargin: 0
-    }
-    color: theme.textColor
-    height: 1
-    opacity: 0.1
-}
-
 RowLayout {
     id: nameAndIcon
-    anchors.leftMargin: units.largeSpacing * 3
+    anchors.leftMargin: units.largeSpacing * 3 - footer.rightPadding
     anchors.left: parent.left
     x: units.smallSpacing
     anchors.right: parent.right
@@ -176,7 +157,7 @@ RowLayout {
             id: nameLabel
             anchors.fill: parent
 
-            level: 5
+            level: 4
             // font.weight: Font.Bold
             text: kuser.fullName
             elide: Text.ElideRight
@@ -209,6 +190,7 @@ RowLayout {
             opacity: 0
             text: kuser.os !== "" ? i18n("%2@%3 (%1)", kuser.os, kuser.loginName, kuser.host) : i18n("%1@%2", kuser.loginName, kuser.host)
             elide: Text.ElideRight
+            anchors.verticalCenter: nameLabel.verticalCenter
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
 
@@ -223,7 +205,7 @@ RowLayout {
 }
 
 RowLayout {
-    anchors.rightMargin: units.largeSpacing * 3
+    anchors.rightMargin: units.largeSpacing * 3 - footer.rightPadding
     anchors.right: parent.right
     x: -units.smallSpacing
     anchors.verticalCenter: parent.verticalCenter
