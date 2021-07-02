@@ -20,7 +20,7 @@
 import QtQuick 2.14
 
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.components 3.0 as PlasmaComponents
 
 import "../code/tools.js" as Tools
 
@@ -76,7 +76,7 @@ Item {
         visible: showLabel
         anchors {
             top: icon.bottom
-            topMargin: -units.smallSpacing * 2
+            topMargin: - units.smallSpacing * 0.6
             horizontalCenter: parent.horizontalCenter
         }
         maximumLineCount: 2
