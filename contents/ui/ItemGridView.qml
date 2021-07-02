@@ -96,8 +96,8 @@ FocusScope {
             row = Math.min(row, rows - 1);
             col = Math.min(col, columns - 1);
             currentIndex = Math.min(row ? ((Math.max(1, row) * columns) + col)
-                                        : col,
-                                    count - 1);
+                : col,
+                count - 1);
 
             focus = true;
         }
@@ -135,7 +135,7 @@ FocusScope {
                         item.GridView.view.model.moveRow(dragSource.itemIndex, item.itemIndex);
                     }
                 } else if (kicker.dragSource.GridView.view.model.favoritesModel === model
-                           && !model.isFavorite(kicker.dragSource.favoriteId)) {
+                    && !model.isFavorite(kicker.dragSource.favoriteId)) {
                     var hasPlaceholder = (model.dropPlaceholderIndex !== -1);
 
                     model.dropPlaceholderIndex = item.itemIndex;
@@ -145,8 +145,8 @@ FocusScope {
                     }
                 }
             } else if (kicker.dragSource.parent !== gridView.contentItem
-                       && kicker.dragSource.GridView.view.model.favoritesModel === model
-                       && !model.isFavorite(kicker.dragSource.favoriteId)) {
+                && kicker.dragSource.GridView.view.model.favoritesModel === model
+                && !model.isFavorite(kicker.dragSource.favoriteId)) {
                 var hasPlaceholder = (model.dropPlaceholderIndex !== -1);
 
                 model.dropPlaceholderIndex = hasPlaceholder ? model.count - 1 : model.count;
@@ -281,8 +281,7 @@ FocusScope {
                                 right: parent.right
                                 rightMargin: parent.margins.right
                                 bottom: parent.bottom
-                                bottomMargin: 
-                                bottom
+                                bottomMargin: parent.margins.bottom
                             }
 
                             width: units.iconSizes.smallMedium
@@ -324,7 +323,7 @@ FocusScope {
                 Keys.onRightPressed: {
                     var columns = Math.floor(width / cellWidth);
 
-                    if (currentCol() !== columns - 1 && currentIndex != count -1) {
+                    if (currentCol() !== columns - 1 && currentIndex != count - 1) {
                         event.accepted = true;
                         moveCurrentIndexRight();
                     } else {
@@ -455,13 +454,13 @@ FocusScope {
             }
 
             onPositionChanged: {
-                var item = pressedItem? pressedItem : updatePositionProperties(mouse.x, mouse.y);
+                var item = pressedItem ? pressedItem : updatePositionProperties(mouse.x, mouse.y);
 
                 if (gridView.currentIndex != -1) {
                     if (dragEnabled && pressX != -1 && dragHelper.isDrag(pressX, pressY, mouse.x, mouse.y)) {
                         if ("pluginName" in item.m) {
                             dragHelper.startDrag(kicker, item.url, item.icon,
-                                                 "text/x-plasmoidservicename", item.m.pluginName);
+                                "text/x-plasmoidservicename", item.m.pluginName);
                         } else {
                             dragHelper.startDrag(kicker, item.url, item.icon);
                         }

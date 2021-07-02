@@ -50,8 +50,8 @@ PlasmaCore.Dialog {
     property int iconSizeSide: units.iconSizes.smallMedium
     property int cellWidth: units.gridUnit * 13
     property int cellWidthSide: units.gridUnit * 13
-    property int cellHeight: iconSize +  ( Math.max(highlightItemSvg.margins.top + highlightItemSvg.margins.bottom,
-                                                    highlightItemSvg.margins.left + highlightItemSvg.margins.right))
+    property int cellHeight: iconSize + (Math.max(highlightItemSvg.margins.top + highlightItemSvg.margins.bottom,
+        highlightItemSvg.margins.left + highlightItemSvg.margins.right))
     signal appendSearchText(string text)
 
     onVisibleChanged: {
@@ -90,16 +90,16 @@ PlasmaCore.Dialog {
         var screenGeom = plasmoid.screenGeometry;
         //QtBug - QTBUG-64115
         var screen = Qt.rect(screenAvail.x + screenGeom.x,
-                             screenAvail.y + screenGeom.y,
-                             screenAvail.width,
-                             screenAvail.height);
+            screenAvail.y + screenGeom.y,
+            screenAvail.width,
+            screenAvail.height);
 
         var offset = units.smallSpacing;
 
         // Fall back to bottom-left of screen area when the applet is on the desktop or floating.
         var x = offset;
         var y = screen.height - height - offset;
-        var horizMidPoint;z
+        var horizMidPoint; z
         var vertMidPoint;
         var appletTopLeft;
         if (plasmoid.configuration.centerMenu) {
@@ -158,7 +158,7 @@ PlasmaCore.Dialog {
 
         Keys.onPressed: {
             if (event.key == Qt.Key_Escape) {
-                    root.visible = false;
+                root.visible = false;
             }
         }
     }
