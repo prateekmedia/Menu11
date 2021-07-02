@@ -35,7 +35,7 @@ PlasmaExtras.PlasmoidHeading {
     id: footer
 
     implicitHeight: Math.round(PlasmaCore.Units.gridUnit * 2.5)
-    rightPadding: rightInset * 4
+    rightPadding: rightInset
     leftPadding: rightPadding
     property Item configureButton: configureButton
     property Item avatar: avatarButton
