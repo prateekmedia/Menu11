@@ -28,7 +28,6 @@ import "../code/tools.js" as Tools
 
 Item {
     id: item
-
     width: GridView.view.cellWidth
     height: GridView.view.cellHeight
     property bool showLabel: true
@@ -58,7 +57,6 @@ Item {
             root.toggle();
         }
     }
-
     PlasmaCore.IconItem {
         id: icon
         x: increaseLeftSpacing ? units.smallSpacing : 0
@@ -79,7 +77,8 @@ Item {
         visible: showLabel
         anchors {
             left: icon.right
-            leftMargin: PlasmaCore.Units.smallSpacing * 4
+            leftMargin: PlasmaCore.Units.smallSpacing * 4            
+            rightMargin: PlasmaCore.Units.smallSpacing * 2
             verticalCenter: parent.verticalCenter
         }
         spacing: 0
@@ -89,6 +88,7 @@ Item {
             maximumLineCount: 1
             elide: Text.ElideRight
             wrapMode: Text.Wrap
+            font.pointSize: 9
             color: theme.textColor
             text: ("name" in model ? model.name : model.display)
         }

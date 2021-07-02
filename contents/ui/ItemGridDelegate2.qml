@@ -60,7 +60,7 @@ Item {
         id: icon
         anchors{
             top: parent.top
-            topMargin: units.smallSpacing
+            topMargin: units.smallSpacing * 2
             horizontalCenter: parent.horizontalCenter
         }
         width: iconSize
