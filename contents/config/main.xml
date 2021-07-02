@@ -61,6 +61,10 @@
       <label>Whether to show the "Recent Documents" category.</label>
       <default>true</default>
     </entry>
+    <entry name="gridAllowTwoLines" type="Bool">
+      <label>Whether to allow showing two lines in grid view.</label>
+      <default>true</default>
+    </entry>
     <entry name="showRecentContacts" type="Bool">
       <label>Whether to show the "Recent Contacts" category.</label>
       <default>false</default>

@@ -142,7 +142,6 @@ PlasmaCore.Dialog {
 
         focus: true
 
-
         Row{
             anchors.fill: parent
             spacing: units.largeSpacing

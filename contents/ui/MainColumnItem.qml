@@ -227,8 +227,8 @@ Item {
         font.pointSize: 8
         icon.height: units.iconSizes.small * 0.97
         icon.width: icon.height
-        LayoutMirroring.enabled: !showAllApps
-        LayoutMirroring.childrenInherit: true
+        LayoutMirroring.enabled: true
+        LayoutMirroring.childrenInherit: !showAllApps
         flat: false
         topPadding: 5
         bottomPadding: 5
@@ -244,7 +244,7 @@ Item {
             verticalCenter: mainLabelGrid.verticalCenter
             rightMargin: units.largeSpacing * 3
             leftMargin: units.largeSpacing * 3
-            left: showAllApps ? undefined : parent.left
+            left: parent.left
             // right: showAllApps ? parent.right : undefined
         }
         x: -units.smallSpacing
