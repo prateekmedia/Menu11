@@ -17,7 +17,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-import QtQuick 2.0
+import QtQuick 2.14
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
@@ -76,10 +76,10 @@ Item {
         visible: showLabel
         anchors {
             top: icon.bottom
-            topMargin: units.smallSpacing * 3
+            topMargin: -units.smallSpacing * 2
             horizontalCenter: parent.horizontalCenter
         }
-        maximumLineCount: 1
+        maximumLineCount: 2
         horizontalAlignment: Text.AlignHCenter
         width: parent.width - units.largeSpacing
         elide: Text.ElideRight
