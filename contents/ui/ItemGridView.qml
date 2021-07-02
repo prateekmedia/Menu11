@@ -209,7 +209,6 @@ FocusScope {
             horizontalScrollBarPolicy: Qt.ScrollBarAlwaysOff
             verticalScrollBarPolicy: Qt.ScrollBarAsNeeded
 
-
             GridView {
                 id: gridView
 
@@ -282,7 +281,8 @@ FocusScope {
                                 right: parent.right
                                 rightMargin: parent.margins.right
                                 bottom: parent.bottom
-                                bottomMargin: parent.margins.bottom
+                                bottomMargin: 
+                                bottom
                             }
 
                             width: units.iconSizes.smallMedium

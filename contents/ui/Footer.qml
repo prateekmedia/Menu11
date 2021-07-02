@@ -52,7 +52,8 @@ PlasmaExtras.PlasmoidHeading {
         id: kuser
     }
     anchors.bottomMargin: 30
-    // anchors.leftMargin: 40
+    anchors.leftMargin: 0
+    anchors.rightMargin: 0
     height: units.iconSizes.medium * 2
 
     PlasmaCore.DataSource {
@@ -159,6 +160,9 @@ RowLayout {
 
             level: 4
             // font.weight: Font.Bold
+            Text {
+                font.capitalization: Font.Capitalize
+            }
             text: kuser.fullName
             elide: Text.ElideRight
             horizontalAlignment: Text.AlignLeft
@@ -215,20 +219,69 @@ RowLayout {
 
     PlasmaComponents.TabButton {
         id: lockScreenButton
+        // flat: true 
+        NumberAnimation {
+            id: animateLockOpacity
+            target: lockScreenButton
+            properties: "opacity"
+            from: 1
+            to: 0.5
+            duration: PlasmaCore.Units.longDuration
+            easing.type: Easing.InOutQuad
+        }
+        NumberAnimation {
+            id: animateLockOpacityReverse
+            target: lockScreenButton
+            properties: "opacity"
+            from: 0.5
+            to: 1
+            duration: PlasmaCore.Units.longDuration
+            easing.type: Easing.InOutQuad
+        }
         icon.name: "system-lock-screen"
+        onHoveredChanged: hovered ? animateLockOpacity.start() : animateLockOpacityReverse.start();
         enabled: pmEngine.data["Sleep States"]["LockScreen"]
-        onClicked: pmEngine.performOperation("lockScreen")
         PlasmaComponents.ToolTip {
             text: i18nc("@action", "Lock Screen")
+        }
+        MouseArea {
+            onClicked: pmEngine.performOperation("lockScreen")
+            anchors.fill: parent
+            hoverEnabled: true
+            cursorShape: containsMouse ? Qt.PointingHandCursor : Qt.ArrowCursor
         }
     }
 
     PlasmaComponents.TabButton {
         id: leaveButton
+        NumberAnimation {
+            id: animateOpacity
+            target: leaveButton
+            properties: "opacity"
+            from: 1
+            to: 0.5
+            duration: PlasmaCore.Units.longDuration
+            easing.type: Easing.InOutQuad
+        }
+        NumberAnimation {
+            id: animateOpacityReverse
+            target: leaveButton
+            properties: "opacity"
+            from: 0.5
+            to: 1
+            duration: PlasmaCore.Units.longDuration
+            easing.type: Easing.InOutQuad
+        }
+        onHoveredChanged: hovered ? animateOpacity.start() : animateOpacityReverse.start();
         icon.name: "system-shutdown"
-        onClicked: pmEngine.performOperation("requestShutDown")
         PlasmaComponents.ToolTip {
             text: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Leave ... ")
+        }
+        MouseArea {
+            hoverEnabled: true
+            anchors.fill: parent
+            onClicked: pmEngine.performOperation("requestShutDown")
+            cursorShape: containsMouse ? Qt.PointingHandCursor : Qt.ArrowCursor
         }
     }
 }
