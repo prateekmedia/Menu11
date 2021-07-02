@@ -41,7 +41,7 @@ import "../code/tools.js" as Tools
 Item {
     id: item
 
-    width: tileSide * 6 + 3 * units.largeSpacing
+    width: tileSide * 6 + 6 * units.largeSpacing
     height: root.height
     y: 30
     property int iconSize: units.iconSizes.large
@@ -150,8 +150,8 @@ Item {
         placeholderText: i18n("Search...")
         opacity: searching
         height: units.iconSizes.medium
-        width: parent.width - x
-        x: units.smallSpacing
+        width: parent.width - 2 * x
+        x: 1.5 * units.largeSpacing
         Accessible.editable: true
         Accessible.searchEdit: true
         onTextChanged: {
@@ -216,16 +216,16 @@ Item {
         visible: !searching
     }
 
-    PlasmaComponents.Button  {
-        text: i18n(showAllApps ? "Back" : "All Apps")
+    PlasmaComponents.ToolButton  {
         id: mainsecLabelGrid
+        text: i18n(showAllApps ? "Back" : "All apps")
+        icon.name: showAllApps ? "go-previous" : "go-next"
+        font.pointSize: 8
+        icon.height: 16
+        icon.width: icon.height
+        LayoutMirroring.enabled: !showAllApps
+        LayoutMirroring.childrenInherit: true
         flat: false
-        background: Rectangle {
-            color: Qt.lighter(theme.backgroundColor)
-            border.width: 1
-            border.color: "#cacbd0"
-            radius: 5
-        }
         topPadding: 5
         bottomPadding: 5
         leftPadding: 10
@@ -237,9 +237,11 @@ Item {
         // }
 
         anchors {
-            top: parent.top
-            right: parent.right
-            rightMargin: units.largeSpacing * 2.5
+            verticalCenter: mainLabelGrid.verticalCenter
+            rightMargin: units.largeSpacing * 3
+            leftMargin: units.largeSpacing * 3
+            left: showAllApps ? undefined : parent.left
+            // right: showAllApps ? parent.right : undefined
         }
         x: -units.smallSpacing
         visible: !searching
@@ -248,11 +250,15 @@ Item {
 
     Item {
         id: mainColumn
-        anchors.top: searching ? searchField.bottom : mainLabelGrid.bottom
-        anchors.margins: units.largeSpacing
-        anchors.left: parent.left 
-        anchors.right: parent.right
-        anchors.bottom: searching ? parent.bottom : showAllApps ? footer.top : undefined
+        anchors {
+            top: searching ? searchField.bottom : mainLabelGrid.bottom
+            margins: units.largeSpacing
+            left: parent.left 
+            right: parent.right
+            bottom: searching ? parent.bottom : showAllApps ? footer.top : undefined
+            leftMargin: units.largeSpacing * (searching ? 1.6 : 3)
+            rightMargin: units.largeSpacing * (searching ? 1.6 : 3)
+        }
         height: searching || showAllApps ? parent.height : tileSide * 3
         property Item visibleGrid: globalFavoritesGrid
         function tryActivate(row, col) {
@@ -268,7 +274,6 @@ Item {
             height: tileSide * 3
             cellWidth: tileSide
             cellHeight: tileSide
-            iconSize: iconSize
             square: true
             dropEnabled: true
             usesPlasmaTheme: true
@@ -287,18 +292,12 @@ Item {
 
         ItemMultiGridView {
             id: allAppsGrid
-            model: rootModel.modelForRow(2)
             anchors.fill: parent
-            width: parent.width 
-            height: parent.height
-            anchors {
-                leftMargin: units.largeSpacing * 2;
-            }
-            // itemHeight: units.iconSizes.medium + 10
-            // iconsEnabled: true
             z: (opacity == 1.0) ? 1 : 0
             enabled: (opacity == 1.0) ? 1 : 0
-            opacity: !searching && showAllApps ? 1 : 0
+            width: parent.width
+            model: rootModel.modelForRow(2)
+            opacity: showAllApps && !searching ? 1.0 : 0.0
             onOpacityChanged: {
                 if (opacity == 1.0) {
                     mainColumn.visibleGrid = allAppsGrid;
@@ -372,6 +371,7 @@ Item {
         anchors.left: parent.left
         anchors.bottom: parent.bottom
         anchors.leftMargin: units.largeSpacing * 3
+        anchors.rightMargin: anchors.leftMargin
 
         property int iconSize: 22
 
@@ -393,7 +393,6 @@ Item {
         ItemGridView {
             id: documentsFavoritesGrid
             visible: !searching && !showAllApps
-            showBacks: false
 
             anchors{
                 top: headLabelDocuments.bottom
@@ -405,8 +404,10 @@ Item {
                 topMargin:  units.largeSpacing
             }
 
+            increaseLeftSpacings: true
+
             height: (units.iconSizes.medium + units.smallSpacing * 2) * 4
-            cellWidth:    parent.width * 0.45
+            cellWidth:    parent.width * 0.45 - units.largeSpacing * 1.5
             cellHeight:   units.iconSizes.medium + units.smallSpacing * 5
             iconSize:    units.iconSizes.medium
             model: rootModel.modelForRow(1);

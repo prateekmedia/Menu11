@@ -31,8 +31,7 @@ Item {
     width: GridView.view.cellWidth
     height: GridView.view.cellHeight
     property bool showLabel: true
-    property bool showBack: false
-    property bool useSmallSpacing: true
+    property bool increaseLeftSpacing: false
     property int itemIndex: model.index
     property string favoriteId: model.favoriteId !== undefined ? model.favoriteId : ""
     property url url: model.url !== undefined ? model.url : ""
@@ -59,25 +58,9 @@ Item {
         }
     }
 
-    function backColor(idx) {
-
-        var i = idx % 4;
-        if (i === 0 || i === 3)
-            return Qt.lighter(theme.backgroundColor)
-        return Qt.darker(theme.backgroundColor)
-    }
-
-    Rectangle{
-        id: back
-        anchors.fill: parent
-        opacity: showBack ? 0.15 : 0
-        color: backColor(index)
-    }
-
     PlasmaCore.IconItem {
         id: icon
-        anchors.left: parent.left
-        anchors.leftMargin: units.smallSpacing
+        x: increaseLeftSpacing ? units.smallSpacing : 0
         anchors.verticalCenter: parent.verticalCenter
         width: iconSize
         height: width
@@ -92,8 +75,8 @@ Item {
         visible: showLabel
         anchors {
             left: icon.right
-            leftMargin: PlasmaCore.Units.smallSpacing * (useSmallSpacing ? 1 : 4)
-            rightMargin: PlasmaCore.Units.smallSpacing * (useSmallSpacing ? 0 : 2)
+            leftMargin: PlasmaCore.Units.smallSpacing * 4
+            rightMargin: PlasmaCore.Units.smallSpacing * 2
             verticalCenter: parent.verticalCenter
         }
         

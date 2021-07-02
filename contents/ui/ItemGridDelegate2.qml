@@ -31,7 +31,7 @@ Item {
     width:  GridView.view.cellWidth - 10
     height: GridView.view.cellHeight - 10
 
-    property int iconSize: units.iconSizes.large * 0.95 
+    property int iconSize: units.iconSizes.large
 
     property bool showLabel: true
     property int itemIndex: model.index

@@ -11,6 +11,7 @@
 #### *Special Thanks to*
 - [Eike Hein](mailto:hein@kde.org) for Creating [MenuZ](https://store.kde.org/p/1367167/)  
 [Know More](https://github.com/prateekmedia/Menu11/graphs/contributors)
+- [Nayam](https://github.com/NayamAmarshe) for improvimg the design to look more like windows 11 menu.
 
 <h2 align="center">Installing Manually</h2>
 
