@@ -82,6 +82,7 @@ Item {
     }
 
     PlasmaComponents.Label {
+        
         id: label
         visible: showLabel
         anchors {

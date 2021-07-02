@@ -216,9 +216,15 @@ Item {
         visible: !searching
     }
 
-    PlasmaComponents.ToolButton  {
+    PlasmaComponents.Button  {
+        MouseArea {
+            hoverEnabled: true
+            anchors.fill: parent
+            cursorShape: containsMouse ? Qt.PointingHandCursor : Qt.ArrowCursor
+            onClicked: showAllApps = !showAllApps
+        }
+        text: i18n(showAllApps ? "Back" : "All Apps")
         id: mainsecLabelGrid
-        text: i18n(showAllApps ? "Back" : "All apps")
         icon.name: showAllApps ? "go-previous" : "go-next"
         font.pointSize: 8
         icon.height: 16
@@ -230,11 +236,11 @@ Item {
         bottomPadding: 5
         leftPadding: 10
         rightPadding: 10
-        // icon{
-        //     width: height
-        //     height: visible ? units.iconSizes.small : 0
-        //     name: showAllApps ? "go-previous" : "go-next"
-        // }
+        icon{
+            width: height
+            height: visible ? units.iconSizes.small : 0
+            name: showAllApps ? "go-previous" : "go-next"
+        }
 
         anchors {
             verticalCenter: mainLabelGrid.verticalCenter
@@ -245,7 +251,6 @@ Item {
         }
         x: -units.smallSpacing
         visible: !searching
-        onClicked: showAllApps = !showAllApps
     }
 
     Item {
@@ -310,6 +315,9 @@ Item {
             anchors.fill: parent
             z: (opacity == 1.0) ? 1 : 0
             enabled: (opacity == 1.0) ? 1 : 0
+            anchors {
+                rightMargin: units.largeSpacing * 2;
+            }
             width: parent.width
             model: runnerModel
             opacity: searching ? 1.0 : 0.0
@@ -449,6 +457,7 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
+        anchors.rightMargin: -10
     }
 
     Component.onCompleted: {
