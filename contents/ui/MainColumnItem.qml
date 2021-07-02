@@ -449,10 +449,13 @@ Item {
     Footer {
         id: footer
         visible: !searching
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        anchors.rightMargin: -10
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+            leftMargin: -12
+            rightMargin: anchors.leftMargin
+        }
     }
 
     Component.onCompleted: {
