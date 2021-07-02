@@ -21,7 +21,7 @@
 import QtQuick 2.12
 
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.components 3.0 as PlasmaComponents
 
 import "../code/tools.js" as Tools
 
@@ -75,7 +75,6 @@ Item {
         anchors {
             left: icon.right
             leftMargin: PlasmaCore.Units.smallSpacing * 4
-            rightMargin: PlasmaCore.Units.smallSpacing * 2
             verticalCenter: parent.verticalCenter
         }
         
