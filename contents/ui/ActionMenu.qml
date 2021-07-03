@@ -1,7 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2013 by Aurélien Gâteau <agateau@kde.org>               *
  *   Copyright (C) 2014-2015 by Eike Hein <hein@kde.org>                   *
- *   Copyright (C) 2021 by Prateek SU <pankajsunal123@gmail.com>           *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -19,7 +18,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-import QtQuick 2.12
+import QtQuick 2.0
 
 import org.kde.plasma.components 2.0 as PlasmaComponents
 

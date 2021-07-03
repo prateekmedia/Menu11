@@ -71,7 +71,6 @@ Item {
 
 
     ColumnLayout {
-        id: label
         Layout.fillWidth: true
         width: parent.width * 0.75
         visible: showLabel
@@ -84,6 +83,7 @@ Item {
         spacing: 0
 
         PlasmaComponents.Label {
+            id: label
             Layout.maximumWidth: parent.width
             maximumLineCount: 1
             elide: Text.ElideRight
@@ -109,7 +109,7 @@ Item {
         id: toolTip
         property string text: model.display
         anchors.fill: parent
-        active: root.visible && label.truncated
+        active: label.truncated
         mainItem: toolTipDelegate
 
         onContainsMouseChanged: item.GridView.view.itemContainsMouseChanged(containsMouse)
