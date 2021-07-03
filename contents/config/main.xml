@@ -61,6 +61,10 @@
       <label>Whether to show the "Recent Documents" category.</label>
       <default>true</default>
     </entry>
+    <entry name="gridAllowTwoLines" type="Bool">
+      <label>Whether to allow showing two lines in grid view.</label>
+      <default>true</default>
+    </entry>
     <entry name="showRecentContacts" type="Bool">
       <label>Whether to show the "Recent Contacts" category.</label>
       <default>false</default>
@@ -76,6 +80,46 @@
     </entry>
     <entry name="centerMenu" type="Bool">
       <label>Whether to center the popup Menu.</label>
+      <default>true</default>
+    </entry>
+    <entry name="alwaysShowSearchBar" type="Bool">
+      <label>Whether to always show the search bar on top of the menu or not.</label>
+      <default>false</default>
+    </entry>
+    <entry name="downIconsDocuments" type="Bool">
+      <label>Shows or hides the Documents shortcut on the bottom bar.</label>
+      <default>false</default>
+    </entry>
+    <entry name="downIconsPictures" type="Bool">
+      <label>Shows or hides the Pictures shortcut on the bottom bar.</label>
+      <default>false</default>
+    </entry>
+    <entry name="downIconsMusic" type="Bool">
+      <label>Shows or hides the Music shortcut on the bottom bar.</label>
+      <default>false</default>
+    </entry>
+    <entry name="downIconsDownloads" type="Bool">
+      <label>Shows or hides the Downloads shortcut on the bottom bar.</label>
+      <default>false</default>
+    </entry>
+    <entry name="downIconsVideos" type="Bool">
+      <label>Shows or hides the Videos shortcut on the bottom bar.</label>
+      <default>false</default>
+    </entry>
+    <entry name="downIconsFileManager" type="Bool">
+      <label>Shows or hides the File Manager (aka Dolphin) shortcut on the bottom bar.</label>
+      <default>false</default>
+    </entry>
+    <entry name="downIconsSystemSettings" type="Bool">
+      <label>Shows or hides the System Settings shortcut on the bottom bar.</label>
+      <default>true</default>
+    </entry>
+    <entry name="downIconsLock" type="Bool">
+      <label>Shows or hides the Lock button on the bottom bar.</label>
+      <default>true</default>
+    </entry>
+    <entry name="downIconsPowerOptions" type="Bool">
+      <label>Shows or hides the Power Options button on the bottom bar.</label>
       <default>true</default>
     </entry>
     <entry name="showIconsRootLevel" type="Bool">
