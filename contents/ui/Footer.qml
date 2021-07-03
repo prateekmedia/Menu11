@@ -200,7 +200,11 @@ PlasmaExtras.PlasmoidHeading {
                 duration: PlasmaCore.Units.longDuration
                 easing.type: Easing.InOutQuad
             }
-            icon.name: "folder-documents-symbolic"
+
+            icon {
+                name: "folder-documents-symbolic"
+                size: iconSize
+            }
             onHoveredChanged: hovered ? animateDocumentsOpacity.start() : animateDocumentsOpacityReverse.start();
             PlasmaComponents.ToolTip {
                 text: i18nc("@action", "Documents")
@@ -236,7 +240,10 @@ PlasmaExtras.PlasmoidHeading {
                 duration: PlasmaCore.Units.longDuration
                 easing.type: Easing.InOutQuad
             }
-            icon.name: "folder-pictures-symbolic"
+            icon {
+                name: "folder-pictures-symbolic"
+                size: iconSize
+            }
             onHoveredChanged: hovered ? animatePicturesOpacity.start() : animatePicturesOpacityReverse.start();
             PlasmaComponents.ToolTip {
                 text: i18nc("@action", "Pictures")
@@ -272,7 +279,10 @@ PlasmaExtras.PlasmoidHeading {
                 duration: PlasmaCore.Units.longDuration
                 easing.type: Easing.InOutQuad
             }
-            icon.name: "folder-music-symbolic"
+            icon {
+                name: "folder-music-symbolic"
+                size: iconSize
+            }
             onHoveredChanged: hovered ? animateMusicOpacity.start() : animateMusicOpacityReverse.start();
             PlasmaComponents.ToolTip {
                 text: i18nc("@action", "Music")
@@ -308,7 +318,10 @@ PlasmaExtras.PlasmoidHeading {
                 duration: PlasmaCore.Units.longDuration
                 easing.type: Easing.InOutQuad
             }
-            icon.name: "folder-download-symbolic"
+            icon {
+                name: "folder-download-symbolic"
+                size: iconSize
+            }
             onHoveredChanged: hovered ? animateDownloadsOpacity.start() : animateDownloadsOpacityReverse.start();
             PlasmaComponents.ToolTip {
                 text: i18nc("@action", "Downloads")
@@ -344,7 +357,10 @@ PlasmaExtras.PlasmoidHeading {
                 duration: PlasmaCore.Units.longDuration
                 easing.type: Easing.InOutQuad
             }
-            icon.name: "folder-videos-symbolic"
+            icon {
+                name: "folder-videos-symbolic"
+                size: iconSize
+            }
             onHoveredChanged: hovered ? animateVideosOpacity.start() : animateVideosOpacityReverse.start();
             PlasmaComponents.ToolTip {
                 text: i18nc("@action", "Videos")
@@ -380,7 +396,10 @@ PlasmaExtras.PlasmoidHeading {
                 duration: PlasmaCore.Units.longDuration
                 easing.type: Easing.InOutQuad
             }
-            icon.name: "folder-symbolic"
+            icon {
+                name: "system-file-manager-symbolic"
+                size: iconSize
+            }
             onHoveredChanged: hovered ? animateFileManagerOpacity.start() : animateFileManagerOpacityReverse.start();
             PlasmaComponents.ToolTip {
                 text: i18nc("@action", "File Manager")
@@ -416,7 +435,10 @@ PlasmaExtras.PlasmoidHeading {
                 duration: PlasmaCore.Units.longDuration
                 easing.type: Easing.InOutQuad
             }
-            icon.name: "configure"
+            icon {
+                name: "configure"
+                size: iconSize
+            }
             onHoveredChanged: hovered ? animateSettingsOpacity.start() : animateSettingsOpacityReverse.start();
             PlasmaComponents.ToolTip {
                 text: i18nc("@action", "System settings")
@@ -452,7 +474,10 @@ PlasmaExtras.PlasmoidHeading {
                 duration: PlasmaCore.Units.longDuration
                 easing.type: Easing.InOutQuad
             }
-            icon.name: "system-lock-screen"
+            icon {
+                name: "system-lock-screen"
+                size: iconSize
+            }
             onHoveredChanged: hovered ? animateLockOpacity.start() : animateLockOpacityReverse.start();
             enabled: pmEngine.data["Sleep States"]["LockScreen"]
             PlasmaComponents.ToolTip {
@@ -489,7 +514,10 @@ PlasmaExtras.PlasmoidHeading {
                 easing.type: Easing.InOutQuad
             }
             onHoveredChanged: hovered ? animateOpacity.start() : animateOpacityReverse.start();
-            icon.name: "system-shutdown"
+            icon {
+                name: "system-shutdown"
+                size: iconSize
+            }
             PlasmaComponents.ToolTip {
                 text: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Leave...")
             }
