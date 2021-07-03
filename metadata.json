@@ -21,7 +21,7 @@
         "ServiceTypes": [
             "Plasma/Applet"
         ],
-        "Version": "2.1"
+        "Version": "2.2"
     },
     "X-Plasma-API": "declarativeappletscript",
     "X-Plasma-MainScript": "ui/main.qml",
