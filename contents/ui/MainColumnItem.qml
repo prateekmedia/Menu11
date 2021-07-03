@@ -64,6 +64,8 @@ Item {
         searchField.clear()
         searchField.focus = true
         showAllApps = false
+        documentsFavoritesGrid.tryActivate(0, 0);
+        allAppsGrid.tryActivate(0, 0);
         globalFavoritesGrid.tryActivate(0, 0);
     }
 
