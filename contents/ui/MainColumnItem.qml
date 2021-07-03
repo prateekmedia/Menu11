@@ -241,7 +241,7 @@ Item {
         id: mainColumn
         anchors {
             top: searching ? searchField.bottom : mainLabelGrid.bottom
-            leftMargin: units.largeSpacing * 2
+            leftMargin: units.largeSpacing * 1.6
             rightMargin: units.largeSpacing
             topMargin: units.largeSpacing
             left: parent.left
@@ -290,7 +290,7 @@ Item {
             model: rootModel.modelForRow(2)
             opacity: showAllApps && !searching ? 1.0 : 0.0
             anchors {
-                leftMargin: units.largeSpacing * 2;
+                leftMargin: units.largeSpacing * 1.6;
             }
             onOpacityChanged: {
                 if (opacity == 1.0) {
@@ -304,9 +304,6 @@ Item {
             anchors.fill: parent
             z: (opacity == 1.0) ? 1 : 0
             enabled: (opacity == 1.0) ? 1 : 0
-            anchors {
-                rightMargin: units.largeSpacing * 2;
-            }
             width: parent.width
             model: runnerModel
             opacity: searching ? 1.0 : 0.0

@@ -30,6 +30,7 @@ import org.kde.kcoreaddons 1.0 as KCoreAddons
 // at all to function, so there won't be any oddities with colours.
 import org.kde.kirigami 2.13 as Kirigami
 import org.kde.kquickcontrolsaddons 2.0 as KQuickAddons
+import org.kde.plasma.private.quicklaunch 1.0
 
 PlasmaExtras.PlasmoidHeading {
     id: footer
@@ -51,6 +52,7 @@ PlasmaExtras.PlasmoidHeading {
     KCoreAddons.KUser {
         id: kuser
     }
+    Logic { id: logic }
     anchors.bottomMargin: units.largeSpacing * 2
     anchors.topMargin: anchors.bottomMargin
     anchors.leftMargin: -12
@@ -148,7 +150,7 @@ PlasmaExtras.PlasmoidHeading {
     RowLayout {
         anchors.rightMargin: units.largeSpacing * 3 - footer.rightPadding - footer.anchors.leftMargin
         anchors.right: parent.right
-        x: -units.smallSpacing 
+        x: -units.smallSpacing
         anchors.verticalCenter: parent.verticalCenter
 
         // looks visually balanced that way
@@ -183,6 +185,40 @@ PlasmaExtras.PlasmoidHeading {
             }
             MouseArea {
                 onClicked: pmEngine.performOperation("lockScreen")
+                anchors.fill: parent
+                hoverEnabled: true
+                cursorShape: containsMouse ? Qt.PointingHandCursor : Qt.ArrowCursor
+            }
+        }
+
+        PlasmaComponents.TabButton {
+            id: settingsButton
+            // flat: true 
+            NumberAnimation {
+                id: animateSettingsOpacity
+                target: settingsButton
+                properties: "opacity"
+                from: 1
+                to: 0.5
+                duration: PlasmaCore.Units.longDuration
+                easing.type: Easing.InOutQuad
+            }
+            NumberAnimation {
+                id: animateSettingsOpacityReverse
+                target: settingsButton
+                properties: "opacity"
+                from: 0.5
+                to: 1
+                duration: PlasmaCore.Units.longDuration
+                easing.type: Easing.InOutQuad
+            }
+            icon.name: "configure"
+            onHoveredChanged: hovered ? animateSettingsOpacity.start() : animateSettingsOpacityReverse.start();
+            PlasmaComponents.ToolTip {
+                text: i18nc("@action", "System settings")
+            }
+            MouseArea {
+                onClicked: logic.openUrl("file:///usr/share/applications/systemsettings.desktop")
                 anchors.fill: parent
                 hoverEnabled: true
                 cursorShape: containsMouse ? Qt.PointingHandCursor : Qt.ArrowCursor
