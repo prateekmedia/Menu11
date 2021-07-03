@@ -40,8 +40,8 @@ PlasmaExtras.PlasmoidHeading {
     property Item configureButton: configureButton
     property Item avatar: avatarButton
     background: Rectangle {
-        color: Qt.lighter(theme.backgroundColor)
-        opacity: .1
+        color: Qt.darker(theme.backgroundColor)
+        opacity: .115
         border.width: 1
         border.color: "#cacbd0"
         radius: 5

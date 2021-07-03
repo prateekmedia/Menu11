@@ -247,6 +247,7 @@ Item {
             left: parent.left
             right: parent.right
             bottom: searching ? parent.bottom : showAllApps ? footer.top : undefined
+            bottomMargin: showAllApps ? 5 : 0
         }
         height: searching || showAllApps ? parent.height : tileSide * 3
         property Item visibleGrid: globalFavoritesGrid
