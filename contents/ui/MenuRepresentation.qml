@@ -43,6 +43,7 @@ PlasmaCore.Dialog {
 
     objectName: "popupWindow"
     flags: Qt.WindowStaysOnTopHint
+    // location: PlasmaCore.Types.Floating
     hideOnWindowDeactivate: true
 
     property int iconSize: units.iconSizes.medium
