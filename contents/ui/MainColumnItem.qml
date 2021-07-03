@@ -392,7 +392,7 @@ Item {
             text: i18n("Recommended")
         }
 
-        ItemGridView {
+        ItemDocumentsView {
             id: documentsFavoritesGrid
             visible: !searching && !showAllApps
 
