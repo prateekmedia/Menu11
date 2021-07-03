@@ -58,19 +58,6 @@ Item {
         }
     }
     signal  newTextQuery(string text)
-    Connections {
-        target: plasmoid
-        onExpandedChanged: {
-            if (expanded) {
-                playAllGrid.start()
-            }
-        }
-    }
-    SequentialAnimation {
-        id: playAllGrid
-        running: false
-        NumberAnimation { target: globalFavoritesGrid; property: "x"; from: 100; to: 0; duration: 500; easing.type: Easing.InOutQuad }
-    }
 
     function reset() {
         mainColumn.visibleGrid = globalFavoritesGrid
@@ -123,8 +110,8 @@ Item {
             done = true;
             mainColumn.visible = true
             recentItem.visible = true
-            playAllGrid.start()
         }
+        
         function defer() {
             if (!running && !done) {
                 restart();
