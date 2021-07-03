@@ -398,7 +398,7 @@ PlasmaExtras.PlasmoidHeading {
             }
             icon {
                 name: "system-file-manager-symbolic"
-                size: iconSize
+                width: iconSize * 0.96
             }
             onHoveredChanged: hovered ? animateFileManagerOpacity.start() : animateFileManagerOpacityReverse.start();
             PlasmaComponents.ToolTip {
@@ -437,7 +437,7 @@ PlasmaExtras.PlasmoidHeading {
             }
             icon {
                 name: "configure"
-                size: iconSize
+                width: iconSize
             }
             onHoveredChanged: hovered ? animateSettingsOpacity.start() : animateSettingsOpacityReverse.start();
             PlasmaComponents.ToolTip {
@@ -516,7 +516,7 @@ PlasmaExtras.PlasmoidHeading {
             onHoveredChanged: hovered ? animateOpacity.start() : animateOpacityReverse.start();
             icon {
                 name: "system-shutdown"
-                size: iconSize
+                width: iconSize
             }
             PlasmaComponents.ToolTip {
                 text: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Leave...")
