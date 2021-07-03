@@ -40,6 +40,7 @@ PlasmaExtras.PlasmoidHeading {
     leftPadding: rightPadding
     property Item configureButton: configureButton
     property Item avatar: avatarButton
+    property int iconSize: units.iconSizes.smallMedium
     background: Rectangle {
         color: Qt.darker(theme.backgroundColor)
         opacity: .115
@@ -68,6 +69,26 @@ PlasmaExtras.PlasmoidHeading {
             var operation = service.operationDescription(what)
             service.startOperationCall(operation)
         }
+    }
+
+    PlasmaCore.DataSource {
+        id: executable
+        engine: "executable"
+        connectedSources: []
+        onNewData: {
+            var exitCode = data["exit code"]
+            var exitStatus = data["exit status"]
+            var stdout = data["stdout"]
+            var stderr = data["stderr"]
+            exited(sourceName, exitCode, exitStatus, stdout, stderr)
+            disconnectSource(sourceName)
+        }
+        function exec(cmd) {
+            if (cmd) {
+                connectSource(cmd)
+            }
+        }
+        signal exited(string cmd, int exitCode, int exitStatus, string stdout, string stderr)
     }
 
     RowLayout {
@@ -157,11 +178,11 @@ PlasmaExtras.PlasmoidHeading {
         spacing: Math.round(PlasmaCore.Units.smallSpacing * 2.5)
 
         PlasmaComponents.TabButton {
-            id: lockScreenButton
+            id: fileExplorerButton
             // flat: true 
             NumberAnimation {
-                id: animateLockOpacity
-                target: lockScreenButton
+                id: animateExplorerOpacity
+                target: fileExplorerButton
                 properties: "opacity"
                 from: 1
                 to: 0.5
@@ -169,22 +190,24 @@ PlasmaExtras.PlasmoidHeading {
                 easing.type: Easing.InOutQuad
             }
             NumberAnimation {
-                id: animateLockOpacityReverse
-                target: lockScreenButton
+                id: animateExplorerOpacityReverse
+                target: fileExplorerButton
                 properties: "opacity"
                 from: 0.5
                 to: 1
                 duration: PlasmaCore.Units.longDuration
                 easing.type: Easing.InOutQuad
             }
-            icon.name: "system-lock-screen"
-            onHoveredChanged: hovered ? animateLockOpacity.start() : animateLockOpacityReverse.start();
-            enabled: pmEngine.data["Sleep States"]["LockScreen"]
+            icon{
+                name: "system-file-manager-symbolic"
+                width: iconSize * 0.96
+            }
+            onHoveredChanged: hovered ? animateExplorerOpacity.start() : animateExplorerOpacityReverse.start();
             PlasmaComponents.ToolTip {
-                text: i18nc("@action", "Lock screen")
+                text: i18nc("@action", "File Explorer")
             }
             MouseArea {
-                onClicked: pmEngine.performOperation("lockScreen")
+                onClicked: executable.exec("dolphin")
                 anchors.fill: parent
                 hoverEnabled: true
                 cursorShape: containsMouse ? Qt.PointingHandCursor : Qt.ArrowCursor
@@ -212,7 +235,10 @@ PlasmaExtras.PlasmoidHeading {
                 duration: PlasmaCore.Units.longDuration
                 easing.type: Easing.InOutQuad
             }
-            icon.name: "configure"
+            icon{
+                name: "configure"
+                width: iconSize
+            }
             onHoveredChanged: hovered ? animateSettingsOpacity.start() : animateSettingsOpacityReverse.start();
             PlasmaComponents.ToolTip {
                 text: i18nc("@action", "System settings")
@@ -246,7 +272,10 @@ PlasmaExtras.PlasmoidHeading {
                 easing.type: Easing.InOutQuad
             }
             onHoveredChanged: hovered ? animateOpacity.start() : animateOpacityReverse.start();
-            icon.name: "system-shutdown"
+            icon{
+                name: "system-shutdown"
+                width: iconSize
+            }
             PlasmaComponents.ToolTip {
                 text: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Leave...")
             }
