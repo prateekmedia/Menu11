@@ -39,14 +39,27 @@ PlasmaExtras.PlasmoidHeading {
     leftPadding: rightPadding
     property Item configureButton: configureButton
     property Item avatar: avatarButton
-    background: Rectangle {
-        color: Qt.lighter(theme.backgroundColor)
-        opacity: .1
-        border.width: 1
-        border.color: "#cacbd0"
-        radius: 5
+
+    Rectangle {
+        id: back
+        anchors.fill: parent
+        opacity: 0.16
+        color: Qt.darker(theme.backgroundColor)
     }
 
+    Rectangle{
+        id: divider
+        anchors{
+            left: root.left
+            right: root.right
+            top: lockScreenButton.top
+            margins: units.largeSpacing
+            bottomMargin: 0
+        }
+        color: theme.textColor
+        height: 1
+        opacity: 0.4
+    }
 
     KCoreAddons.KUser {
         id: kuser
