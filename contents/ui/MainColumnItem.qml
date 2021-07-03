@@ -214,13 +214,13 @@ Item {
         background: Rectangle {
             color: Qt.lighter(theme.backgroundColor)
             border.width: 1
-            border.color: "#cacbd0"
+            border.color: Qt.darker(theme.backgroundColor, 1.14)
             radius: 5
         }
         topPadding: 5
         bottomPadding: topPadding
-        leftPadding: showAllApps ? 4 : 8
-        rightPadding: showAllApps ? 8 : 4
+        leftPadding: 8
+        rightPadding: 8
         icon{
             width: height
             height: visible ? units.iconSizes.small : 0
@@ -380,9 +380,10 @@ Item {
             text: i18n("Recommended")
         }
 
-        ItemDocumentsView {
+        ItemGridView {
             id: documentsFavoritesGrid
             visible: !searching && !showAllApps
+            showDescriptions: true
 
             anchors{
                 top: headLabelDocuments.bottom

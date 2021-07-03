@@ -48,6 +48,7 @@ FocusScope {
     property alias count: gridView.count
     property alias model: gridView.model
     property alias square: gridView.square
+    property alias showDescriptions: gridView.showDescriptions
 
     property alias cellWidth: gridView.cellWidth
     property alias cellHeight: gridView.cellHeight
@@ -195,6 +196,7 @@ FocusScope {
             id: aItemGridDelegate
             ItemGridDelegate {
                 showLabel: showLabels
+                showDescription: showDescriptions
                 increaseLeftSpacing: increaseLeftSpacings
             }
         }
@@ -220,6 +222,7 @@ FocusScope {
                 property bool animating: false
                 property int animationDuration: dropEnabled ? resetAnimationDurationTimer.interval : 0
                 property bool square: false
+                property bool showDescriptions: false
 
                 focus: true
                 currentIndex: -1

@@ -19,6 +19,7 @@
  ***************************************************************************/
 
 import QtQuick 2.12
+import QtQuick.Layouts 1.12
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
@@ -31,6 +32,7 @@ Item {
     width: GridView.view.cellWidth
     height: GridView.view.cellHeight
     property bool showLabel: true
+    property bool showDescription: false
     property bool increaseLeftSpacing: false
     property int itemIndex: model.index
     property string favoriteId: model.favoriteId !== undefined ? model.favoriteId : ""
@@ -69,21 +71,38 @@ Item {
         source: model.decoration
     }
 
-    PlasmaComponents.Label {
+
+    ColumnLayout {
         id: label
+        Layout.fillWidth: true
+        width: parent.width * 0.75
         visible: showLabel
         anchors {
             left: icon.right
             leftMargin: PlasmaCore.Units.smallSpacing * 4
             verticalCenter: parent.verticalCenter
         }
-        
-        maximumLineCount: 1
-        elide: Text.ElideRight
-        wrapMode: Text.Wrap
-        color: theme.textColor
-        width: parent.width - icon.width
-        text: ("name" in model ? model.name : model.display)
+        spacing: 0
+
+        PlasmaComponents.Label {
+            Layout.maximumWidth: parent.width
+            maximumLineCount: 1
+            elide: Text.ElideRight
+            wrapMode: Text.Wrap
+            color: theme.textColor
+            text: ("name" in model ? model.name : model.display)
+        }
+        PlasmaComponents.Label {
+            Layout.maximumWidth: parent.width
+            maximumLineCount: 1
+            elide: Text.ElideRight
+            wrapMode: Text.Wrap
+            color: theme.textColor
+            text: model.description
+            font.pointSize: 8
+            visible: showDescription
+            opacity: 0.7
+        }
     }
 
     PlasmaCore.ToolTipArea {
