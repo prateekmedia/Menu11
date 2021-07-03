@@ -192,7 +192,7 @@ PlasmaExtras.PlasmoidHeading {
             onHoveredChanged: hovered ? animateLockOpacity.start() : animateLockOpacityReverse.start();
             enabled: pmEngine.data["Sleep States"]["LockScreen"]
             PlasmaComponents.ToolTip {
-                text: i18nc("@action", "Lock Screen")
+                text: i18nc("@action", "Lock screen")
             }
             MouseArea {
                 onClicked: pmEngine.performOperation("lockScreen")
@@ -225,7 +225,7 @@ PlasmaExtras.PlasmoidHeading {
             onHoveredChanged: hovered ? animateOpacity.start() : animateOpacityReverse.start();
             icon.name: "system-shutdown"
             PlasmaComponents.ToolTip {
-                text: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Leave ... ")
+                text: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Leave...")
             }
             MouseArea {
                 hoverEnabled: true
