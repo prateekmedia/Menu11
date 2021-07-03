@@ -58,6 +58,8 @@ Kirigami.FormLayout {
     property alias cfg_numberColumns: numberColumns.value
     property alias cfg_numberRows: numberRows.value
 
+    property alias cfg_centerMenu: centerMenu.checked
+    
     property alias cfg_downIconsDocuments: downIconsDocuments.checked
     property alias cfg_downIconsDownloads: downIconsDownloads.checked
     property alias cfg_downIconsPictures: downIconsPictures.checked
@@ -275,6 +277,56 @@ Kirigami.FormLayout {
         Kirigami.FormData.label: i18n("Show applications as:")
 
         model: [i18n("Name only"), i18n("Description only"), i18n("Name (Description)"), i18n("Description (Name)")]
+    }
+    
+    Item {
+        Kirigami.FormData.isSection: true
+    }
+
+    CheckBox {
+        id: downIconsDocuments
+        Kirigami.FormData.label: i18n("Icons on Bottom bar:")
+        text: i18n("Documents")
+    }
+
+    CheckBox {
+        id: downIconsPictures
+        text: i18n("Pictures")
+    }
+
+    CheckBox {
+        id: downIconsMusic
+        text: i18n("Music")
+    }
+
+    CheckBox {
+        id: downIconsDownloads
+        text: i18n("Downloads")
+    }
+
+    CheckBox {
+        id: downIconsVideos
+        text: i18n("Videos")
+    }
+
+    CheckBox {
+        id: downIconsFileManager
+        text: i18n("File Manager")
+    }
+
+    CheckBox {
+        id: downIconsSystemSettings
+        text: i18n("System Settings")
+    }
+
+    CheckBox {
+        id: downIconsLock
+        text: i18n("Lock")
+    }
+
+    CheckBox {
+        id: downIconsPowerOptions
+        text: i18n("Power Options")
     }
 
     Item {
