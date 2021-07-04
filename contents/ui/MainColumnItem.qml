@@ -51,7 +51,7 @@ Item {
         + (2 * Math.max(highlightItemSvg.margins.top + highlightItemSvg.margins.bottom,
             highlightItemSvg.margins.left + highlightItemSvg.margins.right))
     property bool searching: (searchField.text != "")
-    property bool showAllApps: false
+    property bool showAllApps: plasmoid.configuration.defaultAllApps
     property bool showRecents: false
     property int tileSide: 64 + 30
     onSearchingChanged: {
@@ -68,7 +68,7 @@ Item {
         mainColumn.visibleGrid = globalFavoritesGrid
         searchField.clear()
         searchField.focus = true
-        showAllApps = false
+        showAllApps = plasmoid.configuration.defaultAllApps
         showRecents = false
         documentsFavoritesGrid.tryActivate(0, 0);
         allAppsGrid.tryActivate(0, 0);

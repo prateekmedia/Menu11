@@ -54,6 +54,7 @@ Kirigami.FormLayout {
     property alias cfg_centerMenu: centerMenu.checked
     property alias cfg_reduceIconSizeFooter: reduceIconSizeFooter.checked
     property alias cfg_gridAllowTwoLines: gridAllowTwoLines.checked
+    property alias cfg_defaultAllApps: defaultAllApps.checked
     
     property alias cfg_downIconsDocuments: downIconsDocuments.checked
     property alias cfg_downIconsDownloads: downIconsDownloads.checked
@@ -175,6 +176,11 @@ Kirigami.FormLayout {
         Kirigami.FormData.label: i18n("Panel Properties:")
 
         text: i18n("Center menu")
+    }
+
+    CheckBox {
+        id: defaultAllApps
+        text: i18n("Show All Apps By Default")
     }
 
     CheckBox {
