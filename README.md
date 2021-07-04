@@ -4,7 +4,7 @@
 <a href="https://github.com/prateekmedia/Menu11/releases"><img alt="GitHub release" src="https://img.shields.io/github/v/release/prateekmedia/Menu11"/></a> <a href="LICENSE"><img alt="License" src="https://img.shields.io/github/license/prateekmedia/Menu11?color=blue"/></a> <a href="#installing-manually"><img alt="Install Manually" src="https://img.shields.io/badge/Install Manually-git-blue"/></a>
 </p>
 <p align="center">
-<img src="https://user-images.githubusercontent.com/41370460/124347932-bb94c080-dc04-11eb-892c-42e93e57f3d4.jpg" width=400>
+<img src="https://user-images.githubusercontent.com/41370460/124374193-c90a8300-dcb6-11eb-876b-3dd68d7fc503.jpg" width=400>
 </p>
 
 #### *Special Thanks to*
