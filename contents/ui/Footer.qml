@@ -153,7 +153,6 @@ PlasmaExtras.PlasmoidHeading {
 
             PlasmaExtras.Heading {
                 id: nameLabel
-                anchors.fill: parent
 
                 level: 4
                 // font.weight: Font.Bold
@@ -203,7 +202,7 @@ PlasmaExtras.PlasmoidHeading {
 
             icon {
                 name: "folder-documents-symbolic"
-                size: iconSize
+                width: iconSize * (plasmoid.configuration.reduceIconSizeFooter ? 0.96 : 1)
             }
             onHoveredChanged: hovered ? animateDocumentsOpacity.start() : animateDocumentsOpacityReverse.start();
             PlasmaComponents.ToolTip {
@@ -242,7 +241,7 @@ PlasmaExtras.PlasmoidHeading {
             }
             icon {
                 name: "folder-pictures-symbolic"
-                size: iconSize
+                width: iconSize * (plasmoid.configuration.reduceIconSizeFooter ? 0.96 : 1)
             }
             onHoveredChanged: hovered ? animatePicturesOpacity.start() : animatePicturesOpacityReverse.start();
             PlasmaComponents.ToolTip {
@@ -281,7 +280,7 @@ PlasmaExtras.PlasmoidHeading {
             }
             icon {
                 name: "folder-music-symbolic"
-                size: iconSize
+                width: iconSize * (plasmoid.configuration.reduceIconSizeFooter ? 0.96 : 1)
             }
             onHoveredChanged: hovered ? animateMusicOpacity.start() : animateMusicOpacityReverse.start();
             PlasmaComponents.ToolTip {
@@ -320,7 +319,7 @@ PlasmaExtras.PlasmoidHeading {
             }
             icon {
                 name: "folder-download-symbolic"
-                size: iconSize
+                width: iconSize * (plasmoid.configuration.reduceIconSizeFooter ? 0.96 : 1)
             }
             onHoveredChanged: hovered ? animateDownloadsOpacity.start() : animateDownloadsOpacityReverse.start();
             PlasmaComponents.ToolTip {
@@ -359,7 +358,7 @@ PlasmaExtras.PlasmoidHeading {
             }
             icon {
                 name: "folder-videos-symbolic"
-                size: iconSize
+                width: iconSize * (plasmoid.configuration.reduceIconSizeFooter ? 0.96 : 1)
             }
             onHoveredChanged: hovered ? animateVideosOpacity.start() : animateVideosOpacityReverse.start();
             PlasmaComponents.ToolTip {
@@ -397,8 +396,8 @@ PlasmaExtras.PlasmoidHeading {
                 easing.type: Easing.InOutQuad
             }
             icon {
-                name: "system-file-manager-symbolic"
-                width: iconSize * 0.96
+                name: "folder-symbolic"
+                width: iconSize * (plasmoid.configuration.reduceIconSizeFooter ? 0.96 : 1)
             }
             onHoveredChanged: hovered ? animateFileManagerOpacity.start() : animateFileManagerOpacityReverse.start();
             PlasmaComponents.ToolTip {
@@ -476,7 +475,7 @@ PlasmaExtras.PlasmoidHeading {
             }
             icon {
                 name: "system-lock-screen"
-                size: iconSize
+                width: iconSize
             }
             onHoveredChanged: hovered ? animateLockOpacity.start() : animateLockOpacityReverse.start();
             enabled: pmEngine.data["Sleep States"]["LockScreen"]

@@ -52,6 +52,8 @@ Kirigami.FormLayout {
 
     property alias cfg_useExtraRunners: useExtraRunners.checked
     property alias cfg_centerMenu: centerMenu.checked
+    property alias cfg_reduceIconSizeFooter: reduceIconSizeFooter.checked
+    property alias cfg_gridAllowTwoLines: gridAllowTwoLines.checked
     
     property alias cfg_downIconsDocuments: downIconsDocuments.checked
     property alias cfg_downIconsDownloads: downIconsDownloads.checked
@@ -166,12 +168,27 @@ Kirigami.FormLayout {
         Kirigami.FormData.isSection: true
     }
 
+
     CheckBox {
         id: centerMenu
 
-        visible: !isDash
+        Kirigami.FormData.label: i18n("Panel Properties:")
 
-        Kirigami.FormData.label: i18n("Center Menu:")
+        text: i18n("Center menu")
+    }
+
+    CheckBox {
+        id: reduceIconSizeFooter
+        text: i18n("Reduce Icon Size for Footer")
+    }
+
+    CheckBox {
+        id: gridAllowTwoLines
+        text: i18n("Allow label to have two lines (Pinned)")
+    }
+
+    Item {
+        Kirigami.FormData.isSection: true
     }
 
     ComboBox {

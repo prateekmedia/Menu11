@@ -27,6 +27,7 @@ import QtQuick.Layouts 1.12
 import QtGraphicalEffects 1.0
 //import org.kde.plasma.core 2.1 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
+import org.kde.plasma.components 2.0 as PlasmaComponents2
 
 import org.kde.kirigami 2.13 as Kirigami
 import org.kde.plasma.extras 2.0 as PlasmaExtras
@@ -51,6 +52,7 @@ Item {
             highlightItemSvg.margins.left + highlightItemSvg.margins.right))
     property bool searching: (searchField.text != "")
     property bool showAllApps: false
+    property bool showRecents: false
     property int tileSide: 64 + 30
     onSearchingChanged: {
         if (!searching) {
@@ -58,12 +60,21 @@ Item {
         }
     }
     signal  newTextQuery(string text)
+    property real mainColumnHeight: tileSide * 3
+    property real favoritesColumnHeight: (units.iconSizes.medium + units.smallSpacing * 2) * 4
 
     function reset() {
         mainColumn.visibleGrid = globalFavoritesGrid
         searchField.clear()
         searchField.focus = true
         showAllApps = false
+        if (showRecents){
+            showRecents = false
+            mainColumn.opacity = 1
+            mainColumn.height = parent.height
+            documentsFavoritesGrid.height = favoritesColumnHeight
+            recentItem.anchors.top = mainColumn.bottom
+        }
         documentsFavoritesGrid.tryActivate(0, 0);
         allAppsGrid.tryActivate(0, 0);
         globalFavoritesGrid.tryActivate(0, 0);
@@ -90,6 +101,23 @@ Item {
         visible: false
         width: 0
         level: 1
+    }
+
+
+    ParallelAnimation {
+        id: removePinned
+        running: false
+        NumberAnimation { target: mainColumn; property: "height"; from: mainColumnHeight; to: 0; duration: 500; easing.type: Easing.InOutQuad }
+        NumberAnimation { target: mainColumn; property: "opacity"; from: 1; to: 0; duration: 500; easing.type: Easing.InOutQuad }
+        NumberAnimation { target: documentsFavoritesGrid; property: "height"; from: favoritesColumnHeight; to: parent.height; duration: 500; easing.type: Easing.InOutQuad }
+    }
+
+    ParallelAnimation {
+        id: restorePinned
+        running: false
+        NumberAnimation { target: mainColumn; property: "height"; from: 0; to: mainColumnHeight; duration: 500; easing.type: Easing.InOutQuad }
+        NumberAnimation { target: mainColumn; property: "opacity"; from: 0; to: 1; duration: 500; easing.type: Easing.InOutQuad }
+        NumberAnimation { target: documentsFavoritesGrid; property: "height"; from: parent.height; to: favoritesColumnHeight; duration: 500; easing.type: Easing.InOutQuad }
     }
 
     TextMetrics {
@@ -125,9 +153,9 @@ Item {
         id: containmentInterface
     }
 
-    PlasmaComponents.Menu {
+    PlasmaComponents2.Menu {
         id: contextMenu
-        PlasmaComponents.MenuItem {
+        PlasmaComponents2.MenuItem {
             action: plasmoid.action("configure")
         }
     }
@@ -194,7 +222,7 @@ Item {
         font.bold: true
         font.weight: Font.Bold
         text: i18n(showAllApps ? "All apps" : "Pinned")
-        visible: !searching
+        visible: !searching && !showRecents
     }
 
     PlasmaComponents.Button  {
@@ -236,7 +264,7 @@ Item {
             left: parent.left
         }
         x: -units.smallSpacing
-        visible: !searching
+        visible: !searching && !showRecents
     }
 
     Item {
@@ -251,7 +279,8 @@ Item {
             bottom: searching ? parent.bottom : showAllApps ? footer.top : undefined
             bottomMargin: showAllApps ? 5 : 0
         }
-        height: searching || showAllApps ? parent.height : tileSide * 3
+        opacity: 1
+        height: showRecents ? 0 : searching || showAllApps ? parent.height : mainColumnHeight
         property Item visibleGrid: globalFavoritesGrid
         function tryActivate(row, col) {
             if (visibleGrid) {
@@ -385,6 +414,54 @@ Item {
             text: i18n("Recommended")
         }
 
+        PlasmaComponents.Button  {
+            MouseArea {
+                hoverEnabled: true
+                anchors.fill: parent
+                cursorShape: containsMouse ? Qt.PointingHandCursor : Qt.ArrowCursor
+                onClicked: {
+                    showRecents = !showRecents
+                    if (showRecents)
+                        removePinned.start();
+                    else 
+                        restorePinned.start();
+                }
+            }
+            text: i18n(showRecents ? "Back" : "More")
+            id: headsecLabelGrid
+            icon.name: showRecents ? "go-previous" : "go-next"
+            font.pointSize: 9
+            icon.height: 15
+            icon.width: icon.height
+            LayoutMirroring.enabled: true
+            LayoutMirroring.childrenInherit: !showRecents
+            flat: false        
+            background: Rectangle {
+                color: Qt.lighter(theme.backgroundColor)
+                border.width: 1
+                border.color: Qt.darker(theme.backgroundColor, 1.14)
+                radius: 5
+            }
+            topPadding: 4
+            bottomPadding: topPadding
+            leftPadding: 8
+            rightPadding: 8
+            icon{
+                width: height
+                height: visible ? units.iconSizes.small : 0
+                name: showRecents ? "go-previous" : "go-next"
+            }
+
+            anchors {
+                verticalCenter: headLabelDocuments.verticalCenter
+                rightMargin: units.largeSpacing * 6
+                leftMargin: units.largeSpacing * 6
+                left: parent.left
+            }
+            x: -units.smallSpacing
+            visible: !searching
+        }
+
         ItemGridView {
             id: documentsFavoritesGrid
             visible: !searching && !showAllApps
@@ -394,13 +471,12 @@ Item {
                 top: headLabelDocuments.bottom
                 left: parent.left
                 right: parent.right
-                bottom: footer.top
                 bottomMargin: 0
                 topMargin: units.largeSpacing
             }
 
             increaseLeftSpacings: true
-            height: (units.iconSizes.medium + units.smallSpacing * 2) * 4
+            height: showRecents ? parent.height : (units.iconSizes.medium + units.smallSpacing * 2) * 4
             cellWidth: parent.width * 0.4
             cellHeight: units.iconSizes.medium + units.smallSpacing * 5
             iconSize: units.iconSizes.medium

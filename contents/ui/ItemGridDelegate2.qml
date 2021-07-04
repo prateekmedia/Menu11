@@ -76,10 +76,10 @@ Item {
         visible: showLabel
         anchors {
             top: icon.bottom
-            topMargin: - units.smallSpacing * 0.6
+            topMargin: - units.smallSpacing * (plasmoid.configuration.gridAllowTwoLines ? 0.6 : -0.4)
             horizontalCenter: parent.horizontalCenter
         }
-        maximumLineCount: 2
+        maximumLineCount: plasmoid.configuration.gridAllowTwoLines ? 2 : 1
         horizontalAlignment: Text.AlignHCenter
         width: parent.width - units.largeSpacing
         elide: Text.ElideRight
