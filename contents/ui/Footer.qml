@@ -153,7 +153,8 @@ PlasmaExtras.PlasmoidHeading {
 
             PlasmaExtras.Heading {
                 id: nameLabel
-
+                anchors.fill: parent
+                
                 level: 4
                 // font.weight: Font.Bold
                 Text {
