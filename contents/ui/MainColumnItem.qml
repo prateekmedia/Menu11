@@ -55,6 +55,7 @@ Item {
     property bool showRecents: false
     property int tileSide: 64 + 30
     onSearchingChanged: {
+        mainColumn.opacity = 1
         if (!searching) {
             reset();
         }
@@ -68,13 +69,7 @@ Item {
         searchField.clear()
         searchField.focus = true
         showAllApps = false
-        if (showRecents){
-            showRecents = false
-            mainColumn.opacity = 1
-            mainColumn.height = parent.height
-            documentsFavoritesGrid.height = favoritesColumnHeight
-            recentItem.anchors.top = mainColumn.bottom
-        }
+        showRecents = false
         documentsFavoritesGrid.tryActivate(0, 0);
         allAppsGrid.tryActivate(0, 0);
         globalFavoritesGrid.tryActivate(0, 0);
@@ -115,7 +110,7 @@ Item {
     ParallelAnimation {
         id: restorePinned
         running: false
-        NumberAnimation { target: mainColumn; property: "height"; from: 0; to: mainColumnHeight; duration: 500; easing.type: Easing.InOutQuad }
+        NumberAnimation { target: mainColumn; property: "height"; from: 0; to: searching || showAllApps ? parent.height : mainColumnHeight; duration: 500; easing.type: Easing.InOutQuad }
         NumberAnimation { target: mainColumn; property: "opacity"; from: 0; to: 1; duration: 500; easing.type: Easing.InOutQuad }
         NumberAnimation { target: documentsFavoritesGrid; property: "height"; from: parent.height; to: favoritesColumnHeight; duration: 500; easing.type: Easing.InOutQuad }
     }
@@ -279,8 +274,7 @@ Item {
             bottom: searching ? parent.bottom : showAllApps ? footer.top : undefined
             bottomMargin: showAllApps ? 5 : 0
         }
-        opacity: 1
-        height: showRecents ? 0 : searching || showAllApps ? parent.height : mainColumnHeight
+        height: searching || showAllApps ? parent.height : mainColumnHeight
         property Item visibleGrid: globalFavoritesGrid
         function tryActivate(row, col) {
             if (visibleGrid) {
@@ -459,7 +453,7 @@ Item {
                 left: parent.left
             }
             x: -units.smallSpacing
-            visible: !searching
+            visible: !searching && !showAllApps
         }
 
         ItemGridView {
