@@ -55,7 +55,6 @@ Item {
     property bool showRecents: false
     property int tileSide: 64 + 30
     onSearchingChanged: {
-        mainColumn.opacity = 1
         if (!searching) {
             reset();
         }
@@ -65,6 +64,7 @@ Item {
     property real favoritesColumnHeight: (units.iconSizes.medium + units.smallSpacing * 2) * 4
 
     function reset() {
+        mainColumn.opacity = 1
         mainColumn.visibleGrid = globalFavoritesGrid
         searchField.clear()
         searchField.focus = true
