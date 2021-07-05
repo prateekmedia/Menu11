@@ -1,5 +1,5 @@
 <h1 align="center">Menu11</h1>
-<p align="center"><i><b>A launcher based on Windows 11 Menu, Fork of MenuZ.</b></i></p>
+<p align="center"><i><b>A highly customizable launcher inspired from windows 11 menu. Fork of MenuZ.</b></i></p>
 <p align="center">
 <a href="https://github.com/prateekmedia/Menu11/releases"><img alt="GitHub release" src="https://img.shields.io/github/v/release/prateekmedia/Menu11"/></a> <a href="LICENSE"><img alt="License" src="https://img.shields.io/github/license/prateekmedia/Menu11?color=blue"/></a> <a href="#installing-manually"><img alt="Install Manually" src="https://img.shields.io/badge/Install Manually-git-blue"/></a>
 </p>
