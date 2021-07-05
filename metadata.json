@@ -4,10 +4,6 @@
             {
                 "Email": "pankajsunal123@gmail.com",
                 "Name": "Prateek SU"
-            },
-            {
-                "Email": "hein@kde.org",
-                "Name": "Eike Hein"
             }
         ],
         "Category": "Application Launchers",
@@ -21,7 +17,7 @@
         "ServiceTypes": [
             "Plasma/Applet"
         ],
-        "Version": "3.0"
+        "Version": "3.1"
     },
     "X-Plasma-API": "declarativeappletscript",
     "X-Plasma-MainScript": "ui/main.qml",
