@@ -23,14 +23,6 @@
       <label>The format used in the display of application names: 0 = NameOnly, 1 = GenericNameOnly, 2 = NameAndGenericName, 3 = GenericNameAndName</label>
       <default>0</default>
     </entry>
-    <entry name="limitDepth" type="Bool">
-      <label>Whether to flatten top-level menu categories to a single level instead of displaying sub-categories.</label>
-      <default>false</default>
-    </entry>
-    <entry name="alphaSort" type="Bool">
-      <label>Whether to sort menu contents alphabetically or use manual/system sort order.</label>
-      <default>false</default>
-    </entry>
 
     <entry name="recentOrdering" type="Int">
       <label>How should the previously used apps/docs/contacts be ordered: 0 = RecentFirst, 1 = PopularFirst</label>
@@ -133,10 +125,6 @@
     <entry name="downIconsPowerOptions" type="Bool">
       <label>Shows or hides the Power Options button on the bottom bar.</label>
       <default>true</default>
-    </entry>
-    <entry name="showIconsRootLevel" type="Bool">
-      <label>Whether to show icons on the root level of the menu.</label>
-      <default>false</default>
     </entry>
     <entry name="defaultAllApps" type="Bool">
       <label>Whether to show All Apps screen by default or not.</label>

@@ -41,10 +41,6 @@ Kirigami.FormLayout {
     property string cfg_customButtonImage: plasmoid.configuration.customButtonImage
 
     property alias cfg_appNameFormat: appNameFormat.currentIndex
-    property alias cfg_limitDepth: limitDepth.checked
-    property alias cfg_alphaSort: alphaSort.checked
-    property alias cfg_showIconsRootLevel: showIconsRootLevel.checked
-
     property alias cfg_recentOrdering: recentOrdering.currentIndex
     property alias cfg_showRecentApps: showRecentApps.checked
     property alias cfg_showRecentDocs: showRecentDocs.checked
@@ -58,6 +54,7 @@ Kirigami.FormLayout {
     property alias cfg_gridAllowTwoLines: gridAllowTwoLines.checked
     property alias cfg_defaultAllApps: defaultAllApps.checked
     property alias cfg_showDescription: showDescription.checked
+    property alias cfg_alwaysShowSearchBar: alwaysShowSearchBar.checked
     
     property alias cfg_downIconsDocuments: downIconsDocuments.checked
     property alias cfg_downIconsDownloads: downIconsDownloads.checked
@@ -229,6 +226,11 @@ Kirigami.FormLayout {
         text: i18n("Show Description for all apps and search items")
     }
 
+    CheckBox {
+        id: alwaysShowSearchBar
+        text: i18n("Always Show Search Bar")
+    }
+
     Item {
         Kirigami.FormData.isSection: true
     }
@@ -239,34 +241,6 @@ Kirigami.FormLayout {
         Kirigami.FormData.label: i18n("Show applications as:")
 
         model: [i18n("Name only"), i18n("Description only"), i18n("Name (Description)"), i18n("Description (Name)")]
-    }
-
-    Item {
-        Kirigami.FormData.isSection: true
-    }
-
-    CheckBox {
-        id: alphaSort
-
-        Kirigami.FormData.label: i18n("Behavior:")
-
-        text: i18n("Sort applications alphabetically")
-    }
-
-    CheckBox {
-        id: limitDepth
-
-        visible: !isDash
-
-        text: i18n("Flatten sub-menus to a single level")
-    }
-
-    CheckBox {
-        id: showIconsRootLevel
-
-        visible: !isDash
-
-        text: i18n("Show icons on the root level of the menu")
     }
     
     Item {

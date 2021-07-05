@@ -170,7 +170,7 @@ Item {
         id: searchField
         focus: true
         placeholderText: i18n("Search...")
-        opacity: searching
+        opacity: searching || plasmoid.configuration.alwaysShowSearchBar
         height: units.iconSizes.medium
         width: parent.width - 2 * x
         x: 1.5 * units.largeSpacing
@@ -216,8 +216,9 @@ Item {
 
     PlasmaExtras.Heading {
         id: mainLabelGrid
-        anchors.top: parent.top
+        anchors.top: plasmoid.configuration.alwaysShowSearchBar ? searchField.bottom : parent.top
         anchors.leftMargin: units.largeSpacing * 3
+        anchors.topMargin: plasmoid.configuration.alwaysShowSearchBar ? 0.4 * units.largeSpacing : 0
         anchors.left: parent.left
         x: units.smallSpacing
         elide: Text.ElideRight
@@ -476,7 +477,7 @@ Item {
                 left: parent.left
             }
             x: -units.smallSpacing
-            visible: documentsFavoritesGrid.model.count > 6 && !searching && !showAllApps && !showRecents
+            visible: documentsFavoritesGrid.model != null && documentsFavoritesGrid.model.count > 6 && !searching && !showAllApps && !showRecents
         }
 
         ItemGridView {

@@ -38,7 +38,6 @@ PlasmaCore.Dialog {
     property int cellWidthSide: units.gridUnit * 13
     property int cellHeight: iconSize + (Math.max(highlightItemSvg.margins.top + highlightItemSvg.margins.bottom,
         highlightItemSvg.margins.left + highlightItemSvg.margins.right))
-    signal appendSearchText(string text)
 
     onVisibleChanged: {
         if (!visible) {
@@ -125,7 +124,7 @@ PlasmaCore.Dialog {
     FocusScope {
         Layout.minimumWidth: mainColumnItem.width  //+ tilesColumnItem.width
         Layout.maximumWidth: mainColumnItem.width //+ tilesColumnItem.width
-        Layout.minimumHeight: mainColumnItem.tileSide * 6 + 85
+        Layout.minimumHeight: mainColumnItem.tileSide * 6 + 85 + (plasmoid.configuration.alwaysShowSearchBar ? 15 : 0)
         Layout.maximumHeight: mainColumnItem.tileSide * 6 + 85
 
         focus: true
@@ -136,9 +135,6 @@ PlasmaCore.Dialog {
 
             MainColumnItem{
                 id: mainColumnItem
-                onNewTextQuery: {
-                    appendSearchText(text)
-                }
             }
         }
 
