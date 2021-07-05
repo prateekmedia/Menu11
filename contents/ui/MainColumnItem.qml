@@ -57,6 +57,8 @@ Item {
     onSearchingChanged: {
         if (!searching) {
             reset();
+        } else {
+            if (showRecents) resetPinned.start();
         }
     }
     signal  newTextQuery(string text)
@@ -64,8 +66,7 @@ Item {
     property real favoritesColumnHeight: (units.iconSizes.medium + units.smallSpacing * 2) * 4
 
     function reset() {
-        mainColumn.opacity = 1
-        mainColumn.visibleGrid = globalFavoritesGrid
+        if (showRecents) resetPinned.start();
         searchField.clear()
         searchField.focus = true
         showAllApps = plasmoid.configuration.defaultAllApps
@@ -73,7 +74,6 @@ Item {
         documentsFavoritesGrid.tryActivate(0, 0);
         allAppsGrid.tryActivate(0, 0);
         globalFavoritesGrid.tryActivate(0, 0);
-        resetPinned.start();
     }
 
     function reload() {
@@ -123,7 +123,7 @@ Item {
         NumberAnimation { target: mainColumn; property: "opacity"; from: 0; to: 1; duration: 0; }
         NumberAnimation { target: documentsFavoritesGrid; property: "height"; from: parent.height; to: favoritesColumnHeight; duration: 0; }
     }
-    
+
     TextMetrics {
         id: headingMetrics
         font: dummyHeading.font
@@ -145,7 +145,7 @@ Item {
             mainColumn.visible = true
             recentItem.visible = true
         }
-        
+
         function defer() {
             if (!running && !done) {
                 restart();
@@ -215,7 +215,7 @@ Item {
 
     PlasmaExtras.Heading {
         id: mainLabelGrid
-        anchors.top: parent.top + 10//headRect.bottom
+        anchors.top: parent.top//headRect.bottom
         anchors.leftMargin: units.largeSpacing * 3
         anchors.left: parent.left
         x: units.smallSpacing
@@ -225,8 +225,8 @@ Item {
         level: 5
         font.bold: true
         font.weight: Font.Bold
-        text: i18n(showAllApps ? "All apps" : "Pinned")
-        visible: !searching && !showRecents
+        text: i18n(showAllApps ? "All apps" : showRecents ? "Recommended" : "Pinned")
+        visible: !searching
     }
 
     PlasmaComponents.Button  {
@@ -234,17 +234,27 @@ Item {
             hoverEnabled: true
             anchors.fill: parent
             cursorShape: containsMouse ? Qt.PointingHandCursor : Qt.ArrowCursor
-            onClicked: showAllApps = !showAllApps
+            onClicked: {
+                if (showAllApps || !showRecents)
+                    showAllApps = !showAllApps
+                else {
+                    showRecents = !showRecents
+                    if (showRecents)
+                        removePinned.start();
+                    else
+                        restorePinned.start();
+                }
+            }
         }
-        text: i18n(showAllApps ? "Back" : "All apps")
+        text: i18n(showAllApps || showRecents ? "Back" : "All apps")
         id: mainsecLabelGrid
-        icon.name: showAllApps ? "go-previous" : "go-next"
+        icon.name: showAllApps || showRecents ? "go-previous" : "go-next"
         font.pointSize: 9
         icon.height: 15
         icon.width: icon.height
         LayoutMirroring.enabled: true
-        LayoutMirroring.childrenInherit: !showAllApps
-        flat: false        
+        LayoutMirroring.childrenInherit: !showAllApps && !showRecents
+        flat: false
         background: Rectangle {
             color: Qt.lighter(theme.backgroundColor)
             border.width: 1
@@ -258,7 +268,7 @@ Item {
         icon{
             width: height
             height: visible ? units.iconSizes.small : 0
-            name: showAllApps ? "go-previous" : "go-next"
+            name: showAllApps || showRecents ? "go-previous" : "go-next"
         }
 
         anchors {
@@ -268,7 +278,7 @@ Item {
             left: parent.left
         }
         x: -units.smallSpacing
-        visible: !searching && !showRecents
+        visible: !searching
     }
 
     Item {
@@ -413,7 +423,7 @@ Item {
             level: 5
             font.bold: true
             font.weight: Font.Bold
-            visible: !searching && !showAllApps
+            visible: !searching && !showAllApps && !showRecents
             text: i18n("Recommended")
         }
 
@@ -426,7 +436,7 @@ Item {
                     showRecents = !showRecents
                     if (showRecents)
                         removePinned.start();
-                    else 
+                    else
                         restorePinned.start();
                 }
             }
@@ -438,7 +448,7 @@ Item {
             icon.width: icon.height
             LayoutMirroring.enabled: true
             LayoutMirroring.childrenInherit: !showRecents
-            flat: false        
+            flat: false
             background: Rectangle {
                 color: Qt.lighter(theme.backgroundColor)
                 border.width: 1
@@ -462,7 +472,7 @@ Item {
                 left: parent.left
             }
             x: -units.smallSpacing
-            visible: !searching && !showAllApps
+            visible: !searching && !showAllApps && !showRecents
         }
 
         ItemGridView {
