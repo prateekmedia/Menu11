@@ -85,35 +85,37 @@ PlasmaCore.Dialog {
         // Fall back to bottom-left of screen area when the applet is on the desktop or floating.
         var x = offset;
         var y = screen.height - height - offset;
-        var horizMidPoint; z
-        var vertMidPoint;
-        var appletTopLeft;
-        if (plasmoid.configuration.centerMenu) {
-            horizMidPoint = screen.x + (screen.width / 2);
-            vertMidPoint = screen.y + (screen.height / 2);
-            x = horizMidPoint - width / 2;
-            //y = vertMidPoint - height / 2;
-            y = plasmoid.location === PlasmaCore.Types.TopEdge ? parent.height + panelSvg.margins.bottom + offset + 6 :  screen.height - height - offset - panelSvg.margins.top - 6;
+        var horizMidPoint = screen.x + (screen.width / 2);
+        var vertMidPoint = screen.y + (screen.height / 2);
+        var appletTopLeft = parent.mapToGlobal(0, 0);
+        var appletBottomLeft = parent.mapToGlobal(0, parent.height);
+        if (plasmoid.configuration.menuPosition == 0) {
+            x = plasmoid.location === PlasmaCore.Types.LeftEdge ? parent.width + panelSvg.margins.right + offset + 6 : plasmoid.location === PlasmaCore.Types.RightEdge ? appletTopLeft.x - panelSvg.margins.left - offset - width - 6 : horizMidPoint - width / 2;
+            y = plasmoid.location === PlasmaCore.Types.TopEdge ? parent.height + panelSvg.margins.bottom + offset + 6 : plasmoid.location === PlasmaCore.Types.BottomEdge ? screen.height - height - offset - panelSvg.margins.top - 6 : vertMidPoint - height / 2;
         } else if (plasmoid.location === PlasmaCore.Types.BottomEdge) {
-            horizMidPoint = screen.x + (screen.width / 2);
-            appletTopLeft = parent.mapToGlobal(0, 0);
-            x = (appletTopLeft.x < horizMidPoint) ? screen.x + offset + 6 : (screen.x + screen.width) - width - offset - 6;
+            if (plasmoid.configuration.menuPosition == 1)
+                x = (appletTopLeft.x < horizMidPoint) ? screen.x + offset + 6 : (screen.x + screen.width) - width - offset - 6;
+            else
+                x = appletTopLeft.x - width / 2
             y = screen.height - height - offset - panelSvg.margins.top - 6;
         } else if (plasmoid.location === PlasmaCore.Types.TopEdge) {
-            horizMidPoint = screen.x + (screen.width / 2);
-            var appletBottomLeft = parent.mapToGlobal(0, parent.height);
-            x = (appletBottomLeft.x < horizMidPoint) ? screen.x + offset + 6 : (screen.x + screen.width) - width - offset - 6;
+            if (plasmoid.configuration.menuPosition == 1)
+                x = (appletBottomLeft.x < horizMidPoint) ? screen.x + offset + 6 : (screen.x + screen.width) - width - offset - 6;
+            else
+                x = appletBottomLeft.x - width / 2
             y = parent.height + panelSvg.margins.bottom + offset + 6;
         } else if (plasmoid.location === PlasmaCore.Types.LeftEdge) {
-            vertMidPoint = screen.y + (screen.height / 2);
-            appletTopLeft = parent.mapToGlobal(0, 0);
             x = parent.width + panelSvg.margins.right + offset + 6;
-            y = (appletTopLeft.y < vertMidPoint) ? screen.y + offset + 6 : (screen.y + screen.height) - height - offset - 6;
+            if (plasmoid.configuration.menuPosition == 1)
+                y = (appletTopLeft.y < vertMidPoint) ? screen.y + offset + 6 : (screen.y + screen.height) - height - offset - 6;
+            else
+                y = appletTopLeft.y - height / 2
         } else if (plasmoid.location === PlasmaCore.Types.RightEdge) {
-            vertMidPoint = screen.y + (screen.height / 2);
-            appletTopLeft = parent.mapToGlobal(0, 0);
             x = appletTopLeft.x - panelSvg.margins.left - offset - width - 6;
-            y = (appletTopLeft.y < vertMidPoint) ? screen.y + offset + 6 : (screen.y + screen.height) - height - offset - 6;
+            if (plasmoid.configuration.menuPosition == 1)
+                y = (appletTopLeft.y < vertMidPoint) ? screen.y + offset + 6 : (screen.y + screen.height) - height - offset - 6;
+            else
+                y = appletTopLeft.y - height / 2
         }
 
         return Qt.point(x, y);

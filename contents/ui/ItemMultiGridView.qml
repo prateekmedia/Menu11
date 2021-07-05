@@ -41,6 +41,7 @@ PlasmaExtras.ScrollArea {
     signal keyNavDown()
 
     property bool grabFocus: false
+    property bool showDescriptions: false
     property int iconSize: units.iconSizes.medium
 
     property alias model: repeater.model
@@ -134,7 +135,8 @@ PlasmaExtras.ScrollArea {
                         top: gridViewLabel.bottom
                         topMargin: units.smallSpacing
                     }
-
+                    showDescriptions: itemMultiGrid.showDescriptions
+                    increaseLeftSpacings: true
                     //TODO >
                     dragEnabled: false
                     dropEnabled: false

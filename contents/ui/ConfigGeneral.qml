@@ -51,10 +51,13 @@ Kirigami.FormLayout {
     property alias cfg_showRecentContacts: showRecentContacts.checked
 
     property alias cfg_useExtraRunners: useExtraRunners.checked
-    property alias cfg_centerMenu: centerMenu.checked
+    property alias cfg_menuPosition: menuPosition.currentIndex
+    property alias cfg_favGridModel: favGridModel.currentIndex
+    property alias cfg_recentGridModel: recentGridModel.currentIndex
     property alias cfg_reduceIconSizeFooter: reduceIconSizeFooter.checked
     property alias cfg_gridAllowTwoLines: gridAllowTwoLines.checked
     property alias cfg_defaultAllApps: defaultAllApps.checked
+    property alias cfg_showDescription: showDescription.checked
     
     property alias cfg_downIconsDocuments: downIconsDocuments.checked
     property alias cfg_downIconsDownloads: downIconsDownloads.checked
@@ -169,17 +172,45 @@ Kirigami.FormLayout {
         Kirigami.FormData.isSection: true
     }
 
+    ComboBox {
+        id: menuPosition
 
-    CheckBox {
-        id: centerMenu
+        Kirigami.FormData.label: i18n("Menu Position:")
 
-        Kirigami.FormData.label: i18n("Panel Properties:")
+        model: [i18n("Center"), i18n("On Edge"), i18n("Auto")]
+    }
 
-        text: i18n("Center menu")
+    Item {
+        Kirigami.FormData.isSection: true
+    }
+
+    ComboBox {
+        id: favGridModel
+
+        Kirigami.FormData.label: i18n("Pinned items:")
+
+        model: [i18n("Favourite apps"), i18n("Recent apps"), i18n("Recent Documents")]
+    }
+    
+    Item {
+        Kirigami.FormData.isSection: true
+    }
+
+    ComboBox {
+        id: recentGridModel
+
+        Kirigami.FormData.label: i18n("Recommended items:")
+
+        model: [i18n("Recent Documents"), i18n("Recent apps"), i18n("Favourite apps"), i18n("None")]
+    }
+    
+    Item {
+        Kirigami.FormData.isSection: true
     }
 
     CheckBox {
         id: defaultAllApps
+        Kirigami.FormData.label: i18n("Panel Properties:")
         text: i18n("Show All Apps By Default")
     }
 
@@ -191,6 +222,11 @@ Kirigami.FormLayout {
     CheckBox {
         id: gridAllowTwoLines
         text: i18n("Allow label to have two lines (Pinned)")
+    }
+
+    CheckBox {
+        id: showDescription
+        text: i18n("Show Description for all apps and search items")
     }
 
     Item {

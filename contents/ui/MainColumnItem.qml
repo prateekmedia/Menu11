@@ -63,7 +63,9 @@ Item {
     signal  newTextQuery(string text)
     property real mainColumnHeight: tileSide * 3
     property real favoritesColumnHeight: (units.iconSizes.medium + units.smallSpacing * 2) * 4
-
+    property var pinnedModel: plasmoid.configuration.favGridModel == 0 ? globalFavorites : plasmoid.configuration.favGridModel == 1 ? rootModel.modelForRow(0) : rootModel.modelForRow(1)
+    property var recommendedModel: plasmoid.configuration.recentGridModel == 0 ? rootModel.modelForRow(1) : plasmoid.configuration.recentGridModel == 1 ? rootModel.modelForRow(0) : globalFavorites
+    
     function reset() {
         if (showRecents) resetPinned.start();
         searchField.clear()
@@ -137,8 +139,8 @@ Item {
             if (done) {
                 return;
             }
-            globalFavoritesGrid.model = globalFavorites
-            documentsFavoritesGrid.model = rootModel.modelForRow(1);
+            globalFavoritesGrid.model = pinnedModel
+            documentsFavoritesGrid.model = recommendedModel
             allAppsGrid.model = rootModel.modelForRow(2);
             done = true;
             mainColumn.visible = true
@@ -292,7 +294,7 @@ Item {
             bottom: searching ? parent.bottom : showAllApps ? footer.top : undefined
             bottomMargin: showAllApps ? 5 : 0
         }
-        height: searching || showAllApps ? parent.height : mainColumnHeight
+        height: searching || showAllApps || plasmoid.configuration.recentGridModel == 3 ? parent.height : mainColumnHeight
         property Item visibleGrid: globalFavoritesGrid
         function tryActivate(row, col) {
             if (visibleGrid) {
@@ -302,9 +304,9 @@ Item {
 
         ItemGridView {
             id: globalFavoritesGrid
-            model: globalFavorites
+            model: pinnedModel
             width: parent.width
-            height: tileSide * 3
+            height: plasmoid.configuration.recentGridModel == 3 ? parent.height : tileSide * 3
             cellWidth: tileSide
             cellHeight: tileSide
             square: true
@@ -332,6 +334,7 @@ Item {
             width: parent.width
             model: rootModel.modelForRow(2)
             opacity: showAllApps && !searching ? 1.0 : 0.0
+            showDescriptions: plasmoid.configuration.showDescription
             anchors {
                 leftMargin: units.largeSpacing * 1.6;
             }
@@ -349,6 +352,7 @@ Item {
             enabled: (opacity == 1.0) ? 1 : 0
             width: parent.width
             model: runnerModel
+            showDescriptions: plasmoid.configuration.showDescription
             opacity: searching ? 1.0 : 0.0
             onOpacityChanged: {
                 if (opacity == 1.0) {
@@ -409,6 +413,7 @@ Item {
         anchors.bottom: parent.bottom
         anchors.leftMargin: units.largeSpacing * 3
         anchors.rightMargin: units.largeSpacing
+        visible: plasmoid.configuration.recentGridModel != 3
 
         property int iconSize: 22
 
@@ -471,7 +476,7 @@ Item {
                 left: parent.left
             }
             x: -units.smallSpacing
-            visible: !searching && !showAllApps && !showRecents
+            visible: documentsFavoritesGrid.model.count > 6 && !searching && !showAllApps && !showRecents
         }
 
         ItemGridView {
@@ -492,7 +497,7 @@ Item {
             cellWidth: parent.width * 0.4
             cellHeight: units.iconSizes.medium + units.smallSpacing * 5
             iconSize: units.iconSizes.medium
-            model: rootModel.modelForRow(1);
+            model: recommendedModel
             usesPlasmaTheme: false
 
             onKeyNavUp: {
