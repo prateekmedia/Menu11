@@ -73,6 +73,7 @@ Item {
         documentsFavoritesGrid.tryActivate(0, 0);
         allAppsGrid.tryActivate(0, 0);
         globalFavoritesGrid.tryActivate(0, 0);
+        resetPinned.start();
     }
 
     function reload() {
@@ -115,6 +116,14 @@ Item {
         NumberAnimation { target: documentsFavoritesGrid; property: "height"; from: parent.height; to: favoritesColumnHeight; duration: 500; easing.type: Easing.InOutQuad }
     }
 
+    ParallelAnimation {
+        id: resetPinned
+        running: false
+        NumberAnimation { target: mainColumn; property: "height"; from: 0; to: searching || showAllApps ? parent.height : mainColumnHeight; duration: 0; }
+        NumberAnimation { target: mainColumn; property: "opacity"; from: 0; to: 1; duration: 0; }
+        NumberAnimation { target: documentsFavoritesGrid; property: "height"; from: parent.height; to: favoritesColumnHeight; duration: 0; }
+    }
+    
     TextMetrics {
         id: headingMetrics
         font: dummyHeading.font
