@@ -10,7 +10,8 @@
 #### *Special Thanks to*
 - [adhe](https://www.opencode.net/adhe) for Creating [MenuZ](https://store.kde.org/p/1367167/)
 - [Nayam Amarshe](https://github.com/NayamAmarshe) for improving the design to look more like windows 11 menu, and for guiding me.
-- [John Vincent](https://github.com/TenSeventy7) for improving grid view of recommended section.  
+- [John Vincent](https://github.com/TenSeventy7) for improving grid view of recommended section.
+- [Lupert Everett](https://github.com/LupertEverett) for improving footer section and add ability to add/remove icons in footer.  
 <a href="https://github.com/prateekmedia/Menu11/graphs/contributors"><img alt="Know More" src="https://shields.io/badge/-Know More-blue"/></a>
 
 <h2 align="center">Installing Manually</h2>

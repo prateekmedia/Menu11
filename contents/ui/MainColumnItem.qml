@@ -25,7 +25,6 @@ import org.kde.kquickcontrolsaddons 2.0 as KQuickAddons
 import QtQuick 2.12
 import QtQuick.Layouts 1.12
 import QtGraphicalEffects 1.0
-//import org.kde.plasma.core 2.1 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.components 2.0 as PlasmaComponents2
 
@@ -215,7 +214,7 @@ Item {
 
     PlasmaExtras.Heading {
         id: mainLabelGrid
-        anchors.top: parent.top//headRect.bottom
+        anchors.top: parent.top
         anchors.leftMargin: units.largeSpacing * 3
         anchors.left: parent.left
         x: units.smallSpacing
