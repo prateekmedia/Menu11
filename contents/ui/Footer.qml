@@ -38,6 +38,9 @@ PlasmaExtras.PlasmoidHeading {
     property Item configureButton: configureButton
     property Item avatar: avatarButton
     property int iconSize: units.iconSizes.smallMedium
+    property var footerNames: ["Documents", "Pictures", "Music", "Download", "Videos", "File Manager", "System settings", "Lock screen", "Leave..."]
+    property var footerIcons: ["folder-documents-symbolic", "folder-pictures-symbolic", "folder-music-symbolic", "folder-download-symbolic", "folder-videos-symbolic", "folder-symbolic", "configure", "system-lock-screen", "system-shutdown"]
+
     background: Rectangle {
         color: Qt.darker(theme.backgroundColor)
         opacity: .115
@@ -122,7 +125,7 @@ PlasmaExtras.PlasmoidHeading {
                     margins: PlasmaCore.Units.smallSpacing
                 }
 
-                layer.enabled:true
+                layer.enabled: true
                 layer.effect: OpacityMask {
                     maskSource: Rectangle {
                         width: iconUser.width
@@ -157,7 +160,7 @@ PlasmaExtras.PlasmoidHeading {
             PlasmaExtras.Heading {
                 id: nameLabel
                 anchors.fill: parent
-                
+
                 level: 4
                 // font.weight: Font.Bold
                 Text {
@@ -180,355 +183,56 @@ PlasmaExtras.PlasmoidHeading {
         // looks visually balanced that way
         spacing: Math.round(PlasmaCore.Units.smallSpacing * 2.5)
 
-        // Documents Button
-        PlasmaComponents.TabButton {
-            id: documentsButton
-            visible: plasmoid.configuration.downIconsDocuments
-            // flat: true
-            NumberAnimation {
-                id: animateDocumentsOpacity
-                target: documentsButton
-                properties: "opacity"
-                from: 1
-                to: 0.5
-                duration: PlasmaCore.Units.longDuration
-                easing.type: Easing.InOutQuad
-            }
-            NumberAnimation {
-                id: animateDocumentsOpacityReverse
-                target: documentsButton
-                properties: "opacity"
-                from: 0.5
-                to: 1
-                duration: PlasmaCore.Units.longDuration
-                easing.type: Easing.InOutQuad
-            }
 
-            icon {
-                name: "folder-documents-symbolic"
-                width: iconSize * (plasmoid.configuration.reduceIconSizeFooter ? 0.96 : 1)
-            }
-            onHoveredChanged: hovered ? animateDocumentsOpacity.start() : animateDocumentsOpacityReverse.start();
-            PlasmaComponents.ToolTip {
-                text: i18nc("@action", "Documents")
-            }
-            MouseArea {
-                onClicked: executable.exec("xdg-open $(xdg-user-dir DOCUMENTS)")
-                anchors.fill: parent
-                hoverEnabled: true
-                cursorShape: containsMouse ? Qt.PointingHandCursor : Qt.ArrowCursor
-            }
-        }
+        Repeater {
+            model: 9
+            PlasmaComponents.TabButton {
+                id: newTabButton
+                visible: [
+                    plasmoid.configuration.downIconsDocuments,
+                    plasmoid.configuration.downIconsPictures,
+                    plasmoid.configuration.downIconsMusic,
+                    plasmoid.configuration.downIconsDownloads,
+                    plasmoid.configuration.downIconsVideos,
+                    plasmoid.configuration.downIconsFileManager,
+                    plasmoid.configuration.downIconsSystemSettings,
+                    plasmoid.configuration.downIconsLock,
+                    plasmoid.configuration.downIconsPowerOptions
+                ][index]
+                // flat: true
+                NumberAnimation {
+                    id: animateOpacity
+                    target: newTabButton
+                    properties: "opacity"
+                    from: 1
+                    to: 0.5
+                    duration: PlasmaCore.Units.longDuration
+                    easing.type: Easing.InOutQuad
+                }
+                NumberAnimation {
+                    id: animateOpacityReverse
+                    target: newTabButton
+                    properties: "opacity"
+                    from: 0.5
+                    to: 1
+                    duration: PlasmaCore.Units.longDuration
+                    easing.type: Easing.InOutQuad
+                }
 
-        // Pictures Button
-        PlasmaComponents.TabButton {
-            id: picturesButton
-            visible: plasmoid.configuration.downIconsPictures
-            // flat: true
-            NumberAnimation {
-                id: animatePicturesOpacity
-                target: picturesButton
-                properties: "opacity"
-                from: 1
-                to: 0.5
-                duration: PlasmaCore.Units.longDuration
-                easing.type: Easing.InOutQuad
-            }
-            NumberAnimation {
-                id: animatePicturesOpacityReverse
-                target: picturesButton
-                properties: "opacity"
-                from: 0.5
-                to: 1
-                duration: PlasmaCore.Units.longDuration
-                easing.type: Easing.InOutQuad
-            }
-            icon {
-                name: "folder-pictures-symbolic"
-                width: iconSize * (plasmoid.configuration.reduceIconSizeFooter ? 0.96 : 1)
-            }
-            onHoveredChanged: hovered ? animatePicturesOpacity.start() : animatePicturesOpacityReverse.start();
-            PlasmaComponents.ToolTip {
-                text: i18nc("@action", "Pictures")
-            }
-            MouseArea {
-                onClicked: executable.exec("xdg-open $(xdg-user-dir PICTURES)")
-                anchors.fill: parent
-                hoverEnabled: true
-                cursorShape: containsMouse ? Qt.PointingHandCursor : Qt.ArrowCursor
-            }
-        }
-
-        // Downloads Button
-        PlasmaComponents.TabButton {
-            id: musicButton
-            visible: plasmoid.configuration.downIconsMusic
-            // flat: true
-            NumberAnimation {
-                id: animateMusicOpacity
-                target: musicButton
-                properties: "opacity"
-                from: 1
-                to: 0.5
-                duration: PlasmaCore.Units.longDuration
-                easing.type: Easing.InOutQuad
-            }
-            NumberAnimation {
-                id: animateMusicOpacityReverse
-                target: musicButton
-                properties: "opacity"
-                from: 0.5
-                to: 1
-                duration: PlasmaCore.Units.longDuration
-                easing.type: Easing.InOutQuad
-            }
-            icon {
-                name: "folder-music-symbolic"
-                width: iconSize * (plasmoid.configuration.reduceIconSizeFooter ? 0.96 : 1)
-            }
-            onHoveredChanged: hovered ? animateMusicOpacity.start() : animateMusicOpacityReverse.start();
-            PlasmaComponents.ToolTip {
-                text: i18nc("@action", "Music")
-            }
-            MouseArea {
-                onClicked: executable.exec("xdg-open $(xdg-user-dir MUSIC)")
-                anchors.fill: parent
-                hoverEnabled: true
-                cursorShape: containsMouse ? Qt.PointingHandCursor : Qt.ArrowCursor
-            }
-        }
-
-        // Downloads Button
-        PlasmaComponents.TabButton {
-            id: downloadsButton
-            visible: plasmoid.configuration.downIconsDownloads
-            // flat: true
-            NumberAnimation {
-                id: animateDownloadsOpacity
-                target: downloadsButton
-                properties: "opacity"
-                from: 1
-                to: 0.5
-                duration: PlasmaCore.Units.longDuration
-                easing.type: Easing.InOutQuad
-            }
-            NumberAnimation {
-                id: animateDownloadsOpacityReverse
-                target: downloadsButton
-                properties: "opacity"
-                from: 0.5
-                to: 1
-                duration: PlasmaCore.Units.longDuration
-                easing.type: Easing.InOutQuad
-            }
-            icon {
-                name: "folder-download-symbolic"
-                width: iconSize * (plasmoid.configuration.reduceIconSizeFooter ? 0.96 : 1)
-            }
-            onHoveredChanged: hovered ? animateDownloadsOpacity.start() : animateDownloadsOpacityReverse.start();
-            PlasmaComponents.ToolTip {
-                text: i18nc("@action", "Downloads")
-            }
-            MouseArea {
-                onClicked: executable.exec("xdg-open $(xdg-user-dir DOWNLOAD)")
-                anchors.fill: parent
-                hoverEnabled: true
-                cursorShape: containsMouse ? Qt.PointingHandCursor : Qt.ArrowCursor
-            }
-        }
-
-        // Videos Button
-        PlasmaComponents.TabButton {
-            id: videosButton
-            visible: plasmoid.configuration.downIconsVideos
-            // flat: true
-            NumberAnimation {
-                id: animateVideosOpacity
-                target: videosButton
-                properties: "opacity"
-                from: 1
-                to: 0.5
-                duration: PlasmaCore.Units.longDuration
-                easing.type: Easing.InOutQuad
-            }
-            NumberAnimation {
-                id: animateVideosOpacityReverse
-                target: videosButton
-                properties: "opacity"
-                from: 0.5
-                to: 1
-                duration: PlasmaCore.Units.longDuration
-                easing.type: Easing.InOutQuad
-            }
-            icon {
-                name: "folder-videos-symbolic"
-                width: iconSize * (plasmoid.configuration.reduceIconSizeFooter ? 0.96 : 1)
-            }
-            onHoveredChanged: hovered ? animateVideosOpacity.start() : animateVideosOpacityReverse.start();
-            PlasmaComponents.ToolTip {
-                text: i18nc("@action", "Videos")
-            }
-            MouseArea {
-                onClicked: executable.exec("xdg-open $(xdg-user-dir VIDEOS)")
-                anchors.fill: parent
-                hoverEnabled: true
-                cursorShape: containsMouse ? Qt.PointingHandCursor : Qt.ArrowCursor
-            }
-        }
-
-        // File Manager Button
-        PlasmaComponents.TabButton {
-            id: fileManagerButton
-            visible: plasmoid.configuration.downIconsFileManager
-            // flat: true
-            NumberAnimation {
-                id: animateFileManagerOpacity
-                target: fileManagerButton
-                properties: "opacity"
-                from: 1
-                to: 0.5
-                duration: PlasmaCore.Units.longDuration
-                easing.type: Easing.InOutQuad
-            }
-            NumberAnimation {
-                id: animateFileManagerOpacityReverse
-                target: fileManagerButton
-                properties: "opacity"
-                from: 0.5
-                to: 1
-                duration: PlasmaCore.Units.longDuration
-                easing.type: Easing.InOutQuad
-            }
-            icon {
-                name: "folder-symbolic"
-                width: iconSize * (plasmoid.configuration.reduceIconSizeFooter ? 0.96 : 1)
-            }
-            onHoveredChanged: hovered ? animateFileManagerOpacity.start() : animateFileManagerOpacityReverse.start();
-            PlasmaComponents.ToolTip {
-                text: i18nc("@action", "File Manager")
-            }
-            MouseArea {
-                onClicked: executable.exec("xdg-open $(xdg-user-dir)")
-                anchors.fill: parent
-                hoverEnabled: true
-                cursorShape: containsMouse ? Qt.PointingHandCursor : Qt.ArrowCursor
-            }
-        }
-
-        // System Settings Button
-        PlasmaComponents.TabButton {
-            id: settingsButton
-            visible: plasmoid.configuration.downIconsSystemSettings
-            // flat: true
-            NumberAnimation {
-                id: animateSettingsOpacity
-                target: settingsButton
-                properties: "opacity"
-                from: 1
-                to: 0.5
-                duration: PlasmaCore.Units.longDuration
-                easing.type: Easing.InOutQuad
-            }
-            NumberAnimation {
-                id: animateSettingsOpacityReverse
-                target: settingsButton
-                properties: "opacity"
-                from: 0.5
-                to: 1
-                duration: PlasmaCore.Units.longDuration
-                easing.type: Easing.InOutQuad
-            }
-            icon {
-                name: "configure"
-                width: iconSize
-            }
-            onHoveredChanged: hovered ? animateSettingsOpacity.start() : animateSettingsOpacityReverse.start();
-            PlasmaComponents.ToolTip {
-                text: i18nc("@action", "System settings")
-            }
-            MouseArea {
-                onClicked: logic.openUrl("file:///usr/share/applications/systemsettings.desktop")
-                anchors.fill: parent
-                hoverEnabled: true
-                cursorShape: containsMouse ? Qt.PointingHandCursor : Qt.ArrowCursor
-            }
-        }
-
-        // Lock Button
-        PlasmaComponents.TabButton {
-            id: lockScreenButton
-            visible: plasmoid.configuration.downIconsLock
-            // flat: true 
-            NumberAnimation {
-                id: animateLockOpacity
-                target: lockScreenButton
-                properties: "opacity"
-                from: 1
-                to: 0.5
-                duration: PlasmaCore.Units.longDuration
-                easing.type: Easing.InOutQuad
-            }
-            NumberAnimation {
-                id: animateLockOpacityReverse
-                target: lockScreenButton
-                properties: "opacity"
-                from: 0.5
-                to: 1
-                duration: PlasmaCore.Units.longDuration
-                easing.type: Easing.InOutQuad
-            }
-            icon {
-                name: "system-lock-screen"
-                width: iconSize
-            }
-            onHoveredChanged: hovered ? animateLockOpacity.start() : animateLockOpacityReverse.start();
-            enabled: pmEngine.data["Sleep States"]["LockScreen"]
-            PlasmaComponents.ToolTip {
-                text: i18nc("@action", "Lock screen")
-            }
-            MouseArea {
-                onClicked: pmEngine.performOperation("lockScreen")
-                anchors.fill: parent
-                hoverEnabled: true
-                cursorShape: containsMouse ? Qt.PointingHandCursor : Qt.ArrowCursor
-            }
-        }
-
-        // Power Off Button
-        PlasmaComponents.TabButton {
-            id: leaveButton
-            visible: plasmoid.configuration.downIconsPowerOptions
-            NumberAnimation {
-                id: animateOpacity
-                target: leaveButton
-                properties: "opacity"
-                from: 1
-                to: 0.5
-                duration: PlasmaCore.Units.longDuration
-                easing.type: Easing.InOutQuad
-            }
-            NumberAnimation {
-                id: animateOpacityReverse
-                target: leaveButton
-                properties: "opacity"
-                from: 0.5
-                to: 1
-                duration: PlasmaCore.Units.longDuration
-                easing.type: Easing.InOutQuad
-            }
-            onHoveredChanged: hovered ? animateOpacity.start() : animateOpacityReverse.start();
-            icon {
-                name: "system-shutdown"
-                width: iconSize
-            }
-            PlasmaComponents.ToolTip {
-                text: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Leave...")
-            }
-            MouseArea {
-                hoverEnabled: true
-                anchors.fill: parent
-                onClicked: pmEngine.performOperation("requestShutDown")
-                cursorShape: containsMouse ? Qt.PointingHandCursor : Qt.ArrowCursor
+                icon {
+                    name: footerIcons[index]
+                    width: iconSize * (plasmoid.configuration.reduceIconSizeFooter ? 0.96 : 1)
+                }
+                onHoveredChanged: hovered ? animateOpacity.start() : animateOpacityReverse.start();
+                PlasmaComponents.ToolTip {
+                    text: i18nc("@action", footerNames[index])
+                }
+                MouseArea {
+                    onClicked: index < 6 ? executable.exec("xdg-open $(xdg-user-dir" + (index < 5 ? (" " + footerNames[index].toUpperCase()) : "") + ")") : index == 6 ? logic.openUrl("file:///usr/share/applications/systemsettings.desktop") : pmEngine.performOperation(index == 8 ? "requestShutDown" : "lockScreen")
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: containsMouse ? Qt.PointingHandCursor : Qt.ArrowCursor
+                }
             }
         }
     }
