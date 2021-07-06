@@ -23,18 +23,13 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kquickcontrolsaddons 2.0 as KQuickAddons
 
 import QtQuick 2.12
-import QtQuick.Layouts 1.12
-import QtGraphicalEffects 1.0
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.components 2.0 as PlasmaComponents2
 
-import org.kde.kirigami 2.13 as Kirigami
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.kwindowsystem 1.0
-import org.kde.plasma.private.shell 2.0
 import org.kde.plasma.private.kicker 0.1 as Kicker
 import org.kde.kcoreaddons 1.0 as KCoreAddons
-import org.kde.kquickcontrolsaddons 2.0 as KQuickAddons
 
 import "../code/tools.js" as Tools
 
@@ -65,7 +60,8 @@ Item {
     property real favoritesColumnHeight: (units.iconSizes.medium + units.smallSpacing * 2) * 4
     property var pinnedModel: plasmoid.configuration.favGridModel == 0 ? globalFavorites : plasmoid.configuration.favGridModel == 1 ? rootModel.modelForRow(0) : rootModel.modelForRow(1)
     property var recommendedModel: plasmoid.configuration.recentGridModel == 0 ? rootModel.modelForRow(1) : plasmoid.configuration.recentGridModel == 1 ? rootModel.modelForRow(0) : globalFavorites
-    
+    property var allAppsModel: rootModel.modelForRow(2)
+
     function reset() {
         if (showRecents) resetPinned.start();
         searchField.clear()
@@ -141,7 +137,7 @@ Item {
             }
             globalFavoritesGrid.model = pinnedModel
             documentsFavoritesGrid.model = recommendedModel
-            allAppsGrid.model = rootModel.modelForRow(2);
+            allAppsGrid.model = allAppsModel
             done = true;
             mainColumn.visible = true
             recentItem.visible = true
@@ -333,7 +329,7 @@ Item {
             enabled: (opacity == 1.0) ? 1 : 0
             height: parent.height
             width: parent.width
-            model: rootModel.modelForRow(2)
+            model: allAppsModel
             opacity: showAllApps && !searching ? 1.0 : 0.0
             showDescriptions: plasmoid.configuration.showDescription
             anchors {

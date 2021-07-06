@@ -146,7 +146,13 @@ PlasmaCore.Dialog {
         }
     }
 
+    function refreshModel() {
+        mainColumnItem.reload()
+        console.log("refresh model - menu 11")
+    }
+
     Component.onCompleted: {
+        rootModel.refreshed.connect(refreshModel)
         kicker.reset.connect(reset);
         reset();
     }

@@ -20,15 +20,12 @@
  */
 
 import QtQuick 2.12
+import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.12
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.kcoreaddons 1.0 as KCoreAddons
-// While using Kirigami in applets is normally a no, we
-// use Avatar, which doesn't need to read the colour scheme
-// at all to function, so there won't be any oddities with colours.
-import org.kde.kirigami 2.13 as Kirigami
 import org.kde.kquickcontrolsaddons 2.0 as KQuickAddons
 import org.kde.plasma.private.quicklaunch 1.0
 
@@ -110,24 +107,30 @@ PlasmaExtras.PlasmoidHeading {
             Accessible.name: nameLabel.text
             Accessible.description: i18n("Go to user settings")
 
-            Kirigami.Avatar {
-                source: kuser.faceIconUrl
-                name: nameLabel.text
+            Image {
+                id: iconUser
+                source: kuser.faceIconUrl.toString() || "user-identity"
+                cache: false
+                visible: source !== ""
+                height: units.gridUnit * 3
+                width: height
+                sourceSize.width: width
+                sourceSize.height: height
+                fillMode: Image.PreserveAspectFit
                 anchors {
                     fill: parent
                     margins: PlasmaCore.Units.smallSpacing
                 }
-                // NOTE: for some reason Avatar eats touch events even though it shouldn't
-                // Ideally we'd be using Avatar but it doesn't have proper key nav yet
-                // see https://invent.kde.org/frameworks/kirigami/-/merge_requests/218
-                actions.main: Kirigami.Action {
-                    text: avatarButton.Accessible.description
-                    onTriggered: avatarButton.clicked()
+
+                layer.enabled:true
+                layer.effect: OpacityMask {
+                    maskSource: Rectangle {
+                        width: iconUser.width
+                        height: iconUser.height
+                        radius: height / 2
+                        visible: false
+                    }
                 }
-                // no keyboard nav
-                activeFocusOnTab: false
-                // ignore accessibility (done by the button)
-                Accessible.ignored: true
             }
 
             onClicked: {
