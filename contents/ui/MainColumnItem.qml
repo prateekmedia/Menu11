@@ -62,6 +62,12 @@ Item {
     property var recommendedModel: plasmoid.configuration.recentGridModel == 0 ? rootModel.modelForRow(1) : plasmoid.configuration.recentGridModel == 1 ? rootModel.modelForRow(0) : globalFavorites
     property var allAppsModel: rootModel.modelForRow(2)
 
+    function updateModels() {
+        pinnedModel = plasmoid.configuration.favGridModel == 0 ? globalFavorites : plasmoid.configuration.favGridModel == 1 ? rootModel.modelForRow(0) : rootModel.modelForRow(1)
+        recommendedModel = plasmoid.configuration.recentGridModel == 0 ? rootModel.modelForRow(1) : plasmoid.configuration.recentGridModel == 1 ? rootModel.modelForRow(0) : globalFavorites
+        allAppsModel = rootModel.modelForRow(2)
+    }
+
     function reset() {
         if (showRecents) resetPinned.start();
         searchField.clear()
@@ -76,9 +82,9 @@ Item {
     function reload() {
         mainColumn.visible = false
         recentItem.visible = false
-        globalFavoritesGrid.model = null
-        documentsFavoritesGrid.model = null
-        allAppsGrid.model = null
+        pinnedModel = null
+        recommendedModel = null
+        allAppsModel = null
         preloadAllAppsTime.done = false
         preloadAllAppsTime.defer()
     }
@@ -135,9 +141,7 @@ Item {
             if (done) {
                 return;
             }
-            globalFavoritesGrid.model = plasmoid.configuration.favGridModel == 0 ? globalFavorites : plasmoid.configuration.favGridModel == 1 ? rootModel.modelForRow(0) : rootModel.modelForRow(1)
-            documentsFavoritesGrid.model = plasmoid.configuration.recentGridModel == 0 ? rootModel.modelForRow(1) : plasmoid.configuration.recentGridModel == 1 ? rootModel.modelForRow(0) : globalFavorites
-            allAppsGrid.model = rootModel.modelForRow(2)
+            item.updateModels()
             done = true;
             mainColumn.visible = true
             recentItem.visible = true
