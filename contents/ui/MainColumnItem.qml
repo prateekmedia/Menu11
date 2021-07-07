@@ -135,12 +135,18 @@ Item {
             if (done) {
                 return;
             }
-            globalFavoritesGrid.model = pinnedModel
-            documentsFavoritesGrid.model = recommendedModel
-            allAppsGrid.model = allAppsModel
-            done = true;
-            mainColumn.visible = true
-            recentItem.visible = true
+            for (var i = 0; i < rootModel.count; ++i) {
+                var model = rootModel.modelForRow(i);
+                if (model.description === "KICKER_ALL_MODEL") {
+                globalFavoritesGrid.model = pinnedModel
+                documentsFavoritesGrid.model = recommendedModel
+                allAppsGrid.model = model
+                done = true;
+                mainColumn.visible = true
+                recentItem.visible = true
+                    break;
+                }
+            }
         }
 
         function defer() {
