@@ -354,6 +354,7 @@ Item {
             width: parent.width
             model: runnerModel
             showDescriptions: plasmoid.configuration.showDescription
+            grabFocus: true
             opacity: searching ? 1.0 : 0.0
             onOpacityChanged: {
                 if (opacity == 1.0) {
@@ -363,11 +364,7 @@ Item {
         }
 
         Keys.onPressed: {
-
-            if (event.key == Qt.Key_Tab) {
-                event.accepted = true;
-                documentsFavoritesGrid.tryActivate(0, 0)
-            } else if (event.key == Qt.Key_Backspace) {
+            if (event.key == Qt.Key_Backspace) {
                 event.accepted = true;
                 if (searching)
                     searchField.backspace();

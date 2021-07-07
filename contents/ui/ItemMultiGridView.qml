@@ -42,13 +42,10 @@ PlasmaExtras.ScrollArea {
 
     property bool grabFocus: false
     property bool showDescriptions: false
-    property bool square: false
     property int iconSize: units.iconSizes.medium
 
     property alias model: repeater.model
     property alias count: repeater.count
-    property int cellWidth: parent.width
-    property int cellHeight: iconSize + (2 * highlightItemSvg.margins.top)
 
     //clip: true
     verticalScrollBarPolicy: Qt.ScrollBarAsNeeded
@@ -112,7 +109,7 @@ PlasmaExtras.ScrollArea {
                 PlasmaExtras.Heading {
                     id: gridViewLabel
                     anchors.top: parent.top
-                    anchors.topMargin: 10
+                    //anchors.topMargin: 8
                     x: units.smallSpacing
                     width: parent.width - x
                     height: dummyHeading.height
@@ -138,19 +135,18 @@ PlasmaExtras.ScrollArea {
                         top: gridViewLabel.bottom
                         topMargin: units.smallSpacing
                     }
-                    square: itemMultiGrid.square
-                    showDescriptions: itemMultiGrid.showDescriptions
-                    increaseLeftSpacings: true
+
                     //TODO >
                     dragEnabled: false
                     dropEnabled: false
+                    showDescriptions: itemMultiGrid.showDescriptions
                     // <
 
                     width: parent.width
                     height: Math.ceil(count * cellHeight)
-                    cellWidth: itemMultiGrid.cellWidth
-                    cellHeight: itemMultiGrid.cellHeight
-                    iconSize: itemMultiGrid.iconSize
+                    cellWidth: parent.width
+                    cellHeight: root.iconSize + (2 * highlightItemSvg.margins.top)//<>cellSize
+                    iconSize: root.iconSize
                     model: repeater.model.modelForRow(index)
 
                     onFocusChanged: {
