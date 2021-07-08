@@ -122,10 +122,10 @@ PlasmaCore.Dialog {
 
 
     FocusScope {
-        Layout.minimumWidth: mainColumnItem.width  //+ tilesColumnItem.width
-        Layout.maximumWidth: mainColumnItem.width //+ tilesColumnItem.width
-        Layout.minimumHeight: mainColumnItem.tileSide * 6 + 85 + (plasmoid.configuration.alwaysShowSearchBar ? 15 : 0)
-        Layout.maximumHeight: mainColumnItem.tileSide * 6 + 85
+        Layout.minimumWidth: mainColumnItem.width
+        Layout.minimumHeight: mainColumnItem.tileSide * (3 + plasmoid.configuration.numberRows) + 85 + (plasmoid.configuration.alwaysShowSearchBar ? 15 : 0)
+        Layout.maximumWidth: Layout.minimumWidth
+        Layout.maximumHeight: Layout.minimumHeight
 
         focus: true
 

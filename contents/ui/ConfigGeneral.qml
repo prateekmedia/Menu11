@@ -46,15 +46,19 @@ Kirigami.FormLayout {
     property alias cfg_showRecentDocs: showRecentDocs.checked
     property alias cfg_showRecentContacts: showRecentContacts.checked
 
-    property alias cfg_useExtraRunners: useExtraRunners.checked
     property alias cfg_menuPosition: menuPosition.currentIndex
     property alias cfg_favGridModel: favGridModel.currentIndex
     property alias cfg_recentGridModel: recentGridModel.currentIndex
+
+    property alias cfg_useExtraRunners: useExtraRunners.checked
     property alias cfg_reduceIconSizeFooter: reduceIconSizeFooter.checked
     property alias cfg_gridAllowTwoLines: gridAllowTwoLines.checked
     property alias cfg_defaultAllApps: defaultAllApps.checked
     property alias cfg_showDescription: showDescription.checked
     property alias cfg_alwaysShowSearchBar: alwaysShowSearchBar.checked
+
+    property alias cfg_numberColumns: numberColumns.value
+    property alias cfg_numberRows: numberRows.value
     
     property alias cfg_downIconsDocuments: downIconsDocuments.checked
     property alias cfg_downIconsDownloads: downIconsDownloads.checked
@@ -205,6 +209,28 @@ Kirigami.FormLayout {
         Kirigami.FormData.isSection: true
     }
 
+    SpinBox{
+        id: numberColumns
+
+        Kirigami.FormData.label: i18n("Number of columns in grid:")
+
+        from: 4
+        to: 10
+    }
+
+    SpinBox{
+        id: numberRows
+
+        Kirigami.FormData.label: i18n("Number of rows in grid:")
+
+        from: 1
+        to: 10
+    }
+    
+    Item {
+        Kirigami.FormData.isSection: true
+    }
+
     CheckBox {
         id: defaultAllApps
         Kirigami.FormData.label: i18n("Panel Properties:")
@@ -294,6 +320,7 @@ Kirigami.FormLayout {
     }
 
     Item {
+        visible: false
         Kirigami.FormData.isSection: true
     }
 

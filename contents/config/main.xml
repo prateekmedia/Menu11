@@ -78,6 +78,12 @@
       <label>The model for favorite grid / pinned apps grid: 0 = Favourite apps, 1 = Recent apps, 2 = Recent Documents</label>
       <default>0</default>
     </entry>
+    <entry name="numberColumns" type="Int">
+      <default>6</default>
+    </entry>
+    <entry name="numberRows" type="Int">
+      <default>3</default>
+    </entry>
     <entry name="recentGridModel" type="Int">
       <label>The model for recent item grid / recommended grid: 0 = Recent Documents, 1 = Recent apps, 2 = Favourite apps, 3 = None</label>
       <default>0</default>

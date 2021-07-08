@@ -36,7 +36,7 @@ import "../code/tools.js" as Tools
 Item {
     id: item
 
-    width: tileSide * 6 + 16 * units.smallSpacing
+    width: tileSide * plasmoid.configuration.numberColumns + 16 * units.smallSpacing
     height: root.height
     y: units.largeSpacing * 2
     property int iconSize: units.iconSizes.large
@@ -56,7 +56,7 @@ Item {
         }
     }
     signal  newTextQuery(string text)
-    property real mainColumnHeight: tileSide * 3
+    property real mainColumnHeight: tileSide * plasmoid.configuration.numberRows
     property real favoritesColumnHeight: (units.iconSizes.medium + units.smallSpacing * 2) * 4
     property var pinnedModel: plasmoid.configuration.favGridModel == 0 ? globalFavorites : plasmoid.configuration.favGridModel == 1 ? rootModel.modelForRow(0) : rootModel.modelForRow(1)
     property var recommendedModel: plasmoid.configuration.recentGridModel == 0 ? rootModel.modelForRow(1) : plasmoid.configuration.recentGridModel == 1 ? rootModel.modelForRow(0) : globalFavorites
@@ -308,7 +308,7 @@ Item {
             id: globalFavoritesGrid
             model: pinnedModel
             width: parent.width
-            height: plasmoid.configuration.recentGridModel == 3 ? parent.height : tileSide * 3
+            height: plasmoid.configuration.recentGridModel == 3 ? parent.height : mainColumnHeight
             cellWidth: tileSide
             cellHeight: tileSide
             square: true
