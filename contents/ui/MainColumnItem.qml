@@ -58,14 +58,14 @@ Item {
     signal  newTextQuery(string text)
     property real mainColumnHeight: tileSide * plasmoid.configuration.numberRows
     property real favoritesColumnHeight: (units.iconSizes.medium + units.smallSpacing * 2) * 4
-    property var pinnedModel: plasmoid.configuration.favGridModel == 0 ? globalFavorites : plasmoid.configuration.favGridModel == 1 ? rootModel.modelForRow(0) : rootModel.modelForRow(1)
-    property var recommendedModel: plasmoid.configuration.recentGridModel == 0 ? rootModel.modelForRow(1) : plasmoid.configuration.recentGridModel == 1 ? rootModel.modelForRow(0) : globalFavorites
-    property var allAppsModel: rootModel.modelForRow(2)
+    property var pinnedModel: [globalFavorites, rootModel.modelForRow(0), rootModel.modelForRow(1)]
+    property var recommendedModel: [rootModel.modelForRow(1), rootModel.modelForRow(0), globalFavorites, globalFavorites]
+    property var allAppsModel: [rootModel.modelForRow(2)]
 
     function updateModels() {
-        pinnedModel = plasmoid.configuration.favGridModel == 0 ? globalFavorites : plasmoid.configuration.favGridModel == 1 ? rootModel.modelForRow(0) : rootModel.modelForRow(1)
-        recommendedModel = plasmoid.configuration.recentGridModel == 0 ? rootModel.modelForRow(1) : plasmoid.configuration.recentGridModel == 1 ? rootModel.modelForRow(0) : globalFavorites
-        allAppsModel = rootModel.modelForRow(2)
+        item.pinnedModel = [globalFavorites, rootModel.modelForRow(0), rootModel.modelForRow(1)]
+        item.recommendedModel = [rootModel.modelForRow(1), rootModel.modelForRow(0), globalFavorites, globalFavorites]
+        item.allAppsModel = [rootModel.modelForRow(2)]
     }
 
     function reset() {
@@ -246,7 +246,7 @@ Item {
                     else
                         restorePinned.start();
                 }
-                mainColumn.visibleGrid.tryActivate(0,0)
+                mainColumn.visibleGrid.tryActivate(0, 0)
             }
         }
         text: i18n(showAllApps || showRecents ? "Back" : "All apps")
@@ -306,7 +306,7 @@ Item {
 
         ItemGridView {
             id: globalFavoritesGrid
-            model: pinnedModel
+            model: pinnedModel[plasmoid.configuration.favGridModel]
             width: parent.width
             height: plasmoid.configuration.recentGridModel == 3 ? parent.height : mainColumnHeight
             cellWidth: tileSide
@@ -335,7 +335,7 @@ Item {
             height: parent.height
             width: parent.width
             grabFocus: true
-            model: allAppsModel
+            model: allAppsModel[0]
             opacity: showAllApps && !searching ? 1.0 : 0.0
             showDescriptions: plasmoid.configuration.showDescription
             anchors {
@@ -497,7 +497,7 @@ Item {
             cellWidth: parent.width * 0.4
             cellHeight: units.iconSizes.medium + units.smallSpacing * 5
             iconSize: units.iconSizes.medium
-            model: recommendedModel
+            model: recommendedModel[plasmoid.configuration.recentGridModel]
             usesPlasmaTheme: false
 
             onKeyNavUp: {
