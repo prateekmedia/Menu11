@@ -246,6 +246,7 @@ Item {
                     else
                         restorePinned.start();
                 }
+                mainColumn.visibleGrid.tryActivate(0,0)
             }
         }
         text: i18n(showAllApps || showRecents ? "Back" : "All apps")
@@ -333,6 +334,7 @@ Item {
             enabled: (opacity == 1.0) ? 1 : 0
             height: parent.height
             width: parent.width
+            grabFocus: true
             model: allAppsModel
             opacity: showAllApps && !searching ? 1.0 : 0.0
             showDescriptions: plasmoid.configuration.showDescription
