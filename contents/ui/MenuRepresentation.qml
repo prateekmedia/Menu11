@@ -124,7 +124,7 @@ PlasmaCore.Dialog {
 
     FocusScope {
         Layout.minimumWidth: mainColumnItem.width
-        Layout.minimumHeight: cellSize * (5.1 + plasmoid.configuration.numberRows) + (plasmoid.configuration.alwaysShowSearchBar ? 15 : 0)
+        Layout.minimumHeight: cellSize * (5.1 + plasmoid.configuration.numberRows + (plasmoid.configuration.alwaysShowSearchBar ? 0.6 : 0))
         Layout.maximumWidth: Layout.minimumWidth
         Layout.maximumHeight: Layout.minimumHeight
 
