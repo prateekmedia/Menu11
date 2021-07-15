@@ -28,8 +28,8 @@ Item {
     id: item
 
     width:  GridView.view.cellWidth
-    height: width
-    property int iconSize: units.iconSizes.large * 0.95
+    height: GridView.view.cellHeight
+    property int iconSize: units.iconSizes.large * (plasmoid.configuration.reducePinnedSize ? 0.95 : 1)
 
     property bool showLabel: true
 

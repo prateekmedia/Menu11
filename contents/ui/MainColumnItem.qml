@@ -36,7 +36,7 @@ import "../code/tools.js" as Tools
 Item {
     id: item
 
-    width: tileSide * plasmoid.configuration.numberColumns + 16 * units.smallSpacing
+    width: cellSize * (plasmoid.configuration.numberColumns +1.3)
     height: root.height
     y: units.largeSpacing * 2
     property int iconSize: units.iconSizes.large
@@ -47,7 +47,7 @@ Item {
     property bool searching: (searchField.text != "")
     property bool showAllApps: plasmoid.configuration.defaultAllApps
     property bool showRecents: false
-    property int tileSide: 64 + 30
+    property int tileSide: cellSize * 1.08
     onSearchingChanged: {
         if (!searching) {
             reset();
@@ -57,7 +57,7 @@ Item {
     }
     signal  newTextQuery(string text)
     property real mainColumnHeight: tileSide * plasmoid.configuration.numberRows
-    property real favoritesColumnHeight: (units.iconSizes.medium + units.smallSpacing * 2) * 4
+    property real favoritesColumnHeight: tileSide * 0.6 * 3
     property var pinnedModel: [globalFavorites, rootModel.modelForRow(0), rootModel.modelForRow(1)]
     property var recommendedModel: [rootModel.modelForRow(1), rootModel.modelForRow(0), globalFavorites, globalFavorites]
     property var allAppsModel: [rootModel.modelForRow(2)]
@@ -493,9 +493,9 @@ Item {
             }
 
             increaseLeftSpacings: true
-            height: showRecents ? parent.height : (units.iconSizes.medium + units.smallSpacing * 2) * 4
+            height: showRecents ? parent.height : favoritesColumnHeight
             cellWidth: parent.width * 0.4
-            cellHeight: units.iconSizes.medium + units.smallSpacing * 5
+            cellHeight: tileSide * 0.6
             iconSize: units.iconSizes.medium
             model: recommendedModel[plasmoid.configuration.recentGridModel]
             usesPlasmaTheme: false

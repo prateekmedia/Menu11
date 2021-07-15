@@ -29,10 +29,8 @@ import org.kde.kcoreaddons 1.0 as KCoreAddons
 import org.kde.kquickcontrolsaddons 2.0 as KQuickAddons
 import org.kde.plasma.private.quicklaunch 1.0
 
-PlasmaExtras.PlasmoidHeading {
+PlasmaExtras.Heading {
     id: footer
-
-    implicitHeight: Math.round(PlasmaCore.Units.gridUnit * 2.5)
     rightPadding: rightInset
     leftPadding: rightPadding
     property Item configureButton: configureButton

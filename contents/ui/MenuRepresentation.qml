@@ -34,10 +34,11 @@ PlasmaCore.Dialog {
 
     property int iconSize: units.iconSizes.medium
     property int iconSizeSide: units.iconSizes.smallMedium
-    property int cellWidth: units.gridUnit * 13
-    property int cellWidthSide: units.gridUnit * 13
-    property int cellHeight: iconSize + (Math.max(highlightItemSvg.margins.top + highlightItemSvg.margins.bottom,
-        highlightItemSvg.margins.left + highlightItemSvg.margins.right))
+
+    property int cellSize: iconSize + theme.mSize(theme.defaultFont).height
+                           + units.largeSpacing
+                           + (2 * Math.max(highlightItemSvg.margins.top + highlightItemSvg.margins.bottom,
+                                           highlightItemSvg.margins.left + highlightItemSvg.margins.right))
 
     onVisibleChanged: {
         if (!visible) {
@@ -123,7 +124,7 @@ PlasmaCore.Dialog {
 
     FocusScope {
         Layout.minimumWidth: mainColumnItem.width
-        Layout.minimumHeight: mainColumnItem.tileSide * (3 + plasmoid.configuration.numberRows) + 85 + (plasmoid.configuration.alwaysShowSearchBar ? 15 : 0)
+        Layout.minimumHeight: cellSize * (5.1 + plasmoid.configuration.numberRows) + (plasmoid.configuration.alwaysShowSearchBar ? 15 : 0)
         Layout.maximumWidth: Layout.minimumWidth
         Layout.maximumHeight: Layout.minimumHeight
 

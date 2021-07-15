@@ -52,6 +52,7 @@ Kirigami.FormLayout {
 
     property alias cfg_useExtraRunners: useExtraRunners.checked
     property alias cfg_reduceIconSizeFooter: reduceIconSizeFooter.checked
+    property alias cfg_reducePinnedSize: reducePinnedSize.checked
     property alias cfg_gridAllowTwoLines: gridAllowTwoLines.checked
     property alias cfg_defaultAllApps: defaultAllApps.checked
     property alias cfg_showDescription: showDescription.checked
@@ -240,6 +241,11 @@ Kirigami.FormLayout {
     CheckBox {
         id: reduceIconSizeFooter
         text: i18n("Reduce Icon Size for Footer")
+    }
+
+    CheckBox {
+        id: reducePinnedSize
+        text: i18n("Reduce Icon Size for Pinned Items")
     }
 
     CheckBox {

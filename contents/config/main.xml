@@ -136,6 +136,9 @@
       <label>Whether to show All Apps screen by default or not.</label>
       <default>false</default>
     </entry>
+    <entry name="reducePinnedSize" type="Bool">
+      <default>true</default>
+    </entry>
     <entry name="reduceIconSizeFooter" type="Bool">
       <label>Whether to reduce icon size for footer to match consistency.</label>
       <default>false</default>
