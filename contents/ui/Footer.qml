@@ -20,6 +20,7 @@
  */
 
 import QtQuick 2.12
+import QtQuick.Controls 2.12
 import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.12
 import org.kde.plasma.core 2.0 as PlasmaCore
@@ -29,7 +30,7 @@ import org.kde.kcoreaddons 1.0 as KCoreAddons
 import org.kde.kquickcontrolsaddons 2.0 as KQuickAddons
 import org.kde.plasma.private.quicklaunch 1.0
 
-PlasmaExtras.Heading {
+Control {
     id: footer
     rightPadding: rightInset
     leftPadding: rightPadding
