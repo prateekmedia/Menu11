@@ -60,7 +60,7 @@ Kirigami.FormLayout {
 
     property alias cfg_numberColumns: numberColumns.value
     property alias cfg_numberRows: numberRows.value
-    
+
     property alias cfg_downIconsDocuments: downIconsDocuments.checked
     property alias cfg_downIconsDownloads: downIconsDownloads.checked
     property alias cfg_downIconsPictures: downIconsPictures.checked
@@ -133,7 +133,7 @@ Kirigami.FormLayout {
             id: previewFrame
             anchors.centerIn: parent
             imagePath: plasmoid.location === PlasmaCore.Types.Vertical || plasmoid.location === PlasmaCore.Types.Horizontal
-                       ? "widgets/panel-background" : "widgets/background"
+                ? "widgets/panel-background" : "widgets/background"
             width: units.iconSizes.large + fixedMargins.left + fixedMargins.right
             height: units.iconSizes.large + fixedMargins.top + fixedMargins.bottom
 
@@ -193,7 +193,7 @@ Kirigami.FormLayout {
 
         model: [i18n("Favourite apps"), i18n("Recent apps"), i18n("Recent Documents")]
     }
-    
+
     Item {
         Kirigami.FormData.isSection: true
     }
@@ -205,7 +205,7 @@ Kirigami.FormLayout {
 
         model: [i18n("Recent Documents"), i18n("Recent apps"), i18n("Favourite apps"), i18n("None")]
     }
-    
+
     Item {
         Kirigami.FormData.isSection: true
     }
@@ -227,7 +227,7 @@ Kirigami.FormLayout {
         from: 1
         to: 10
     }
-    
+
     Item {
         Kirigami.FormData.isSection: true
     }
@@ -274,7 +274,7 @@ Kirigami.FormLayout {
 
         model: [i18n("Name only"), i18n("Description only"), i18n("Name (Description)"), i18n("Description (Name)")]
     }
-    
+
     Item {
         Kirigami.FormData.isSection: true
     }
@@ -336,24 +336,24 @@ Kirigami.FormLayout {
         Kirigami.FormData.label: i18n("Show categories:")
         visible: false
         text: recentOrdering.currentIndex == 0
-              ? i18n("Recent applications")
-              : i18n("Often used applications")
+            ? i18n("Recent applications")
+            : i18n("Often used applications")
     }
 
     CheckBox {
         id: showRecentDocs
         visible: false
         text: recentOrdering.currentIndex == 0
-              ? i18n("Recent documents")
-              : i18n("Often used documents")
+            ? i18n("Recent documents")
+            : i18n("Often used documents")
     }
 
     CheckBox {
         id: showRecentContacts
         visible: false
         text: recentOrdering.currentIndex == 0
-              ? i18n("Recent contacts")
-              : i18n("Often used contacts")
+            ? i18n("Recent contacts")
+            : i18n("Often used contacts")
     }
 
     ComboBox {

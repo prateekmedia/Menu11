@@ -36,9 +36,9 @@ PlasmaCore.Dialog {
     property int iconSizeSide: units.iconSizes.smallMedium
 
     property int cellSize: iconSize + theme.mSize(theme.defaultFont).height
-                           + units.largeSpacing
-                           + (2 * Math.max(highlightItemSvg.margins.top + highlightItemSvg.margins.bottom,
-                                           highlightItemSvg.margins.left + highlightItemSvg.margins.right))
+        + units.largeSpacing
+        + (2 * Math.max(highlightItemSvg.margins.top + highlightItemSvg.margins.bottom,
+            highlightItemSvg.margins.left + highlightItemSvg.margins.right))
 
     onVisibleChanged: {
         if (!visible) {

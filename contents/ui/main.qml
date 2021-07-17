@@ -52,12 +52,12 @@ Item {
 
     Component {
         id: compactRepresentation
-        CompactRepresentation {}
+        CompactRepresentation { }
     }
 
     Component {
         id: menuRepresentation
-        MenuRepresentation {}
+        MenuRepresentation { }
     }
 
     Kicker.RootModel {
@@ -180,7 +180,7 @@ Item {
     }
 
     PlasmaCore.FrameSvgItem {
-        id : highlightItemSvg
+        id: highlightItemSvg
 
         visible: false
 
@@ -189,7 +189,7 @@ Item {
     }
 
     PlasmaCore.FrameSvgItem {
-        id : panelSvg
+        id: panelSvg
 
         visible: false
 

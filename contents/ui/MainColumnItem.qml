@@ -36,7 +36,7 @@ import "../code/tools.js" as Tools
 Item {
     id: item
 
-    width: cellSize * (plasmoid.configuration.numberColumns +1.3)
+    width: cellSize * (plasmoid.configuration.numberColumns + 1.3)
     height: root.height
     y: units.largeSpacing * 2
     property int iconSize: units.iconSizes.large
@@ -142,6 +142,7 @@ Item {
                 return;
             }
             item.updateModels()
+            mainColumn.tryActivate(0, 0);
             done = true;
             mainColumn.visible = true
             recentItem.visible = true
@@ -169,9 +170,11 @@ Item {
     PlasmaComponents.TextField {
         id: searchField
         focus: true
-        placeholderText: i18n("Search...")
+        placeholderText: i18n("Type here to search")
         opacity: searching || plasmoid.configuration.alwaysShowSearchBar
+        leftPadding: PlasmaCore.Units.iconSizes.small * 1.9
         height: units.iconSizes.medium
+        clearButtonShown: true
         width: parent.width - 2 * x
         x: 1.5 * units.largeSpacing
         Accessible.editable: true
@@ -180,6 +183,18 @@ Item {
             runnerModel.query = text;
             newTextQuery(text)
         }
+        PlasmaCore.IconItem {
+            id: showPasswordButton
+            source: "search"
+            height: PlasmaCore.Units.iconSizes.small
+            width: height
+            x: PlasmaCore.Units.iconSizes.small * 0.45
+            anchors {
+                right: textField.left
+                verticalCenter: searchField.verticalCenter
+            }
+        }
+
         function clear() {
             text = "";
         }

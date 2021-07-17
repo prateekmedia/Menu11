@@ -27,7 +27,7 @@ import "../code/tools.js" as Tools
 Item {
     id: item
 
-    width:  GridView.view.cellWidth
+    width: GridView.view.cellWidth
     height: GridView.view.cellHeight
     property int iconSize: units.iconSizes.large * (plasmoid.configuration.reducePinnedSize ? 0.95 : 1)
 
@@ -39,7 +39,7 @@ Item {
     property variant icon: model.decoration !== undefined ? model.decoration : ""
     property var m: model
     property bool hasActionList: ((model.favoriteId !== null)
-                                  || (("hasActionList" in model) && (model.hasActionList === true)))
+        || (("hasActionList" in model) && (model.hasActionList === true)))
 
     Accessible.role: Accessible.MenuItem
     Accessible.name: model.display

@@ -68,20 +68,20 @@ Item {
     }
 
     function fillMenu(menu, items) {
-        items.forEach(function(actionItem) {
+        items.forEach(function (actionItem) {
             if (actionItem.subActions) {
                 // This is a menu
                 var submenuItem = contextSubmenuItemComponent.createObject(
-                                          menu, { "actionItem" : actionItem });
+                    menu, { "actionItem": actionItem });
 
                 fillMenu(submenuItem.submenu, actionItem.subActions);
 
             } else {
                 var item = contextMenuItemComponent.createObject(
-                                menu,
-                                {
-                                    "actionItem": actionItem,
-                                }
+                    menu,
+                    {
+                        "actionItem": actionItem,
+                    }
                 );
             }
         });
@@ -107,7 +107,7 @@ Item {
             text: actionItem.text ? actionItem.text : ""
             icon: actionItem.icon ? actionItem.icon : null
 
-            property variant submenu : submenu_
+            property variant submenu: submenu_
 
             PlasmaComponents.ContextMenu {
                 id: submenu_
@@ -122,13 +122,13 @@ Item {
         PlasmaComponents.MenuItem {
             property variant actionItem
 
-            text      : actionItem.text ? actionItem.text : ""
-            enabled   : actionItem.type != "title" && ("enabled" in actionItem ? actionItem.enabled : true)
-            separator : actionItem.type == "separator"
-            section   : actionItem.type == "title"
-            icon      : actionItem.icon ? actionItem.icon : null
-            checkable : actionItem.checkable ? actionItem.checkable : false
-            checked   : actionItem.checked ? actionItem.checked : false
+            text: actionItem.text ? actionItem.text : ""
+            enabled: actionItem.type != "title" && ("enabled" in actionItem ? actionItem.enabled : true)
+            separator: actionItem.type == "separator"
+            section: actionItem.type == "title"
+            icon: actionItem.icon ? actionItem.icon : null
+            checkable: actionItem.checkable ? actionItem.checkable : false
+            checked: actionItem.checked ? actionItem.checked : false
 
             onClicked: {
                 actionClicked(actionItem.actionId, actionItem.actionArgument);
