@@ -135,7 +135,7 @@ Item {
     Timer {
         id: preloadAllAppsTime
         property bool done: false
-        interval: 1000
+        interval: 100
         repeat: false
         onTriggered: {
             if (done) {
