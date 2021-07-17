@@ -77,7 +77,7 @@ Item {
         anchors {
             left: icon.right
             leftMargin: PlasmaCore.Units.smallSpacing * 4
-            rightMargin: PlasmaCore.Units.smallSpacing * 2
+            rightMargin: leftMargin / 2
             verticalCenter: parent.verticalCenter
         }
         spacing: 0

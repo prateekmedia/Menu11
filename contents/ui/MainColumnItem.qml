@@ -183,7 +183,7 @@ Item {
             runnerModel.query = text;
             newTextQuery(text)
         }
-        
+
         PlasmaCore.IconItem {
             id: searchIconItem
             source: "search"
@@ -233,7 +233,7 @@ Item {
         id: mainLabelGrid
         anchors.top: plasmoid.configuration.alwaysShowSearchBar ? searchField.bottom : parent.top
         anchors.leftMargin: units.largeSpacing * 3
-        anchors.topMargin: plasmoid.configuration.alwaysShowSearchBar ? 0.4 * units.largeSpacing : 0
+        anchors.topMargin: plasmoid.configuration.alwaysShowSearchBar ? units.largeSpacing : 0
         anchors.left: parent.left
         x: units.smallSpacing
         elide: Text.ElideRight
@@ -290,6 +290,7 @@ Item {
         }
 
         anchors {
+            topMargin: units.smallSpacing
             verticalCenter: mainLabelGrid.verticalCenter
             rightMargin: units.largeSpacing * 3
             leftMargin: units.largeSpacing * 3
@@ -305,7 +306,7 @@ Item {
             top: searching ? searchField.bottom : mainLabelGrid.bottom
             leftMargin: units.largeSpacing * 1.6
             rightMargin: units.largeSpacing
-            topMargin: units.largeSpacing
+            topMargin: units.largeSpacing * 0.7
             left: parent.left
             right: parent.right
             bottom: searching ? parent.bottom : showAllApps ? footer.top : undefined
@@ -387,6 +388,9 @@ Item {
                     searchField.backspace();
                 else
                     searchField.focus = true
+            } else if (event.key == Qt.Key_Tab) {
+                event.accepted = true;
+                if (!searching && !showAllApps) documentsFavoritesGrid.tryActivate(0, 0);
             } else if (event.key == Qt.Key_Escape) {
                 event.accepted = true;
                 if (searching) {
@@ -504,7 +508,7 @@ Item {
                 left: parent.left
                 right: parent.right
                 bottomMargin: 0
-                topMargin: units.largeSpacing
+                topMargin: units.largeSpacing * 0.7
             }
 
             increaseLeftSpacings: true
