@@ -94,7 +94,7 @@
     </entry>
     <entry name="alwaysShowSearchBar" type="Bool">
       <label>Whether to always show the search bar on top of the menu or not.</label>
-      <default>false</default>
+      <default>true</default>
     </entry>
     <entry name="downIconsDocuments" type="Bool">
       <label>Shows or hides the Documents shortcut on the bottom bar.</label>
