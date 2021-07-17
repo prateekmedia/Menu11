@@ -183,14 +183,14 @@ Item {
             runnerModel.query = text;
             newTextQuery(text)
         }
+        
         PlasmaCore.IconItem {
-            id: showPasswordButton
+            id: searchIconItem
             source: "search"
             height: PlasmaCore.Units.iconSizes.small
             width: height
             x: PlasmaCore.Units.iconSizes.small * 0.45
             anchors {
-                right: textField.left
                 verticalCenter: searchField.verticalCenter
             }
         }
