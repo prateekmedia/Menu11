@@ -38,7 +38,7 @@ Control {
     property Item avatar: avatarButton
     property int iconSize: units.iconSizes.smallMedium
     property var footerNames: ["Documents", "Pictures", "Music", "Download", "Videos", "File Manager", "System settings", "Lock screen", "Leave..."]
-    property var footerIcons: ["folder-documents-symbolic", "folder-pictures-symbolic", "folder-music-symbolic", "folder-download-symbolic", "folder-videos-symbolic", "folder-symbolic", "configure", "system-lock-screen", "system-shutdown"]
+    property var footerIcons: ["folder-documents-symbolic", "folder-pictures-symbolic", "folder-music-symbolic", "folder-download-symbolic", "folder-videos-symbolic", Qt.resolvedUrl("icons/explorer.svg"), "configure", "system-lock-screen", "system-shutdown"]
 
     background: Rectangle {
         color: Qt.darker(theme.backgroundColor)
@@ -57,7 +57,7 @@ Control {
     anchors.topMargin: anchors.bottomMargin
     anchors.leftMargin: -12
     anchors.rightMargin: anchors.leftMargin
-    height: units.iconSizes.medium * 2
+    height: units.iconSizes.medium * 2.4
 
     PlasmaCore.DataSource {
         id: pmEngine
@@ -182,7 +182,6 @@ Control {
         // looks visually balanced that way
         spacing: Math.round(PlasmaCore.Units.smallSpacing * 2.5)
 
-
         Repeater {
             model: 9
             PlasmaComponents.TabButton {
@@ -220,7 +219,7 @@ Control {
 
                 icon {
                     name: footerIcons[index]
-                    width: iconSize * (plasmoid.configuration.reduceIconSizeFooter ? 0.96 : 1)
+                    width: iconSize * (plasmoid.configuration.reduceIconSizeFooter ? 0.97 : 1)
                 }
                 onHoveredChanged: hovered ? animateOpacity.start() : animateOpacityReverse.start();
                 PlasmaComponents.ToolTip {
