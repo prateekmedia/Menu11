@@ -114,10 +114,6 @@ Control {
                 source: kuser.faceIconUrl.toString() || "user-identity"
                 cache: false
                 visible: source !== ""
-                height: units.gridUnit * 3
-                width: height
-                sourceSize.width: width
-                sourceSize.height: height
                 fillMode: Image.PreserveAspectFit
                 anchors {
                     fill: parent
