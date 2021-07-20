@@ -174,7 +174,6 @@ Item {
         opacity: searching || plasmoid.configuration.alwaysShowSearchBar
         leftPadding: PlasmaCore.Units.iconSizes.small * 1.9
         height: units.iconSizes.medium
-        clearButtonShown: true
         width: parent.width - 2 * x
         x: 1.5 * units.largeSpacing
         Accessible.editable: true
