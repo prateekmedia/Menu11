@@ -38,8 +38,8 @@ Control {
     property Item avatar: avatarButton
     property int iconSize: units.iconSizes.smallMedium
     property var footerNames: ["Documents", "Pictures", "Music", "Download", "Videos", "File Manager", "System settings", "Lock screen", "Leave..."]
-    property var footerIcons: ["folder-documents-symbolic", "folder-pictures-symbolic", "folder-music-symbolic", "folder-download-symbolic", "folder-videos-symbolic", Qt.resolvedUrl("icons/explorer.svg"), "configure", "system-lock-screen", "system-shutdown"]
-
+    property var footerIcons: ["folder-documents-symbolic", "folder-pictures-symbolic", "folder-music-symbolic", "folder-download-symbolic", "folder-videos-symbolic", Qt.resolvedUrl((theme.textColor.r * 0.299 + theme.textColor.g * 0.587 + theme.textColor.b * 0.114) > 0.7265625 ? "icons/explorer.svg" : "icons/explorer_dark.svg"), "configure", "system-lock-screen", "system-shutdown"]
+    
     background: Rectangle {
         color: Qt.darker(theme.backgroundColor)
         opacity: .115
