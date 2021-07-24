@@ -1,0 +1,198 @@
+# Translation of menu11 in LANGUAGE
+# Copyright (C) 2021
+# This file is distributed under the same license as the menu11 package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: menu11\n"
+"Report-Msgid-Bugs-To: https://github.com/prateekmedia/menu11\n"
+"POT-Creation-Date: 2021-04-09 22:46-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../metadata.desktop
+msgid "Menu 11"
+msgstr ""
+
+#: ../metadata.desktop
+msgid "A highly customizable launcher inspired from windows 11 menu. Fork of MenuZ."
+msgstr ""
+
+#: ../contents/config/config.qml
+msgid "General"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Icon"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Menu Position"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Pinned item:"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Favourite apps"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Recent apps"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Recent documents"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Recommended item:"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "None"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Number of columns in grid:"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Number of rows in grid:"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Panel Properties:"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Show All apps by default"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Reduce Icon Size for User Profile"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Reduce Icon Size for Footer"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Reduce Icon Size for Pinned item"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Allow label to have two lines (Pinned)"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Show Description for all apps and search item"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Always Show Search Bar"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Show applications as:"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Name only"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Description only"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Name (Description)"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Description (Name)"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Icons on Bottom bar:"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Documents"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Pictures"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Music"
+msgstr ""
+
+#: ../contents/ui/config.qml ../contents/ui/Footer.qml
+msgid "Downloads"
+msgstr ""
+
+#: ../contents/ui/config.qml ../contents/ui/Footer.qml
+msgid "Videos"
+msgstr ""
+
+#: ../contents/ui/config.qml ../contents/ui/Footer.qml
+msgid "File manager"
+msgstr ""
+
+#: ../contents/ui/config.qml ../contents/ui/Footer.qml
+msgid "System settings"
+msgstr ""
+
+#: ../contents/ui/config.qml ../contents/ui/Footer.qml
+msgid "Lock screen"
+msgstr ""
+
+#: ../contents/ui/config.qml ../contents/ui/Footer.qml
+msgid "Power options"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Search:"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Expand search to bookmarks, files and emails"
+msgstr ""
+
+#: ../contents/ui/MainColumnItem.qml
+msgid "Type here to search"
+msgstr ""
+
+#: ../contents/ui/MainColumnItem.qml
+msgid "All apps"
+msgstr ""
+
+#: ../contents/ui/MainColumnItem.qml
+msgid "Recommended"
+msgstr ""
+
+#: ../contents/ui/MainColumnItem.qml
+msgid "Pinned"
+msgstr ""
+
+#: ../contents/ui/MainColumnItem.qml
+msgid "Back"
+msgstr ""
+
+#: ../contents/ui/MainColumnItem.qml
+msgid "More"
+msgstr ""
+
+#: ../contents/ui/Footer.qml
+msgid "Go to user settings"
+msgstr ""

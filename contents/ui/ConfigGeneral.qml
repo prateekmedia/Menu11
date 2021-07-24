@@ -41,10 +41,6 @@ Kirigami.FormLayout {
     property string cfg_customButtonImage: plasmoid.configuration.customButtonImage
 
     property alias cfg_appNameFormat: appNameFormat.currentIndex
-    property alias cfg_recentOrdering: recentOrdering.currentIndex
-    property alias cfg_showRecentApps: showRecentApps.checked
-    property alias cfg_showRecentDocs: showRecentDocs.checked
-    property alias cfg_showRecentContacts: showRecentContacts.checked
 
     property alias cfg_menuPosition: menuPosition.currentIndex
     property alias cfg_favGridModel: favGridModel.currentIndex
@@ -190,9 +186,9 @@ Kirigami.FormLayout {
     ComboBox {
         id: favGridModel
 
-        Kirigami.FormData.label: i18n("Pinned items:")
+        Kirigami.FormData.label: i18n("Pinned item:")
 
-        model: [i18n("Favourite apps"), i18n("Recent apps"), i18n("Recent Documents")]
+        model: [i18n("Favourite apps"), i18n("Recent apps"), i18n("Recent documents")]
     }
 
     Item {
@@ -202,7 +198,7 @@ Kirigami.FormLayout {
     ComboBox {
         id: recentGridModel
 
-        Kirigami.FormData.label: i18n("Recommended items:")
+        Kirigami.FormData.label: i18n("Recommended item:")
 
         model: [i18n("Recent Documents"), i18n("Recent apps"), i18n("Favourite apps"), i18n("None")]
     }
@@ -236,7 +232,7 @@ Kirigami.FormLayout {
     CheckBox {
         id: defaultAllApps
         Kirigami.FormData.label: i18n("Panel Properties:")
-        text: i18n("Show All Apps By Default")
+        text: i18n("Show All apps by default")
     }
 
     CheckBox {
@@ -251,7 +247,7 @@ Kirigami.FormLayout {
 
     CheckBox {
         id: reducePinnedSize
-        text: i18n("Reduce Icon Size for Pinned Items")
+        text: i18n("Reduce Icon Size for Pinned item")
     }
 
     CheckBox {
@@ -261,7 +257,7 @@ Kirigami.FormLayout {
 
     CheckBox {
         id: showDescription
-        text: i18n("Show Description for all apps and search items")
+        text: i18n("Show Description for all apps and search item")
     }
 
     CheckBox {
@@ -313,60 +309,22 @@ Kirigami.FormLayout {
 
     CheckBox {
         id: downIconsFileManager
-        text: i18n("File Manager")
+        text: i18n("File manager")
     }
 
     CheckBox {
         id: downIconsSystemSettings
-        text: i18n("System Settings")
+        text: i18n("System settings")
     }
 
     CheckBox {
         id: downIconsLock
-        text: i18n("Lock")
+        text: i18n("Lock screen")
     }
 
     CheckBox {
         id: downIconsPowerOptions
-        text: i18n("Power Options")
-    }
-
-    Item {
-        visible: false
-        Kirigami.FormData.isSection: true
-    }
-
-    CheckBox {
-        id: showRecentApps
-
-        Kirigami.FormData.label: i18n("Show categories:")
-        visible: false
-        text: recentOrdering.currentIndex == 0
-            ? i18n("Recent applications")
-            : i18n("Often used applications")
-    }
-
-    CheckBox {
-        id: showRecentDocs
-        visible: false
-        text: recentOrdering.currentIndex == 0
-            ? i18n("Recent documents")
-            : i18n("Often used documents")
-    }
-
-    CheckBox {
-        id: showRecentContacts
-        visible: false
-        text: recentOrdering.currentIndex == 0
-            ? i18n("Recent contacts")
-            : i18n("Often used contacts")
-    }
-
-    ComboBox {
-        id: recentOrdering
-        visible: false
-        Kirigami.FormData.label: i18n("Sort items in categories by:")
-        model: [i18nc("@item:inlistbox Sort items in categories by [Recently used | Often used]", "Recently used"), i18nc("@item:inlistbox Sort items in categories by [Recently used | Ofetn used]", "Often used")]
+        text: i18n("Power options")
     }
 
     Item {

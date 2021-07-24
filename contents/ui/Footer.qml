@@ -37,7 +37,7 @@ Control {
     property Item configureButton: configureButton
     property Item avatar: avatarButton
     property int iconSize: units.iconSizes.smallMedium
-    property var footerNames: ["Documents", "Pictures", "Music", "Download", "Videos", "File Manager", "System settings", "Lock screen", "Leave..."]
+    property var footerNames: ["Documents", "Pictures", "Music", "Downloads", "Videos", "File manager", "System settings", "Lock screen", "Power options"]
     property var footerIcons: ["folder-documents-symbolic", "folder-pictures-symbolic", "folder-music-symbolic", "folder-download-symbolic", "folder-videos-symbolic", Qt.resolvedUrl((theme.textColor.r * 0.299 + theme.textColor.g * 0.587 + theme.textColor.b * 0.114) > 0.7265625 ? "icons/explorer.svg" : "icons/explorer_dark.svg"), "configure", "system-lock-screen", "system-shutdown"]
     
     background: Rectangle {
@@ -219,7 +219,7 @@ Control {
                 }
                 onHoveredChanged: hovered ? animateOpacity.start() : animateOpacityReverse.start();
                 PlasmaComponents.ToolTip {
-                    text: i18nc("@action", footerNames[index])
+                    text: i18n(footerNames[index])
                 }
                 MouseArea {
                     onClicked: index < 6 ? executable.exec("xdg-open $(xdg-user-dir" + (index < 5 ? (" " + footerNames[index].toUpperCase()) : "") + ")") : index == 6 ? logic.openUrl("file:///usr/share/applications/systemsettings.desktop") : pmEngine.performOperation(index == 8 ? "requestShutDown" : "lockScreen")
