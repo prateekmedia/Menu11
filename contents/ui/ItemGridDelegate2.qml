@@ -17,7 +17,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-import QtQuick 2.14
+import QtQuick 2.12
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
@@ -27,9 +27,9 @@ import "../code/tools.js" as Tools
 Item {
     id: item
 
-    width:  GridView.view.cellWidth
-    height: width
-    property int iconSize: units.iconSizes.large * 0.95
+    width: GridView.view.cellWidth
+    height: GridView.view.cellHeight
+    property int iconSize: units.iconSizes.large * (plasmoid.configuration.reducePinnedSize ? 0.95 : 1)
 
     property bool showLabel: true
 
@@ -39,7 +39,7 @@ Item {
     property variant icon: model.decoration !== undefined ? model.decoration : ""
     property var m: model
     property bool hasActionList: ((model.favoriteId !== null)
-                                  || (("hasActionList" in model) && (model.hasActionList === true)))
+        || (("hasActionList" in model) && (model.hasActionList === true)))
 
     Accessible.role: Accessible.MenuItem
     Accessible.name: model.display
@@ -76,10 +76,10 @@ Item {
         visible: showLabel
         anchors {
             top: icon.bottom
-            topMargin: - units.smallSpacing * 0.6
+            topMargin: - units.smallSpacing * (plasmoid.configuration.gridAllowTwoLines ? 0.6 : -0.4)
             horizontalCenter: parent.horizontalCenter
         }
-        maximumLineCount: 2
+        maximumLineCount: plasmoid.configuration.gridAllowTwoLines ? 2 : 1
         horizontalAlignment: Text.AlignHCenter
         width: parent.width - units.largeSpacing
         elide: Text.ElideRight

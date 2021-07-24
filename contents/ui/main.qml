@@ -52,12 +52,12 @@ Item {
 
     Component {
         id: compactRepresentation
-        CompactRepresentation {}
+        CompactRepresentation { }
     }
 
     Component {
         id: menuRepresentation
-        MenuRepresentation {}
+        MenuRepresentation { }
     }
 
     Kicker.RootModel {
@@ -67,7 +67,7 @@ Item {
 
         appNameFormat: plasmoid.configuration.appNameFormat
         flat: true
-        sorted: plasmoid.configuration.alphaSort
+        sorted: true
         showSeparators: false
         appletInterface: plasmoid
 
@@ -180,7 +180,7 @@ Item {
     }
 
     PlasmaCore.FrameSvgItem {
-        id : highlightItemSvg
+        id: highlightItemSvg
 
         visible: false
 
@@ -189,7 +189,7 @@ Item {
     }
 
     PlasmaCore.FrameSvgItem {
-        id : panelSvg
+        id: panelSvg
 
         visible: false
 

@@ -76,8 +76,8 @@ Item {
         visible: showLabel
         anchors {
             left: icon.right
-            leftMargin: PlasmaCore.Units.smallSpacing * 4            
-            rightMargin: PlasmaCore.Units.smallSpacing * 2
+            leftMargin: PlasmaCore.Units.smallSpacing * 4
+            rightMargin: anchors.leftMargin / 2
             verticalCenter: parent.verticalCenter
         }
         spacing: 0

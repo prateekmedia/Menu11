@@ -41,6 +41,7 @@ PlasmaExtras.ScrollArea {
     signal keyNavDown()
 
     property bool grabFocus: false
+    property bool showDescriptions: false
     property int iconSize: units.iconSizes.medium
 
     property alias model: repeater.model
@@ -108,7 +109,7 @@ PlasmaExtras.ScrollArea {
                 PlasmaExtras.Heading {
                     id: gridViewLabel
                     anchors.top: parent.top
-                    anchors.topMargin: 10
+                    //anchors.topMargin: 8
                     x: units.smallSpacing
                     width: parent.width - x
                     height: dummyHeading.height
@@ -138,13 +139,14 @@ PlasmaExtras.ScrollArea {
                     //TODO >
                     dragEnabled: false
                     dropEnabled: false
+                    showDescriptions: itemMultiGrid.showDescriptions
                     // <
 
                     width: parent.width
                     height: Math.ceil(count * cellHeight)
                     cellWidth: parent.width
-                    cellHeight: itemMultiGrid.iconSize + (2 * highlightItemSvg.margins.top)//<>cellSize
-                    iconSize: itemMultiGrid.iconSize
+                    cellHeight: root.iconSize + (2 * highlightItemSvg.margins.top)//<>cellSize
+                    iconSize: root.iconSize
                     model: repeater.model.modelForRow(index)
 
                     onFocusChanged: {

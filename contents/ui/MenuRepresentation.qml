@@ -29,16 +29,16 @@ PlasmaCore.Dialog {
 
     objectName: "popupWindow"
     flags: Qt.WindowStaysOnTopHint
-    // location: PlasmaCore.Types.Floating
+    location: PlasmaCore.Types.Floating
     hideOnWindowDeactivate: true
 
     property int iconSize: units.iconSizes.medium
     property int iconSizeSide: units.iconSizes.smallMedium
-    property int cellWidth: units.gridUnit * 13
-    property int cellWidthSide: units.gridUnit * 13
-    property int cellHeight: iconSize + (Math.max(highlightItemSvg.margins.top + highlightItemSvg.margins.bottom,
-        highlightItemSvg.margins.left + highlightItemSvg.margins.right))
-    signal appendSearchText(string text)
+
+    property int cellSize: iconSize + theme.mSize(theme.defaultFont).height
+        + units.largeSpacing
+        + (2 * Math.max(highlightItemSvg.margins.top + highlightItemSvg.margins.bottom,
+            highlightItemSvg.margins.left + highlightItemSvg.margins.right))
 
     onVisibleChanged: {
         if (!visible) {
@@ -85,35 +85,37 @@ PlasmaCore.Dialog {
         // Fall back to bottom-left of screen area when the applet is on the desktop or floating.
         var x = offset;
         var y = screen.height - height - offset;
-        var horizMidPoint; z
-        var vertMidPoint;
-        var appletTopLeft;
-        if (plasmoid.configuration.centerMenu) {
-            horizMidPoint = screen.x + (screen.width / 2);
-            vertMidPoint = screen.y + (screen.height / 2);
-            x = horizMidPoint - width / 2;
-            //y = vertMidPoint - height / 2;
-            y = plasmoid.location === PlasmaCore.Types.TopEdge ? parent.height + panelSvg.margins.bottom + offset + 6 :  screen.height - height - offset - panelSvg.margins.top - 6;
+        var horizMidPoint = screen.x + (screen.width / 2);
+        var vertMidPoint = screen.y + (screen.height / 2);
+        var appletTopLeft = parent.mapToGlobal(0, 0);
+        var appletBottomLeft = parent.mapToGlobal(0, parent.height);
+        if (plasmoid.configuration.menuPosition == 0) {
+            x = plasmoid.location === PlasmaCore.Types.LeftEdge ? parent.width + panelSvg.margins.right + offset + 6 : plasmoid.location === PlasmaCore.Types.RightEdge ? appletTopLeft.x - panelSvg.margins.left - offset - width - 6 : horizMidPoint - width / 2;
+            y = plasmoid.location === PlasmaCore.Types.TopEdge ? parent.height + panelSvg.margins.bottom + offset + 6 : plasmoid.location === PlasmaCore.Types.BottomEdge ? screen.height - height - offset - panelSvg.margins.top - 6 : vertMidPoint - height / 2;
         } else if (plasmoid.location === PlasmaCore.Types.BottomEdge) {
-            horizMidPoint = screen.x + (screen.width / 2);
-            appletTopLeft = parent.mapToGlobal(0, 0);
-            x = (appletTopLeft.x < horizMidPoint) ? screen.x + offset + 6 : (screen.x + screen.width) - width - offset - 6;
+            if (plasmoid.configuration.menuPosition == 1)
+                x = (appletTopLeft.x < horizMidPoint) ? screen.x + offset + 6 : (screen.x + screen.width) - width - offset - 6;
+            else
+                x = appletTopLeft.x - width / 2
             y = screen.height - height - offset - panelSvg.margins.top - 6;
         } else if (plasmoid.location === PlasmaCore.Types.TopEdge) {
-            horizMidPoint = screen.x + (screen.width / 2);
-            var appletBottomLeft = parent.mapToGlobal(0, parent.height);
-            x = (appletBottomLeft.x < horizMidPoint) ? screen.x + offset + 6 : (screen.x + screen.width) - width - offset - 6;
+            if (plasmoid.configuration.menuPosition == 1)
+                x = (appletBottomLeft.x < horizMidPoint) ? screen.x + offset + 6 : (screen.x + screen.width) - width - offset - 6;
+            else
+                x = appletBottomLeft.x - width / 2
             y = parent.height + panelSvg.margins.bottom + offset + 6;
         } else if (plasmoid.location === PlasmaCore.Types.LeftEdge) {
-            vertMidPoint = screen.y + (screen.height / 2);
-            appletTopLeft = parent.mapToGlobal(0, 0);
             x = parent.width + panelSvg.margins.right + offset + 6;
-            y = (appletTopLeft.y < vertMidPoint) ? screen.y + offset + 6 : (screen.y + screen.height) - height - offset - 6;
+            if (plasmoid.configuration.menuPosition == 1)
+                y = (appletTopLeft.y < vertMidPoint) ? screen.y + offset + 6 : (screen.y + screen.height) - height - offset - 6;
+            else
+                y = appletTopLeft.y - height / 2
         } else if (plasmoid.location === PlasmaCore.Types.RightEdge) {
-            vertMidPoint = screen.y + (screen.height / 2);
-            appletTopLeft = parent.mapToGlobal(0, 0);
             x = appletTopLeft.x - panelSvg.margins.left - offset - width - 6;
-            y = (appletTopLeft.y < vertMidPoint) ? screen.y + offset + 6 : (screen.y + screen.height) - height - offset - 6;
+            if (plasmoid.configuration.menuPosition == 1)
+                y = (appletTopLeft.y < vertMidPoint) ? screen.y + offset + 6 : (screen.y + screen.height) - height - offset - 6;
+            else
+                y = appletTopLeft.y - height / 2
         }
 
         return Qt.point(x, y);
@@ -121,10 +123,10 @@ PlasmaCore.Dialog {
 
 
     FocusScope {
-        Layout.minimumWidth: mainColumnItem.width  //+ tilesColumnItem.width
-        Layout.maximumWidth: mainColumnItem.width //+ tilesColumnItem.width
-        Layout.minimumHeight: mainColumnItem.tileSide * 6 + 85
-        Layout.maximumHeight: mainColumnItem.tileSide * 6 + 85
+        Layout.minimumWidth: mainColumnItem.width
+        Layout.minimumHeight: cellSize * (5.1 + plasmoid.configuration.numberRows + (plasmoid.configuration.alwaysShowSearchBar ? 0.6 : 0))
+        Layout.maximumWidth: Layout.minimumWidth
+        Layout.maximumHeight: Layout.minimumHeight
 
         focus: true
 
@@ -134,9 +136,6 @@ PlasmaCore.Dialog {
 
             MainColumnItem{
                 id: mainColumnItem
-                onNewTextQuery: {
-                    appendSearchText(text)
-                }
             }
         }
 
@@ -148,7 +147,13 @@ PlasmaCore.Dialog {
         }
     }
 
+    function refreshModel() {
+        mainColumnItem.reload()
+        console.log("refresh model - menu 11")
+    }
+
     Component.onCompleted: {
+        rootModel.refreshed.connect(refreshModel)
         kicker.reset.connect(reset);
         reset();
     }

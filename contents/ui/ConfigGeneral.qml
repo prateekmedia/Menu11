@@ -24,7 +24,7 @@ import QtQuick.Controls 2.5
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kquickcontrolsaddons 2.0 as KQuickAddons
 import org.kde.draganddrop 2.0 as DragDrop
-import org.kde.kirigami 2.5 as Kirigami
+import org.kde.kirigami 2.3 as Kirigami
 
 import org.kde.plasma.private.kicker 0.1 as Kicker
 
@@ -41,16 +41,23 @@ Kirigami.FormLayout {
     property string cfg_customButtonImage: plasmoid.configuration.customButtonImage
 
     property alias cfg_appNameFormat: appNameFormat.currentIndex
-    property alias cfg_limitDepth: limitDepth.checked
-    property alias cfg_alphaSort: alphaSort.checked
-    property alias cfg_showIconsRootLevel: showIconsRootLevel.checked
 
-    property alias cfg_recentOrdering: recentOrdering.currentIndex
-    property alias cfg_showRecentApps: showRecentApps.checked
-    property alias cfg_showRecentDocs: showRecentDocs.checked
-    property alias cfg_showRecentContacts: showRecentContacts.checked
+    property alias cfg_menuPosition: menuPosition.currentIndex
+    property alias cfg_favGridModel: favGridModel.currentIndex
+    property alias cfg_recentGridModel: recentGridModel.currentIndex
 
     property alias cfg_useExtraRunners: useExtraRunners.checked
+    property alias cfg_reduceIconSizeFooter: reduceIconSizeFooter.checked
+    property alias cfg_reduceIconSizeUserProfile: reduceIconSizeUserProfile.checked
+    property alias cfg_reducePinnedSize: reducePinnedSize.checked
+    property alias cfg_gridAllowTwoLines: gridAllowTwoLines.checked
+    property alias cfg_defaultAllApps: defaultAllApps.checked
+    property alias cfg_showDescription: showDescription.checked
+    property alias cfg_alwaysShowSearchBar: alwaysShowSearchBar.checked
+
+    property alias cfg_numberColumns: numberColumns.value
+    property alias cfg_numberRows: numberRows.value
+
     property alias cfg_centerMenu: centerMenu.checked
     
     property alias cfg_downIconsDocuments: downIconsDocuments.checked
@@ -125,7 +132,7 @@ Kirigami.FormLayout {
             id: previewFrame
             anchors.centerIn: parent
             imagePath: plasmoid.location === PlasmaCore.Types.Vertical || plasmoid.location === PlasmaCore.Types.Horizontal
-                       ? "widgets/panel-background" : "widgets/background"
+                ? "widgets/panel-background" : "widgets/background"
             width: units.iconSizes.large + fixedMargins.left + fixedMargins.right
             height: units.iconSizes.large + fixedMargins.top + fixedMargins.bottom
 
@@ -166,12 +173,102 @@ Kirigami.FormLayout {
         Kirigami.FormData.isSection: true
     }
 
+    ComboBox {
+        id: menuPosition
+
+        Kirigami.FormData.label: i18n("Menu Position:")
+
+        model: [i18n("Center"), i18n("On Edge"), i18n("Auto")]
+    }
+
+    Item {
+        Kirigami.FormData.isSection: true
+    }
+
+    ComboBox {
+        id: favGridModel
+
+        Kirigami.FormData.label: i18n("Pinned item:")
+
+        model: [i18n("Favourite apps"), i18n("Recent apps"), i18n("Recent documents")]
+    }
+
+    Item {
+        Kirigami.FormData.isSection: true
+    }
+
+    ComboBox {
+        id: recentGridModel
+
+        Kirigami.FormData.label: i18n("Recommended item:")
+
+        model: [i18n("Recent Documents"), i18n("Recent apps"), i18n("Favourite apps"), i18n("None")]
+    }
+
+    Item {
+        Kirigami.FormData.isSection: true
+    }
+
+    SpinBox{
+        id: numberColumns
+
+        Kirigami.FormData.label: i18n("Number of columns in grid:")
+
+        from: 4
+        to: 10
+    }
+
+    SpinBox{
+        id: numberRows
+
+        Kirigami.FormData.label: i18n("Number of rows in grid:")
+
+        from: 1
+        to: 10
+    }
+
+    Item {
+        Kirigami.FormData.isSection: true
+    }
+
     CheckBox {
-        id: centerMenu
+        id: defaultAllApps
+        Kirigami.FormData.label: i18n("Panel Properties:")
+        text: i18n("Show All apps by default")
+    }
 
-        visible: !isDash
+    CheckBox {
+        id: reduceIconSizeUserProfile
+        text: i18n("Reduce Icon Size for User Profile")
+    }
 
-        Kirigami.FormData.label: i18n("Center Menu:")
+    CheckBox {
+        id: reduceIconSizeFooter
+        text: i18n("Reduce Icon Size for Footer")
+    }
+
+    CheckBox {
+        id: reducePinnedSize
+        text: i18n("Reduce Icon Size for Pinned item")
+    }
+
+    CheckBox {
+        id: gridAllowTwoLines
+        text: i18n("Allow label to have two lines (Pinned)")
+    }
+
+    CheckBox {
+        id: showDescription
+        text: i18n("Show Description for all apps and search item")
+    }
+
+    CheckBox {
+        id: alwaysShowSearchBar
+        text: i18n("Always Show Search Bar")
+    }
+
+    Item {
+        Kirigami.FormData.isSection: true
     }
 
     ComboBox {
@@ -181,33 +278,55 @@ Kirigami.FormLayout {
 
         model: [i18n("Name only"), i18n("Description only"), i18n("Name (Description)"), i18n("Description (Name)")]
     }
-
+    
     Item {
         Kirigami.FormData.isSection: true
     }
 
     CheckBox {
-        id: alphaSort
-
-        Kirigami.FormData.label: i18n("Behavior:")
-
-        text: i18n("Sort applications alphabetically")
+        id: downIconsDocuments
+        Kirigami.FormData.label: i18n("Icons on Bottom bar:")
+        text: i18n("Documents")
     }
 
     CheckBox {
-        id: limitDepth
-
-        visible: !isDash
-
-        text: i18n("Flatten sub-menus to a single level")
+        id: downIconsPictures
+        text: i18n("Pictures")
     }
 
     CheckBox {
-        id: showIconsRootLevel
+        id: downIconsMusic
+        text: i18n("Music")
+    }
 
-        visible: !isDash
+    CheckBox {
+        id: downIconsDownloads
+        text: i18n("Downloads")
+    }
 
-        text: i18n("Show icons on the root level of the menu")
+    CheckBox {
+        id: downIconsVideos
+        text: i18n("Videos")
+    }
+
+    CheckBox {
+        id: downIconsFileManager
+        text: i18n("File Manager")
+    }
+
+    CheckBox {
+        id: downIconsSystemSettings
+        text: i18n("System Settings")
+    }
+
+    CheckBox {
+        id: downIconsLock
+        text: i18n("Lock")
+    }
+
+    CheckBox {
+        id: downIconsPowerOptions
+        text: i18n("Power Options")
     }
     
     Item {
@@ -265,36 +384,49 @@ Kirigami.FormLayout {
     }
 
     CheckBox {
-        id: showRecentApps
-
-        Kirigami.FormData.label: i18n("Show categories:")
-        visible: false
-        text: recentOrdering.currentIndex == 0
-              ? i18n("Recent applications")
-              : i18n("Often used applications")
+        id: downIconsDocuments
+        Kirigami.FormData.label: i18n("Icons on Bottom bar:")
+        text: i18n("Documents")
     }
 
     CheckBox {
-        id: showRecentDocs
-        visible: false
-        text: recentOrdering.currentIndex == 0
-              ? i18n("Recent documents")
-              : i18n("Often used documents")
+        id: downIconsPictures
+        text: i18n("Pictures")
     }
 
     CheckBox {
-        id: showRecentContacts
-        visible: false
-        text: recentOrdering.currentIndex == 0
-              ? i18n("Recent contacts")
-              : i18n("Often used contacts")
+        id: downIconsMusic
+        text: i18n("Music")
     }
 
-    ComboBox {
-        id: recentOrdering
-        visible: false
-        Kirigami.FormData.label: i18n("Sort items in categories by:")
-        model: [i18nc("@item:inlistbox Sort items in categories by [Recently used | Often used]", "Recently used"), i18nc("@item:inlistbox Sort items in categories by [Recently used | Ofetn used]", "Often used")]
+    CheckBox {
+        id: downIconsDownloads
+        text: i18n("Downloads")
+    }
+
+    CheckBox {
+        id: downIconsVideos
+        text: i18n("Videos")
+    }
+
+    CheckBox {
+        id: downIconsFileManager
+        text: i18n("File manager")
+    }
+
+    CheckBox {
+        id: downIconsSystemSettings
+        text: i18n("System settings")
+    }
+
+    CheckBox {
+        id: downIconsLock
+        text: i18n("Lock screen")
+    }
+
+    CheckBox {
+        id: downIconsPowerOptions
+        text: i18n("Power options")
     }
 
     Item {
