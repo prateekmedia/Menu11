@@ -52,6 +52,7 @@ Kirigami.FormLayout {
 
     property alias cfg_useExtraRunners: useExtraRunners.checked
     property alias cfg_reduceIconSizeFooter: reduceIconSizeFooter.checked
+    property alias cfg_reduceIconSizeUserProfile: reduceIconSizeUserProfile.checked
     property alias cfg_reducePinnedSize: reducePinnedSize.checked
     property alias cfg_gridAllowTwoLines: gridAllowTwoLines.checked
     property alias cfg_defaultAllApps: defaultAllApps.checked
@@ -236,6 +237,11 @@ Kirigami.FormLayout {
         id: defaultAllApps
         Kirigami.FormData.label: i18n("Panel Properties:")
         text: i18n("Show All Apps By Default")
+    }
+
+    CheckBox {
+        id: reduceIconSizeUserProfile
+        text: i18n("Reduce Icon Size for User Profile")
     }
 
     CheckBox {

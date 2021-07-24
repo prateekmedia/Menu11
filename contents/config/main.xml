@@ -143,5 +143,8 @@
       <label>Whether to reduce icon size for footer to match consistency.</label>
       <default>false</default>
     </entry>
+    <entry name="reduceIconSizeUserProfile" type="Bool">
+      <default>true</default>
+    </entry>
   </group>
 </kcfg>

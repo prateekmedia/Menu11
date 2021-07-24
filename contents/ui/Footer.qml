@@ -103,7 +103,7 @@ Control {
 
             flat: true
 
-            Layout.preferredWidth: units.iconSizes.large * 0.8
+            Layout.preferredWidth: plasmoid.configuration.reduceIconSizeUserProfile ? units.iconSizes.smallMedium * 1.8 : units.iconSizes.large * 1.2
             Layout.preferredHeight: Layout.preferredWidth
 
             Accessible.name: nameLabel.text
