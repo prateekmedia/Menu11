@@ -44,6 +44,7 @@
       <label>List of menu id's (usually .desktop file names) of apps that should not be shown in the menu.</label>
       <default></default>
     </entry>
+        
     <entry name="showRecentApps" type="Bool">
       <label>Whether to show the "Recent Applications" category.</label>
       <default>true</default>
@@ -60,6 +61,7 @@
       <label>Whether to show the "Recent Contacts" category.</label>
       <default>false</default>
     </entry>
+        
     <entry name="useExtraRunners" type="Bool">
       <label>Whether to use additional KRunner plugins to produce results in the search.</label>
       <default>true</default>
@@ -133,10 +135,6 @@
     <entry name="downIconsPowerOptions" type="Bool">
       <label>Shows or hides the Power Options button on the bottom bar.</label>
       <default>true</default>
-    </entry>
-    <entry name="showIconsRootLevel" type="Bool">
-      <label>Whether to show icons on the root level of the menu.</label>
-      <default>false</default>
     </entry>
     <entry name="defaultAllApps" type="Bool">
       <label>Whether to show All Apps screen by default or not.</label>
