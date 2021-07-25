@@ -44,7 +44,6 @@
       <label>List of menu id's (usually .desktop file names) of apps that should not be shown in the menu.</label>
       <default></default>
     </entry>
-
     <entry name="showRecentApps" type="Bool">
       <label>Whether to show the "Recent Applications" category.</label>
       <default>true</default>
@@ -61,7 +60,6 @@
       <label>Whether to show the "Recent Contacts" category.</label>
       <default>false</default>
     </entry>
-
     <entry name="useExtraRunners" type="Bool">
       <label>Whether to use additional KRunner plugins to produce results in the search.</label>
       <default>true</default>
@@ -94,7 +92,7 @@
     </entry>
     <entry name="alwaysShowSearchBar" type="Bool">
       <label>Whether to always show the search bar on top of the menu or not.</label>
-      <default>false</default>
+      <default>true</default>
     </entry>
     <entry name="preferFullName" type="Bool">
       <label>Whether to prefer showing the user's full name in the menu, instead of the login name.</label>
@@ -131,46 +129,6 @@
     <entry name="downIconsLock" type="Bool">
       <label>Shows or hides the Lock button on the bottom bar.</label>
       <default>false</default>
-    </entry>
-    <entry name="downIconsPowerOptions" type="Bool">
-      <label>Shows or hides the Power Options button on the bottom bar.</label>
-      <default>true</default>
-    </entry>
-    <entry name="alwaysShowSearchBar" type="Bool">
-      <label>Whether to always show the search bar on top of the menu or not.</label>
-      <default>false</default>
-    </entry>
-    <entry name="downIconsDocuments" type="Bool">
-      <label>Shows or hides the Documents shortcut on the bottom bar.</label>
-      <default>false</default>
-    </entry>
-    <entry name="downIconsPictures" type="Bool">
-      <label>Shows or hides the Pictures shortcut on the bottom bar.</label>
-      <default>false</default>
-    </entry>
-    <entry name="downIconsMusic" type="Bool">
-      <label>Shows or hides the Music shortcut on the bottom bar.</label>
-      <default>false</default>
-    </entry>
-    <entry name="downIconsDownloads" type="Bool">
-      <label>Shows or hides the Downloads shortcut on the bottom bar.</label>
-      <default>false</default>
-    </entry>
-    <entry name="downIconsVideos" type="Bool">
-      <label>Shows or hides the Videos shortcut on the bottom bar.</label>
-      <default>false</default>
-    </entry>
-    <entry name="downIconsFileManager" type="Bool">
-      <label>Shows or hides the File Manager (aka Dolphin) shortcut on the bottom bar.</label>
-      <default>false</default>
-    </entry>
-    <entry name="downIconsSystemSettings" type="Bool">
-      <label>Shows or hides the System Settings shortcut on the bottom bar.</label>
-      <default>true</default>
-    </entry>
-    <entry name="downIconsLock" type="Bool">
-      <label>Shows or hides the Lock button on the bottom bar.</label>
-      <default>true</default>
     </entry>
     <entry name="downIconsPowerOptions" type="Bool">
       <label>Shows or hides the Power Options button on the bottom bar.</label>
