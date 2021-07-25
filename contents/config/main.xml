@@ -122,7 +122,7 @@
     </entry>
     <entry name="downIconsFileManager" type="Bool">
       <label>Shows or hides the File Manager (aka Dolphin) shortcut on the bottom bar.</label>
-      <default>false</default>
+      <default>true</default>
     </entry>
     <entry name="downIconsSystemSettings" type="Bool">
       <label>Shows or hides the System Settings shortcut on the bottom bar.</label>
@@ -130,7 +130,7 @@
     </entry>
     <entry name="downIconsLock" type="Bool">
       <label>Shows or hides the Lock button on the bottom bar.</label>
-      <default>true</default>
+      <default>false</default>
     </entry>
     <entry name="downIconsPowerOptions" type="Bool">
       <label>Shows or hides the Power Options button on the bottom bar.</label>
