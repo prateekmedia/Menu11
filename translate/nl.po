@@ -31,12 +31,24 @@ msgid "General"
 msgstr "Algemeen"
 
 #: ../contents/ui/config.qml
-msgid "Icon"
+msgid "Icon:"
 msgstr "Pictogram"
 
 #: ../contents/ui/config.qml
-msgid "Menu Position"
+msgid "Menu Position:"
 msgstr "Menupositie"
+
+#: ../contents/ui/config.qml
+msgid "Center"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "On Edge"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Auto"
+msgstr ""
 
 #: ../contents/ui/config.qml
 msgid "Pinned item:"
@@ -101,6 +113,10 @@ msgstr "Beschrijvingen tonen bij alle programma's en zoekopdrachten"
 #: ../contents/ui/config.qml
 msgid "Always Show Search Bar"
 msgstr "Zoekbalk altijd tonen"
+
+#: ../contents/ui/config.qml
+msgid "Prefer showing full name, instead of login name"
+msgstr ""
 
 #: ../contents/ui/config.qml
 msgid "Show applications as:"

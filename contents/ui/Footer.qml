@@ -161,7 +161,7 @@ Control {
                 Text {
                     font.capitalization: Font.Capitalize
                 }
-                text: kuser.fullName
+                text: plasmoid.configuration.preferFullName ? kuser.fullName : kuser.loginName
                 elide: Text.ElideRight
                 horizontalAlignment: Text.AlignLeft
                 verticalAlignment: Text.AlignVCenter
