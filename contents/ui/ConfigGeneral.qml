@@ -54,6 +54,7 @@ Kirigami.FormLayout {
     property alias cfg_defaultAllApps: defaultAllApps.checked
     property alias cfg_showDescription: showDescription.checked
     property alias cfg_alwaysShowSearchBar: alwaysShowSearchBar.checked
+    property alias cfg_preferFullName: preferFullName.checked
 
     property alias cfg_numberColumns: numberColumns.value
     property alias cfg_numberRows: numberRows.value
@@ -200,7 +201,7 @@ Kirigami.FormLayout {
 
         Kirigami.FormData.label: i18n("Recommended item:")
 
-        model: [i18n("Recent Documents"), i18n("Recent apps"), i18n("Favourite apps"), i18n("None")]
+        model: [i18n("Recent documents"), i18n("Recent apps"), i18n("Favourite apps"), i18n("None")]
     }
 
     Item {
@@ -263,6 +264,11 @@ Kirigami.FormLayout {
     CheckBox {
         id: alwaysShowSearchBar
         text: i18n("Always Show Search Bar")
+    }
+
+    CheckBox {
+        id: preferFullName
+        text: i18n("Prefer showing full name, instead of login name")
     }
 
     Item {

@@ -30,11 +30,23 @@ msgid "General"
 msgstr ""
 
 #: ../contents/ui/config.qml
-msgid "Icon"
+msgid "Icon:"
 msgstr ""
 
 #: ../contents/ui/config.qml
-msgid "Menu Position"
+msgid "Menu Position:"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Center"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "On Edge"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Auto"
 msgstr ""
 
 #: ../contents/ui/config.qml
@@ -99,6 +111,10 @@ msgstr ""
 
 #: ../contents/ui/config.qml
 msgid "Always Show Search Bar"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Prefer showing full name, instead of login name"
 msgstr ""
 
 #: ../contents/ui/config.qml

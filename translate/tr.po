@@ -1,7 +1,7 @@
-# Translation of menu11 in ITALIAN
+# Translation of menu11 in LANGUAGE
 # Copyright (C) 2021
 # This file is distributed under the same license as the menu11 package.
-# Daniele Aliquo' <aliquo93@gmail.com>, 2021.
+# Alper Tiryakioğlu <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: menu11\n"
 "Report-Msgid-Bugs-To: https://github.com/prateekmedia/menu11\n"
 "POT-Creation-Date: 2021-04-09 22:46-0400\n"
-"PO-Revision-Date: 2021-07-24 13:43+LMT\n"
-"Last-Translator: Daniele Aliquo' <aliquo93@gmail.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2021-07-25 20:45+0300\n"
+"Last-Translator: Alper Tiryakioğlu\n"
+"Language-Team:\n"
+"Language: Turkish\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,192 +23,192 @@ msgstr "Menu 11"
 
 #: ../metadata.desktop
 msgid "A highly customizable launcher inspired from windows 11 menu. Fork of MenuZ."
-msgstr "Un launcher altamente personalizzabile ispirato al menu' Start di Windows 11. Fork di MenuZ"
+msgstr "Windows 11 menüsünden ilham almış, yüksek derecede kişiselleştirilebilir çalıştırıcı. MenuZ çatallaması."
 
 #: ../contents/config/config.qml
 msgid "General"
-msgstr "Generale"
+msgstr "Genel"
 
 #: ../contents/ui/config.qml
 msgid "Icon:"
-msgstr "Icona"
+msgstr "Simge:"
 
 #: ../contents/ui/config.qml
 msgid "Menu Position:"
-msgstr "Posizione menu'"
+msgstr "Menü Konumu:"
 
 #: ../contents/ui/config.qml
 msgid "Center"
-msgstr ""
+msgstr "Ortada"
 
 #: ../contents/ui/config.qml
 msgid "On Edge"
-msgstr ""
+msgstr "Köşede"
 
 #: ../contents/ui/config.qml
 msgid "Auto"
-msgstr ""
+msgstr "Otomatik"
 
 #: ../contents/ui/config.qml
 msgid "Pinned item:"
-msgstr "Elementi fissati:"
+msgstr "Sabitlenen öğeler:"
 
 #: ../contents/ui/config.qml
 msgid "Favourite apps"
-msgstr "Applicazioni preferite"
+msgstr "Sık kullanılan uygulamalar"
 
 #: ../contents/ui/config.qml
 msgid "Recent apps"
-msgstr "Applicazioni recenti"
+msgstr "Son kullanılan uygulamalar"
 
 #: ../contents/ui/config.qml
 msgid "Recent documents"
-msgstr "Documenti recenti"
+msgstr "En son belgeler"
 
 #: ../contents/ui/config.qml
 msgid "Recommended item:"
-msgstr "Articoli consigliati:"
+msgstr "Önerilen öğeler:"
 
 #: ../contents/ui/config.qml
 msgid "None"
-msgstr "Nessuno"
+msgstr "Hiçbiri"
 
 #: ../contents/ui/config.qml
 msgid "Number of columns in grid:"
-msgstr "Numero di colonne"
+msgstr "Sütun sayısı:"
 
 #: ../contents/ui/config.qml
 msgid "Number of rows in grid:"
-msgstr "Numero di righe"
+msgstr "Satır sayısı:"
 
 #: ../contents/ui/config.qml
 msgid "Panel Properties:"
-msgstr "Proprieta' pannello"
+msgstr "Panel Özellikleri:"
 
 #: ../contents/ui/config.qml
 msgid "Show All apps by default"
-msgstr "Mostra sempre tutte le app"
+msgstr "Varsayılan olarak Tüm uygulamaları göster"
 
 #: ../contents/ui/config.qml
 msgid "Reduce Icon Size for User Profile"
-msgstr "Riduci dimensione icona per l'immagine di profilo"
+msgstr "Profil resminin simge boyutunu küçült"
 
 #: ../contents/ui/config.qml
 msgid "Reduce Icon Size for Footer"
-msgstr "Riduci dimensione icone in basso"
+msgstr "Alt çubuk öğeleri için simge boyutunu küçült"
 
 #: ../contents/ui/config.qml
 msgid "Reduce Icon Size for Pinned item"
-msgstr "Riduci dimensione icone per Elementi fissati"
+msgstr "Sabitlenmiş öğelerin simge boyutunu küçült"
 
 #: ../contents/ui/config.qml
 msgid "Allow label to have two lines (Pinned)"
-msgstr "Consenti al testo di andare a capo (Elementi fissati)"
+msgstr "Etiketlerin iki satırı kaplamasına izin ver (Sabitlenmiş öğeler'de)"
 
 #: ../contents/ui/config.qml
 msgid "Show Description for all apps and search item"
-msgstr "Mostra descrizione per tutte le app ed elementi di ricerca"
+msgstr "Tüm uygulamalar ve arama sonuçları için açıklama göster"
 
 #: ../contents/ui/config.qml
 msgid "Always Show Search Bar"
-msgstr "Mostra sempre la barra di ricerca"
+msgstr "Her zaman Arama Çubuğu'nu göster"
 
 #: ../contents/ui/config.qml
 msgid "Prefer showing full name, instead of login name"
-msgstr ""
+msgstr "Kullanıcı adı yerine tam ismi göstermeyi tercih et."
 
 #: ../contents/ui/config.qml
 msgid "Show applications as:"
-msgstr "Mostra applicazioni come:"
+msgstr "Uygulamaları gösterme şekli:"
 
 #: ../contents/ui/config.qml
 msgid "Name only"
-msgstr "Solo nome"
+msgstr "Sadece Ad"
 
 #: ../contents/ui/config.qml
 msgid "Description only"
-msgstr "Solo descrizione"
+msgstr "Sadece Açıklama"
 
 #: ../contents/ui/config.qml
 msgid "Name (Description)"
-msgstr "Nome (Descrizione)"
+msgstr "Ad (Açıklama)"
 
 #: ../contents/ui/config.qml
 msgid "Description (Name)"
-msgstr "Descrizione (Nome)"
+msgstr "Açıklama (Ad)"
 
 #: ../contents/ui/config.qml
 msgid "Icons on Bottom bar:"
-msgstr "Icone nella barra inferiore"
+msgstr "Alt çubuktaki simgeler:"
 
 #: ../contents/ui/config.qml
 msgid "Documents"
-msgstr "Documenti"
+msgstr "Belgeler"
 
 #: ../contents/ui/config.qml
 msgid "Pictures"
-msgstr "Immagini"
+msgstr "Resimler"
 
 #: ../contents/ui/config.qml
 msgid "Music"
-msgstr "Musica"
+msgstr "Müzik"
 
 #: ../contents/ui/config.qml ../contents/ui/Footer.qml
 msgid "Downloads"
-msgstr "Scaricati"
+msgstr "İndirilenler"
 
 #: ../contents/ui/config.qml ../contents/ui/Footer.qml
 msgid "Videos"
-msgstr "Video"
+msgstr "Videolar"
 
 #: ../contents/ui/config.qml ../contents/ui/Footer.qml
 msgid "File manager"
-msgstr "Gestore file"
+msgstr "Dosya yöneticisi"
 
 #: ../contents/ui/config.qml ../contents/ui/Footer.qml
 msgid "System settings"
-msgstr "Impostazioni di sistema"
+msgstr "Sistem ayarları"
 
 #: ../contents/ui/config.qml ../contents/ui/Footer.qml
 msgid "Lock screen"
-msgstr "Schermata di blocco"
+msgstr "Ekranı kilitle"
 
 #: ../contents/ui/config.qml ../contents/ui/Footer.qml
 msgid "Power options"
-msgstr "Arresta"
+msgstr "Güç seçenekleri"
 
 #: ../contents/ui/config.qml
 msgid "Search:"
-msgstr "Ricerca:"
+msgstr "Arama:"
 
 #: ../contents/ui/config.qml
 msgid "Expand search to bookmarks, files and emails"
-msgstr "Espandi ricerca a segnalibri, file ed email"
+msgstr "Aramaları yer imlerine, dosyalara ve e-maillere genişlet"
 
 #: ../contents/ui/MainColumnItem.qml
 msgid "Type here to search"
-msgstr "Scrivi qui il testo da cercare."
+msgstr "Aramak için buraya yazın"
 
 #: ../contents/ui/MainColumnItem.qml
 msgid "All apps"
-msgstr "Tutte le app"
+msgstr "Tüm uygulamalar"
 
 #: ../contents/ui/MainColumnItem.qml
 msgid "Recommended"
-msgstr "Articoli consigliati"
+msgstr "Önerilenler"
 
 #: ../contents/ui/MainColumnItem.qml
 msgid "Pinned"
-msgstr "Aggiunto"
+msgstr "Sabitlenmiş"
 
 #: ../contents/ui/MainColumnItem.qml
 msgid "Back"
-msgstr "Indietro"
+msgstr "Geri"
 
 #: ../contents/ui/MainColumnItem.qml
 msgid "More"
-msgstr "Altro"
+msgstr "Daha fazla"
 
 #: ../contents/ui/Footer.qml
 msgid "Go to user settings"
-msgstr "Vai alle impostazioni utente"
+msgstr "Kullanıcı ayarları'na gidin"
