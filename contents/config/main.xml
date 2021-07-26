@@ -98,7 +98,7 @@
     </entry>
     <entry name="preferFullName" type="Bool">
       <label>Whether to prefer showing the user's full name in the menu, instead of the login name.</label>
-      <default>false</default>
+      <default>true</default>
     </entry>
     <entry name="downIconsDocuments" type="Bool">
       <label>Shows or hides the Documents shortcut on the bottom bar.</label>

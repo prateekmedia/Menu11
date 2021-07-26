@@ -76,7 +76,7 @@ Item {
         visible: showLabel
         anchors {
             top: icon.bottom
-            topMargin: - units.smallSpacing * (plasmoid.configuration.gridAllowTwoLines ? 0.6 : -0.4)
+            topMargin: units.smallSpacing * (plasmoid.configuration.gridAllowTwoLines ? 0.8 : 1.4)
             horizontalCenter: parent.horizontalCenter
         }
         maximumLineCount: plasmoid.configuration.gridAllowTwoLines ? 2 : 1

@@ -71,7 +71,6 @@ Item {
 
 
     ColumnLayout {
-        Layout.fillWidth: true
         width: parent.width * 0.75
         visible: showLabel
         anchors {

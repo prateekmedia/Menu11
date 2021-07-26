@@ -83,8 +83,12 @@ msgid "Number of rows in grid:"
 msgstr "Aantal rijen op rooster:"
 
 #: ../contents/ui/config.qml
+msgid "Icon Properties:"
+msgstr "Pictogram Eigenschappen:"
+
+#: ../contents/ui/config.qml
 msgid "Panel Properties:"
-msgstr "Paneeleigenschappen:"
+msgstr "Paneel Eigenschappen:"
 
 #: ../contents/ui/config.qml
 msgid "Show All apps by default"
@@ -116,7 +120,7 @@ msgstr "Zoekbalk altijd tonen"
 
 #: ../contents/ui/config.qml
 msgid "Prefer showing full name, instead of login name"
-msgstr ""
+msgstr "Liever volledige naam weergeven in plaats van inlognaam"
 
 #: ../contents/ui/config.qml
 msgid "Show applications as:"

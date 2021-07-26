@@ -237,21 +237,6 @@ Kirigami.FormLayout {
     }
 
     CheckBox {
-        id: reduceIconSizeUserProfile
-        text: i18n("Reduce Icon Size for User Profile")
-    }
-
-    CheckBox {
-        id: reduceIconSizeFooter
-        text: i18n("Reduce Icon Size for Footer")
-    }
-
-    CheckBox {
-        id: reducePinnedSize
-        text: i18n("Reduce Icon Size for Pinned item")
-    }
-
-    CheckBox {
         id: gridAllowTwoLines
         text: i18n("Allow label to have two lines (Pinned)")
     }
@@ -269,6 +254,26 @@ Kirigami.FormLayout {
     CheckBox {
         id: preferFullName
         text: i18n("Prefer showing full name, instead of login name")
+    }
+
+    Item {
+        Kirigami.FormData.isSection: true
+    }
+
+    CheckBox {
+        id: reduceIconSizeUserProfile
+        Kirigami.FormData.label: i18n("Icon Properties:")
+        text: i18n("Reduce Icon Size for User Profile")
+    }
+
+    CheckBox {
+        id: reduceIconSizeFooter
+        text: i18n("Reduce Icon Size for Footer")
+    }
+
+    CheckBox {
+        id: reducePinnedSize
+        text: i18n("Reduce Icon Size for Pinned item")
     }
 
     Item {

@@ -82,6 +82,10 @@ msgid "Number of rows in grid:"
 msgstr "Numero di righe"
 
 #: ../contents/ui/config.qml
+msgid "Icon Properties:"
+msgstr "Icona' pannello"
+
+#: ../contents/ui/config.qml
 msgid "Panel Properties:"
 msgstr "Proprieta' pannello"
 
@@ -115,7 +119,7 @@ msgstr "Mostra sempre la barra di ricerca"
 
 #: ../contents/ui/config.qml
 msgid "Prefer showing full name, instead of login name"
-msgstr ""
+msgstr "Preferisce mostrare il nome completo invece del nome utente"
 
 #: ../contents/ui/config.qml
 msgid "Show applications as:"

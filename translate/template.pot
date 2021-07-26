@@ -82,6 +82,10 @@ msgid "Number of rows in grid:"
 msgstr ""
 
 #: ../contents/ui/config.qml
+msgid "Icon Properties:"
+msgstr ""
+
+#: ../contents/ui/config.qml
 msgid "Panel Properties:"
 msgstr ""
 
