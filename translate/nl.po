@@ -95,6 +95,10 @@ msgid "Show All apps by default"
 msgstr "Onderdeel ‘Alle programma's’ tonen na aanklikken"
 
 #: ../contents/ui/config.qml
+msgid "Replace Explorer icon in footer"
+msgstr "Vervang Explorer-pictogram in voettekst"
+
+#: ../contents/ui/config.qml
 msgid "Reduce Icon Size for User Profile"
 msgstr "Pictogram van gebruikersafbeelding verkleinen"
 

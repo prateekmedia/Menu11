@@ -55,6 +55,7 @@ Kirigami.FormLayout {
     property alias cfg_showDescription: showDescription.checked
     property alias cfg_alwaysShowSearchBar: alwaysShowSearchBar.checked
     property alias cfg_preferFullName: preferFullName.checked
+    property alias cfg_replaceExplorerIcon: replaceExplorerIcon.checked
 
     property alias cfg_numberColumns: numberColumns.value
     property alias cfg_numberRows: numberRows.value
@@ -261,8 +262,13 @@ Kirigami.FormLayout {
     }
 
     CheckBox {
-        id: reduceIconSizeUserProfile
+        id: replaceExplorerIcon
         Kirigami.FormData.label: i18n("Icon Properties:")
+        text: i18n("Replace Explorer icon in footer")
+    }
+
+    CheckBox {
+        id: reduceIconSizeUserProfile
         text: i18n("Reduce Icon Size for User Profile")
     }
 

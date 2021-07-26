@@ -94,6 +94,10 @@ msgid "Show All apps by default"
 msgstr "Varsayılan olarak Tüm uygulamaları göster"
 
 #: ../contents/ui/config.qml
+msgid "Replace Explorer icon in footer"
+msgstr "Alt Bilgideki dosya gezgini simgesini değiştirin"
+
+#: ../contents/ui/config.qml
 msgid "Reduce Icon Size for User Profile"
 msgstr "Profil resminin simge boyutunu küçült"
 

@@ -94,6 +94,10 @@ msgid "Show All apps by default"
 msgstr "Mostra sempre tutte le app"
 
 #: ../contents/ui/config.qml
+msgid "Replace Explorer icon in footer"
+msgstr "Sostituisci l'icona dell'esploratore nel piè di pagina"
+
+#: ../contents/ui/config.qml
 msgid "Reduce Icon Size for User Profile"
 msgstr "Riduci dimensione icona per l'immagine di profilo"
 

@@ -95,6 +95,10 @@ msgid "Show All apps by default"
 msgstr "הצגת כל היישומים כברירת מחדל"
 
 #: ../contents/ui/config.qml
+msgid "Replace Explorer icon in footer"
+msgstr "החלף את סמל הסייר בכותרת התחתונה"
+
+#: ../contents/ui/config.qml
 msgid "Reduce Icon Size for User Profile"
 msgstr "הקטנת סמל תמונת המשתמש"
 

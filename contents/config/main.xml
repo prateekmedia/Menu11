@@ -61,6 +61,9 @@
       <label>Whether to show the "Recent Contacts" category.</label>
       <default>false</default>
     </entry>
+    <entry name="replaceExplorerIcon" type="Bool">
+      <default>false</default>
+    </entry>
         
     <entry name="useExtraRunners" type="Bool">
       <label>Whether to use additional KRunner plugins to produce results in the search.</label>

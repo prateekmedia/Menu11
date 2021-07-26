@@ -94,6 +94,10 @@ msgid "Show All apps by default"
 msgstr ""
 
 #: ../contents/ui/config.qml
+msgid "Replace Explorer icon in footer"
+msgstr ""
+
+#: ../contents/ui/config.qml
 msgid "Reduce Icon Size for User Profile"
 msgstr ""
 
