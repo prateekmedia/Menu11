@@ -35,4 +35,8 @@ Or if you know how to make a pull request
 ## Status
 |  Locale  |  Lines  | % Done|
 |----------|---------|-------|
-| Template |    45   |       |
+| Template |    51   |  100  |
+| Dutch    |    48   |  94   |
+| Hebrew   |    51   |  100  |
+| Italian  |    48   |  94   |
+| Turkish  |    51   |  100  |

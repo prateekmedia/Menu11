@@ -1,4 +1,4 @@
-# Translation of menu11 in LANGUAGE
+# Translation of menu11 in Turkish
 # Copyright (C) 2021
 # This file is distributed under the same license as the menu11 package.
 # Alper Tiryakioğlu <EMAIL@ADDRESS>, YEAR.
