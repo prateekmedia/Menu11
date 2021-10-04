@@ -23,7 +23,7 @@ msgstr "मेनू 11"
 
 #: ../metadata.desktop
 msgid "A highly customizable launcher inspired from windows 11 menu. Fork of MenuZ."
-msgstr "विंडोज़ 11 मेनू से प्रेरित एक उच्च अनुकूलन योग्य लांचर। मेनूजेड का कांटा।"
+msgstr "विंडोज़ 11 मेनू से प्रेरित एक उच्च अनुकूलन योग्य लांचर। मेनूजेड का फोर्क।"
 
 #: ../contents/config/config.qml
 msgid "General"
