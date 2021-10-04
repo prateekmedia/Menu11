@@ -1,0 +1,222 @@
+# Translation of menu11 in LANGUAGE
+# Copyright (C) 2021
+# This file is distributed under the same license as the menu11 package.
+# Telegram : @VCARP <viren.28opensky@gmail.com>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: menu11\n"
+"Report-Msgid-Bugs-To: https://github.com/prateekmedia/menu11\n"
+"POT-Creation-Date: 2021-04-09 22:46-0400\n"
+"PO-Revision-Date: 2021-10-04 16:30+0530\n"
+"Last-Translator: Virendra Carpenter <virendra carpenter>\n"
+"Language-Team: \n"
+"Language: hi_IN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../metadata.desktop
+msgid "Menu 11"
+msgstr "मेनू 11"
+
+#: ../metadata.desktop
+msgid "A highly customizable launcher inspired from windows 11 menu. Fork of MenuZ."
+msgstr "विंडोज़ 11 मेनू से प्रेरित एक उच्च अनुकूलन योग्य लांचर। मेनूजेड का फोर्क।"
+
+#: ../contents/config/config.qml
+msgid "General"
+msgstr "आम"
+
+#: ../contents/ui/config.qml
+msgid "Icon:"
+msgstr "आइकन:"
+
+#: ../contents/ui/config.qml
+msgid "Menu Position:"
+msgstr "मेनू स्थिति:"
+
+#: ../contents/ui/config.qml
+msgid "Center"
+msgstr "केंद्र"
+
+#: ../contents/ui/config.qml
+msgid "On Edge"
+msgstr "किनारे पर"
+
+#: ../contents/ui/config.qml
+msgid "Auto"
+msgstr "ऑटो"
+
+#: ../contents/ui/config.qml
+msgid "Pinned item:"
+msgstr "पिन किया गया आइटम"
+
+#: ../contents/ui/config.qml
+msgid "Favourite apps"
+msgstr "पसंदीदा ऐप्स"
+
+#: ../contents/ui/config.qml
+msgid "Recent apps"
+msgstr "हाल के ऐप्स"
+
+#: ../contents/ui/config.qml
+msgid "Recent documents"
+msgstr "हाल के कागजात"
+
+#: ../contents/ui/config.qml
+msgid "Recommended item:"
+msgstr "अनुशंसित वस्तु:"
+
+#: ../contents/ui/config.qml
+msgid "None"
+msgstr "कोई नहीं"
+
+#: ../contents/ui/config.qml
+msgid "Number of columns in grid:"
+msgstr "ग्रिड में स्तंभों की संख्या:"
+
+#: ../contents/ui/config.qml
+msgid "Number of rows in grid:"
+msgstr "ग्रिड में पंक्तियों की संख्या:"
+
+#: ../contents/ui/config.qml
+msgid "Icon Properties:"
+msgstr "चिह्न गुण:"
+
+#: ../contents/ui/config.qml
+msgid "Panel Properties:"
+msgstr "पैनल गुण:"
+
+#: ../contents/ui/config.qml
+msgid "Show All apps by default"
+msgstr "डिफ़ॉल्ट रूप से सभी ऐप्स दिखाएं"
+
+#: ../contents/ui/config.qml
+msgid "Replace Explorer icon in footer"
+msgstr "पाद लेख में एक्सप्लोरर आइकन बदलें"
+
+#: ../contents/ui/config.qml
+msgid "Reduce Icon Size for User Profile"
+msgstr "उपयोगकर्ता प्रोफ़ाइल के लिए चिह्न का आकार कम करें"
+
+#: ../contents/ui/config.qml
+msgid "Reduce Icon Size for Footer"
+msgstr "पाद लेख के लिए चिह्न का आकार कम करें"
+
+#: ../contents/ui/config.qml
+msgid "Reduce Icon Size for Pinned item"
+msgstr "पिन किए गए आइटम के लिए आइकन का आकार कम करें"
+
+#: ../contents/ui/config.qml
+msgid "Allow label to have two lines (Pinned)"
+msgstr "लेबल को दो पंक्तियों की अनुमति दें (पिन किया हुआ)"
+
+#: ../contents/ui/config.qml
+msgid "Show Description for all apps and search item"
+msgstr "सभी ऐप्स और खोज आइटम के लिए विवरण दिखाएं"
+
+#: ../contents/ui/config.qml
+msgid "Always Show Search Bar"
+msgstr "हमेशा खोज बार दिखाएँ"
+
+#: ../contents/ui/config.qml
+msgid "Prefer showing full name, instead of login name"
+msgstr "लॉगिन नाम के बजाय पूरा नाम दिखाना पसंद करें"
+
+#: ../contents/ui/config.qml
+msgid "Show applications as:"
+msgstr "अनुप्रयोगों को इस रूप में दिखाएं:"
+
+#: ../contents/ui/config.qml
+msgid "Name only"
+msgstr "केवल नाम"
+
+#: ../contents/ui/config.qml
+msgid "Description only"
+msgstr "केवल विवरण"
+
+#: ../contents/ui/config.qml
+msgid "Name (Description)"
+msgstr "नाम (विवरण)"
+
+#: ../contents/ui/config.qml
+msgid "Description (Name)"
+msgstr "विवरण (नाम)"
+
+#: ../contents/ui/config.qml
+msgid "Icons on Bottom bar:"
+msgstr "नीचे पट्टी पर चिह्न:"
+
+#: ../contents/ui/config.qml
+msgid "Documents"
+msgstr "दस्तावेज़"
+
+#: ../contents/ui/config.qml
+msgid "Pictures"
+msgstr "चित्रों"
+
+#: ../contents/ui/config.qml
+msgid "Music"
+msgstr "संगीत"
+
+#: ../contents/ui/config.qml ../contents/ui/Footer.qml
+msgid "Downloads"
+msgstr "डाउनलोड"
+
+#: ../contents/ui/config.qml ../contents/ui/Footer.qml
+msgid "Videos"
+msgstr "वीडियो"
+
+#: ../contents/ui/config.qml ../contents/ui/Footer.qml
+msgid "File manager"
+msgstr "फ़ाइल प्रबंधक"
+
+#: ../contents/ui/config.qml ../contents/ui/Footer.qml
+msgid "System settings"
+msgstr "प्रणाली व्यवस्था"
+
+#: ../contents/ui/config.qml ../contents/ui/Footer.qml
+msgid "Lock screen"
+msgstr "लॉक स्क्रीन"
+
+#: ../contents/ui/config.qml ../contents/ui/Footer.qml
+msgid "Power options"
+msgstr "ऊर्जा के विकल्प"
+
+#: ../contents/ui/config.qml
+msgid "Search:"
+msgstr "खोज:"
+
+#: ../contents/ui/config.qml
+msgid "Expand search to bookmarks, files and emails"
+msgstr "बुकमार्क, फ़ाइलों और ईमेल में खोज का विस्तार करें"
+
+#: ../contents/ui/MainColumnItem.qml
+msgid "Type here to search"
+msgstr "खोजने के लिए यहां टाइप करें"
+
+#: ../contents/ui/MainColumnItem.qml
+msgid "All apps"
+msgstr "सभी एप्लीकेशन"
+
+#: ../contents/ui/MainColumnItem.qml
+msgid "Recommended"
+msgstr "अनुशंसित"
+
+#: ../contents/ui/MainColumnItem.qml
+msgid "Pinned"
+msgstr "पिन की गई"
+
+#: ../contents/ui/MainColumnItem.qml
+msgid "Back"
+msgstr "वापस"
+
+#: ../contents/ui/MainColumnItem.qml
+msgid "More"
+msgstr "अधिक"
+
+#: ../contents/ui/Footer.qml
+msgid "Go to user settings"
+msgstr "उपयोगकर्ता सेटिंग पर जाएं"
