@@ -1,0 +1,222 @@
+# Translation of menu11 in Spanish
+# Copyright (C) 2021
+# This file is distributed under the same license as the menu11 package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: menu11\n"
+"Report-Msgid-Bugs-To: https://github.com/prateekmedia/menu11\n"
+"POT-Creation-Date: 2021-04-09 22:46-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Ángel Fernández Sánchez <angelfx19@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: Español\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../metadata.desktop
+msgid "Menu 11"
+msgstr "Menú 11"
+
+#: ../metadata.desktop
+msgid "A highly customizable launcher inspired from windows 11 menu. Fork of MenuZ."
+msgstr "Launcher con gran capacidad de personalización inspirado en el menú de Windows 11. Fork de MenuZ"
+
+#: ../contents/config/config.qml
+msgid "General"
+msgstr "General"
+
+#: ../contents/ui/config.qml
+msgid "Icon:"
+msgstr "Icono"
+
+#: ../contents/ui/config.qml
+msgid "Menu Position:"
+msgstr "Posición del Menú"
+
+#: ../contents/ui/config.qml
+msgid "Center"
+msgstr "Centro"
+
+#: ../contents/ui/config.qml
+msgid "On Edge"
+msgstr "En el borde"
+
+#: ../contents/ui/config.qml
+msgid "Auto"
+msgstr "Auto"
+
+#: ../contents/ui/config.qml
+msgid "Pinned item:"
+msgstr "Elemento anclado"
+
+#: ../contents/ui/config.qml
+msgid "Favourite apps"
+msgstr "Aplicaciones favoritas"
+
+#: ../contents/ui/config.qml
+msgid "Recent apps"
+msgstr "Aplicaciones recientes"
+
+#: ../contents/ui/config.qml
+msgid "Recent documents"
+msgstr "Documentos recientes"
+
+#: ../contents/ui/config.qml
+msgid "Recommended item:"
+msgstr "Elemento recomendado"
+
+#: ../contents/ui/config.qml
+msgid "None"
+msgstr "Ninguno"
+
+#: ../contents/ui/config.qml
+msgid "Number of columns in grid:"
+msgstr "Número de columnas en la cuadrícula:"
+
+#: ../contents/ui/config.qml
+msgid "Número de filas en la cuadrícula:"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Icon Properties:"
+msgstr "Propiedades de los iconos:"
+
+#: ../contents/ui/config.qml
+msgid "Propiedades del panel:"
+msgstr ""
+
+#: ../contents/ui/config.qml
+msgid "Show All apps by default"
+msgstr "Mostrar todas las aplicaciones por defecto"
+
+#: ../contents/ui/config.qml
+msgid "Replace Explorer icon in footer"
+msgstr "Sustituir el icono del Explorador en el pie de página"
+
+#: ../contents/ui/config.qml
+msgid "Reduce Icon Size for User Profile"
+msgstr "Reducir el tamaño de los iconos del perfil de usuario"
+
+#: ../contents/ui/config.qml
+msgid "Reduce Icon Size for Footer"
+msgstr "Reducir el tamaño del icono para el pie de página"
+
+#: ../contents/ui/config.qml
+msgid "Reduce Icon Size for Pinned item"
+msgstr "Reducir el tamaño del icono del elemento anclado"
+
+#: ../contents/ui/config.qml
+msgid "Allow label to have two lines (Pinned)"
+msgstr "Permitir que la etiqueta tenga dos líneas (Anclado)"
+
+#: ../contents/ui/config.qml
+msgid "Show Description for all apps and search item"
+msgstr "Mostrar la descripción de todas las aplicaciones y el elemento de búsqueda"
+
+#: ../contents/ui/config.qml
+msgid "Always Show Search Bar"
+msgstr "Mostrar siempre la barra de búsqueda"
+
+#: ../contents/ui/config.qml
+msgid "Prefer showing full name, instead of login name"
+msgstr "Preferir mostrar el nombre completo, en lugar del nombre de usuario"
+
+#: ../contents/ui/config.qml
+msgid "Show applications as:"
+msgstr "Mostrar aplicaciones como:"
+
+#: ../contents/ui/config.qml
+msgid "Name only"
+msgstr "Sólo el nombre"
+
+#: ../contents/ui/config.qml
+msgid "Description only"
+msgstr "Sólo la descripción"
+
+#: ../contents/ui/config.qml
+msgid "Name (Description)"
+msgstr "Nombre (Descripción)"
+
+#: ../contents/ui/config.qml
+msgid "Description (Name)"
+msgstr "Descripción (Nombre)"
+
+#: ../contents/ui/config.qml
+msgid "Icons on Bottom bar:"
+msgstr "Iconos en la barra inferior:"
+
+#: ../contents/ui/config.qml
+msgid "Documents"
+msgstr "Documentos"
+
+#: ../contents/ui/config.qml
+msgid "Pictures"
+msgstr "Imágenes"
+
+#: ../contents/ui/config.qml
+msgid "Music"
+msgstr "Música"
+
+#: ../contents/ui/config.qml ../contents/ui/Footer.qml
+msgid "Downloads"
+msgstr "Descargas"
+
+#: ../contents/ui/config.qml ../contents/ui/Footer.qml
+msgid "Videos"
+msgstr "Vídeos"
+
+#: ../contents/ui/config.qml ../contents/ui/Footer.qml
+msgid "File manager"
+msgstr "Gestor de archivos"
+
+#: ../contents/ui/config.qml ../contents/ui/Footer.qml
+msgid "System settings"
+msgstr "Configuración del sistema"
+
+#: ../contents/ui/config.qml ../contents/ui/Footer.qml
+msgid "Lock screen"
+msgstr "Pantalla de bloqueo"
+
+#: ../contents/ui/config.qml ../contents/ui/Footer.qml
+msgid "Power options"
+msgstr "Opciones de energía"
+
+#: ../contents/ui/config.qml
+msgid "Search:"
+msgstr "Buscar:"
+
+#: ../contents/ui/config.qml
+msgid "Expand search to bookmarks, files and emails"
+msgstr "Ampliar la búsqueda a marcadores, archivos y correos electrónicos"
+
+#: ../contents/ui/MainColumnItem.qml
+msgid "Type here to search"
+msgstr "Escribe aquí para buscar"
+
+#: ../contents/ui/MainColumnItem.qml
+msgid "All apps"
+msgstr "Todas las aplicaciones"
+
+#: ../contents/ui/MainColumnItem.qml
+msgid "Recommended"
+msgstr "Recomendado"
+
+#: ../contents/ui/MainColumnItem.qml
+msgid "Pinned"
+msgstr "Anclado"
+
+#: ../contents/ui/MainColumnItem.qml
+msgid "Back"
+msgstr "Volver"
+
+#: ../contents/ui/MainColumnItem.qml
+msgid "More"
+msgstr "Más"
+
+#: ../contents/ui/Footer.qml
+msgid "Go to user settings"
+msgstr "Ir a la configuración del usuario"
