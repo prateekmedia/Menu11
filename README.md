@@ -14,6 +14,21 @@
 - [Lupert Everett](https://github.com/LupertEverett) for adding multiple footer icons.  
 <a href="https://github.com/prateekmedia/Menu11/graphs/contributors"><img alt="Know More" src="https://shields.io/badge/-Know More-blue"/></a>
 
+### Frequently asked questions(FAQ)
+#### How do I fix "Sorry! There was an error loading Menu 11."
+This is most likely due to missing `plasma-widgets-addons` package on your system.
+
+You can install this using `sudo apt install plasma-widgets-addons` on Ubuntu / Debian Distros or `sudo pacman -S kdeplasma-addons` on Arch based distro.
+
+If you have any other distro then please search for the package name for your distro.
+
+#### The elements look messed up, What's wrong with this applet?
+This can be due to various reasons:
+- KDE version you are using is too old, we recommend at least **KDE 5.21** if you are using this applet.
+- Another applet or program is causing this issue.
+
+You can [create an issue](https://github.com/prateekmedia/Menu11/issues/new) if you think it's due to a KDE update or it's not mentioned above.
+
 <h2 align="center">Installing Manually</h2>
 
 ### Using git
