@@ -7,6 +7,13 @@
   <img src="https://user-images.githubusercontent.com/41370460/126046490-08a6f26d-ee70-4ba9-b2ce-a9f2e5ad1a59.png" width=400>
 </p>
 
+Deprecated:
+- It is not maintainable and has many errors and bugs, unfortunately I am not on KDE right now so I cannot help with those
+Suggested replacement: https://github.com/adhec/OnzeMenuKDE
+
+OnzeMenu is not that customizable but I hope it will continue to improve.
+
+
 #### *Special Thanks to*
 - [Prateek SU](https://github.com/prateekmedia) / Me for creating [Menu 11](https://github.com/prateekmedia/) by forking [Menu Z](https://store.kde.org/p/1367167/)  and for continuously adding and improving features.
 - [Nayam Amarshe](https://github.com/NayamAmarshe) for improving the design.
